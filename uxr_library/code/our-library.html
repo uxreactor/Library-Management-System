@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Librarian Page</title>
+    <title>Librarian Page our_library</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet">  
@@ -22,6 +22,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head><!--/head-->
 
 <body>
@@ -66,6 +67,72 @@
         </div>
     </header>
     <!--/#header-->
+     <div class="container">
+        <div class="row">    
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown">
+                            <span id="search_concept">Select any</span> <span class="caret"></span> 
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#contains">Books</a></li>
+                          <li><a href="#its_equal">Members</a></li>
+                        </ul>
+                    </div>      
+                    <input type="text" class="textbox_size form-control input-lg" placeholder="Search book by authorname/bookname">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <!--/#search bar and dropdown-->  
+        <table  class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Member ID</th>
+                <th>Name</th>
+                <th>Validity</th>
+                <th>Phone No.</th>
+                <th>Mail ID</th>
+                <th colspan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1001</td>
+                    <td>Anurag</td>
+                    <td>26/12/2016</td>
+                    <td>9059638871</td>
+                    <td>abc@gmail.com</td>
+                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
+                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>Anurag</td>
+                    <td>26/12/2016</td>
+                    <td>9059638871</td>
+                    <td>abc@gmail.com</td>
+                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
+                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>Anurag</td>
+                    <td>26/12/2016</td>
+                    <td>9059638871</td>
+                    <td>abc@gmail.com</td>
+                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
+                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
+                </tr>
+           </tbody>
+          </table>
+    </div>
+    <!--/#table-->
      <footer>
         <div class="container">
             <div class="col-sm-12">
