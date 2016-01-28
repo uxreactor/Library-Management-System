@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -43,20 +43,20 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="our-library.html">Our library</a></li>
-                        <li><a href="add-book.html">Add New Book</a></li>
+                        <li class="active"><a href="our-library.html">Our library</a></li>
+                        <li><a href="admin-add-book.html">Add New Book</a></li>
                         <li class="dropdown"><a>Issue<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                                <li><a href="issue-book.html">Issue New Book</a></li>
-                                <li><a href="manage-book.html">Manage Issued Books</a></li>
+                                <li><a href="admin-issue-book.html">Issue New Book</a></li>
+                                <li><a href="admin-manage-book.html">Manage Issued Books</a></li>
                             </ul>
                         </li>    
                         <li class="dropdown "> <a>Requests<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                                <li><a href="new-book.html">New Books</a></li>
-                                <li class="active"><a href="admin-accept-membership.html">New Memberships</a></li>
+                                <li><a href="admin-new-book.html">New Books</a></li>
+                                <li><a href="admin-accept-membership.html">New Memberships</a></li>
                                 <li><a href="admin-book-renewal.html">Renew Books</a></li>
-                                <li><a href="renew-membership.html">Renew Memberships</a></li>
+                                <li><a href="admin-membership-renewal.html">Renew Memberships</a></li>
                             </ul>
                         </li>                         
                         <li><a href="index.html ">Logout</a></li>                    
@@ -66,6 +66,71 @@
         </div>
     </header>
     <!--/#header-->
+    <div class="container">
+        <div class="row">    
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown">
+                            <span id="search_concept">Select any</span> <span class="caret"></span> 
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#contains">Books</a></li>
+                          <li><a href="#its_equal">Members</a></li>
+                        </ul>
+                    </div>      
+                    <input type="text" class="textbox_size form-control input-lg" placeholder="Search book by authorname/bookname">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <!--/#search bar and dropdown-->  
+        <table  class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Member ID</th>
+                <th>Name</th>
+                <th>Validity</th>
+                <th>Phone No.</th>
+                <th>Mail ID</th>
+                <th colspan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1001</td>
+                    <td>Anurag</td>
+                    <td>26/12/2016</td>
+                    <td>9059638871</td>
+                    <td>abc@gmail.com</td>
+                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
+                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>Anurag</td>
+                    <td>26/12/2016</td>
+                    <td>9059638871</td>
+                    <td>abc@gmail.com</td>
+                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
+                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>Anurag</td>
+                    <td>26/12/2016</td>
+                    <td>9059638871</td>
+                    <td>abc@gmail.com</td>
+                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
+                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
      <footer>
         <div class="container">
             <div class="col-sm-12">

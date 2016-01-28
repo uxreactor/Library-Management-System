@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                   <a class="navbar-brand" href="index.html">
+                   <a class="navbar-brand" href="index.html">+
                         <h1>UXR LIBRARY</h1>
                     </a>                  
                 </div>
@@ -49,9 +49,85 @@
                 </div>
             </div>
         </div>
+        <style> 
+            .form-control{
+               width:30%; 
+            } 
+        </style>
     </header>
     <!--/#header-->
-     <footer>
+    <div class="container">
+        <div class="row">    
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown">
+                            <span id="search_concept">Select any</span> <span class="caret"></span> 
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#contains">Books</a></li>
+                          <li><a href="#its_equal">Members</a></li>
+                        </ul>
+                    </div>      
+                    <input type="text" class="textbox_size form-control input-lg" placeholder="Search book by authorname/bookname">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-lg" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <h3>Issued book list</h3>
+        <!--/#searchbar-->  
+        <table  class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Member ID</th>
+                    <th>Name</th>
+                    <th>Book name</th>
+                    <th>ISBN No.</th>
+                    <th>Issued date</th>
+                    <th>Return date</th>
+                    <th>Penalty</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1001</td>
+                    <td>Rupam</td>
+                    <td>Devoloper Guide</td>
+                    <td>1222</td>
+                    <td>21/12/2015</td>
+                    <td>21/02/2016</td>
+                    <td>No</td>
+                    <td><input type="button" class="btn btn-primary" value="Returned" ></td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>Rupam</td>
+                    <td>Devoloper Guide</td>
+                    <td>1222</td>
+                    <td>21/12/2015</td>
+                    <td>21/02/2016</td>
+                    <td>No</td>
+                    <td><input type="button" class="btn btn-primary" value="Returned" ></td>
+                </tr>
+                <tr>
+                    <td>1001</td>
+                    <td>Rupam</td>
+                    <td>Devoloper Guide</td>
+                    <td>1222</td>
+                    <td>21/12/2015</td>
+                    <td>21/02/2016</td>
+                    <td>No</td>
+                    <td><input type="button" class="btn btn-primary" value="Returned" ></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer>
         <div class="container">
             <div class="col-sm-12">
                 <div class="copyright-text text-center">
@@ -62,10 +138,6 @@
         </div>
     </footer>
     <!--/#footer-->
-
-   
-
-
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
