@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Add_book</title>
+    <title>Librarian Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet">  
     <link href="css/animate.min.css" rel="stylesheet"> 
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+
     <!--[if lt IE 9]>
 	    <script src="js/html5shiv.js"></script>
 	    <script src="js/respond.min.js"></script>
@@ -38,27 +39,12 @@
 
                    <a class="navbar-brand" href="index.html" style="margin-top:10px;">
                         <h1>UXR LIBRARY</h1>
-                    </a>
-                    
+                    </a>                  
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="our-library.html">Our library</a></li>
-                        <li class="active"><a href="add-book.html">Add New Book</a></li>
-                        <li class="dropdown"><a>Issue<i class="fa fa-angle-down"></i></a>
-                            <ul role="menu" class="sub-menu">
-                                <li><a href="admin-issue-book.html">Issue New Book</a></li>
-                                <li><a href="manage-book.html">Manage Issued Books</a></li>
-                            </ul>
-                        </li>    
-                        <li class="dropdown "> <a>Requests<i class="fa fa-angle-down"></i></a>
-                            <ul role="menu" class="sub-menu">
-                                <li><a class="active" href="new-book.html">New Books</a></li>
-                                <li><a href="admin-accept-membership.html">New Memberships</a></li>
-                                <li><a href="admin-book-renewal.html">Renew Books</a></li>
-                                <li><a href="admin-memebership-renewal.html">Renew Memberships</a></li>
-                            </ul>
-                        </li>                         
+                        <li class="active"><a href="member.html">My books</a></li>
+                        <li><a href="member-renew-membership.html">Renew Membership</a></li>                   
                         <li><a href="index.html ">Logout</a></li>                    
                     </ul>
                 </div>
@@ -67,27 +53,62 @@
     </header>
     <!--/#header-->
     <div class="container">
-        <h2>Adding Book</h2>
-        <form>
-            <div class="form-group" >
-                <label >Book name</label>
-                <input type="text" class="form-control" >
-                <label >Author name</label>
-                <input type="text" class="form-control" >
-                <label >ISBN</label>
-                <input type="text" class="form-control" >
-                <label >Category</label>
-                <input type="text" class="form-control" >
-                <label >Edition</label>
-                <input type="text" class="form-control" >
-                <label >Quantity</label>
-                <input type="text" class="form-control" >
-            </div>
-            <button type="button" class="btn btn-default btn-lg btn-info">Submit</button>
-            <a href="our-library.html" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
-        </form>
-        <!--/#issue book form -->
-    </div>  
+        <div class="input-group col-xs-6 col-xs-offset-3">
+            <input type="text" class="textbox_size form-control" placeholder="Search book by authorname/bookname" />
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" type="button">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    <br/>
+    <br/>
+    <!--/#searchbar--> 
+    
+    <h3><a class="pull-right" href="mem_request_new_book.html">
+      <i class="glyphicon glyphicon-plus-sign"></i>Request new book </a>
+    </h3>
+    <h2>My books</h2>
+    <table  class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Book ID</th>
+          <th>Book name</th>
+          <th>Issued date</th>
+          <th>Return date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>1</th>
+          <td>UX Design</td>
+          <td>21/12/2015</td>
+          <td>10/02/2016</td>
+          <td><input type="button" class="btn btn-info" value=" Request extension" /></td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>UX Design</td>
+          <td>21/12/2015</td>
+          <td>10/02/2016</td>
+          <td><input type="button" class="btn btn-info" value=" Request extension" /></td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>UX Design</td>
+          <td>21/12/2015</td>
+          <td>10/02/2016</td>
+          <td><input type="button" class="btn btn-info" value=" Request extension" /></td>
+        </tr>
+     </tbody>
+    </table>
+    </div>
+    <!--/#table-->
+    <table class="table table-striped">
+  	
+	</table>
+	<!--/#table-->
      <footer>
         <div class="container">
             <div class="col-sm-12">
@@ -99,6 +120,10 @@
         </div>
     </footer>
     <!--/#footer-->
+
+   
+
+
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.isotope.min.js"></script>

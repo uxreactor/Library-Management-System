@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Librarian Page</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/lightbox.css" rel="stylesheet" />  
+    <link href="css/animate.min.css" rel="stylesheet" /> 
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/responsive.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png" />
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+</head><!--/head-->
+
+<body>
+    <header id="header">      
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                   <a class="navbar-brand" href="index.html" style="margin-top:10px;">
+                        <h1>UXR LIBRARY</h1>
+                    </a>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="our-library.html">Our library</a></li>
+                        <li class="active"><a href="add-book.html">Add New Book</a></li>
+                        <li class="dropdown"><a>Issue<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a href="admin-issue-book.html">Issue New Book</a></li>
+                                <li><a href="manage-book.html">Manage Issued Books</a></li>
+                            </ul>
+                        </li>    
+                        <li class="dropdown "> <a>Requests<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a class="active" href="new-book.html">New Books</a></li>
+                                <li><a href="admin-accept-membership.html">New Memberships</a></li>
+                                <li><a href="admin-book-renewal.html">Renew Books</a></li>
+                                <li><a href="admin-memebership-renewal.html">Renew Memberships</a></li>
+                            </ul>
+                        </li>                         
+                        <li><a href="index.html ">Logout</a></li>                    
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+    <div class="container">
+        <h2>Adding Book</h2>
+        <form name="add_book" method="post" action="" onsubmit="return submitForm();">
+            <div class="form-group" id="book_name_label">
+                <label >Book name</label>
+                <input type="text" class="form-control" id ="book_name" />
+                <span class="error"></span>
+            </div>
+            <div class="form-group" id="author_name_label">
+                <label >Author name</label>
+                <input type="text" class="form-control" id ="author_name"/>
+                <span class="error"></span>
+            </div>
+            <div class="form-group" id="isbn_label">
+                <label >ISBN</label>
+                <input type="text" class="form-control" id ="isbn"/>
+                <span class="error"></span>
+            </div>
+            <div class="form-group" id="category_label">
+                <label >Category</label><br/>
+                <select class="form-control" >
+                    <option value="Arts">Arts</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Novel">Novel</option>
+                    <option value="History">History</option>
+                    <option value="Anthology">Anthology</option>
+                    <option value="Comics">Comics</option>
+                </select>   
+            </div>
+            <div class="form-group" id="edition_label">
+                <label >Edition</label>
+                <input type="number" class="form-control" id ="edition"/>
+                <span class="error"></span>
+            </div>
+            <div class="form-group" id="price_label">
+                <label >Price</label>
+                <input type="number" class="form-control" id ="price"/>
+                <span class="error"></span>
+            </div>
+            <div class="form-group" id="publisher_label">
+                <label >Publisher</label>
+                <input type="text" class="form-control" id ="publisher"/>
+                <span class="error"></span>
+            </div>
+            <div class="form-group" id="quantity_label">
+                <label >Quantity</label>
+                <input type="number" class="form-control" id ="quantity"/>
+                <span class="error"></span>
+            </div>
+            <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
+            <a href="our-library.html" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+        </form>
+        <!--/#issue book form -->
+    </div>  
+     <footer>
+        <div class="container">
+            <div class="col-sm-12">
+                <div class="copyright-text text-center">
+                    <p>&copy; UXReactor. All Rights Reserved.</p>
+                    <p>Designed and Developed by <a target="_blank" href="http://www.uxreactor.com">UXReactor Coding Batch 01</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="js/lightbox.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script> 
+    <script type="text/javascript" src="js/script.js"></script>  
+    <script type="text/javascript">
+        $(function () {
+                  //$('#myTab li:eq(1) a').tab('show');
+
+               });
+
+        var submitForm = function() {
+            var validation_message;
+            add_book = [{ type : 'text' , value: $('#book_name').val() , errorMessage:'Book name is required' }, 
+            { type:'text' , value: $('#author_name').val() , errorMessage:'Author name is required' },
+            { type:'text' , value: $('#isbn').val() , errorMessage:'ISBN is required' },
+            { type:'text' , value: $('#edition').val() , errorMessage:'Edition is required' },
+            { type:'text' , value: $('#price').val() , errorMessage:'Price is required' },
+            { type:'text' , value: $('#publisher').val() , errorMessage:'Publisher is required' },
+            { type:'text' , value: $('#quantity').val() , errorMessage:'Quantity is required' }];
+            validation_message = validateForm (add_book);  
+             if(submitToServer(validation_message)){
+                $.ajax({
+                    url: $('form').attr('action'),
+                    type: $('form').attr('method'),
+                    data: add_book,
+                    success: function(response){
+                        console.log(response);
+                    },
+                    error: function(xhr, desc, err){
+                        console.log(desc);
+                    }
+                });
+                //return false;
+            }else{
+                body = document.getElementById('book_name_label');
+                writeError(validation_message[0],body);
+                body = document.getElementById('author_name_label');
+                writeError(validation_message[1],body);
+                body = document.getElementById('isbn_label');
+                writeError(validation_message[2],body);
+                body = document.getElementById('edition_label');
+                writeError(validation_message[3],body);
+                body = document.getElementById('price_label');
+                writeError(validation_message[4],body);
+                body = document.getElementById('publisher_label');
+                writeError(validation_message[5],body);
+                body = document.getElementById('quantity_label');
+                writeError(validation_message[6],body);
+                return false;
+            }
+        }
+    </script>   
+</body>
+</html>

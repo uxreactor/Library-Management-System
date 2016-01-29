@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Add_book</title>
+    <title>Librarian Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet">  
     <link href="css/animate.min.css" rel="stylesheet"> 
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+
     <!--[if lt IE 9]>
 	    <script src="js/html5shiv.js"></script>
 	    <script src="js/respond.min.js"></script>
@@ -23,7 +24,6 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head><!--/head-->
-
 <body>
 	<header id="header">      
         <div class="navbar navbar-inverse" role="banner">
@@ -38,27 +38,12 @@
 
                    <a class="navbar-brand" href="index.html" style="margin-top:10px;">
                         <h1>UXR LIBRARY</h1>
-                    </a>
-                    
+                    </a>                  
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="our-library.html">Our library</a></li>
-                        <li class="active"><a href="add-book.html">Add New Book</a></li>
-                        <li class="dropdown"><a>Issue<i class="fa fa-angle-down"></i></a>
-                            <ul role="menu" class="sub-menu">
-                                <li><a href="admin-issue-book.html">Issue New Book</a></li>
-                                <li><a href="manage-book.html">Manage Issued Books</a></li>
-                            </ul>
-                        </li>    
-                        <li class="dropdown "> <a>Requests<i class="fa fa-angle-down"></i></a>
-                            <ul role="menu" class="sub-menu">
-                                <li><a class="active" href="new-book.html">New Books</a></li>
-                                <li><a href="admin-accept-membership.html">New Memberships</a></li>
-                                <li><a href="admin-book-renewal.html">Renew Books</a></li>
-                                <li><a href="admin-memebership-renewal.html">Renew Memberships</a></li>
-                            </ul>
-                        </li>                         
+                        <li class="active"><a href="member.html">My books</a></li>
+                        <li><a href="renew-membership.html">Renew Membership</a></li>                       
                         <li><a href="index.html ">Logout</a></li>                    
                     </ul>
                 </div>
@@ -67,27 +52,30 @@
     </header>
     <!--/#header-->
     <div class="container">
-        <h2>Adding Book</h2>
-        <form>
+        <h2>Book request extension </h2>
+        <form name="login" method="post" action="" onsubmit="return submitForm();">
             <div class="form-group" >
-                <label >Book name</label>
-                <input type="text" class="form-control" >
-                <label >Author name</label>
-                <input type="text" class="form-control" >
-                <label >ISBN</label>
-                <input type="text" class="form-control" >
-                <label >Category</label>
-                <input type="text" class="form-control" >
-                <label >Edition</label>
-                <input type="text" class="form-control" >
-                <label >Quantity</label>
-                <input type="text" class="form-control" >
+                <label >Member ID</label>
+                <input type="text" class="form-control" readonly />
             </div>
-            <button type="button" class="btn btn-default btn-lg btn-info">Submit</button>
-            <a href="our-library.html" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+            <div class="form-group" >
+                <label >Book ID</label>
+                <input type="text" class="form-control" readonly />
+            </div>
+            <div class="form-group" >                
+                <label >Return date</label>
+                <input type="date" class="form-control" readonly />
+            </div>
+            <div class="form-group" id="extention_days_label">
+                <label >Extension duration(Days)</label>
+                <input type="number" class="form-control" id="extention_days"/>
+                <span></span>
+            </div>
+            <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
+            <a href="" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
         <!--/#issue book form -->
-    </div>  
+    </div>
      <footer>
         <div class="container">
             <div class="col-sm-12">
@@ -99,11 +87,41 @@
         </div>
     </footer>
     <!--/#footer-->
+
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="js/lightbox.min.js"></script>
     <script type="text/javascript" src="js/wow.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>    
+    <script type="text/javascript" src="js/main.js"></script>  
+    <script type="text/javascript" src="js/script.js"></script> 
+    <script>
+
+        var submitForm = function() {
+            var validation_message;
+            login = [{ type : 'text' , value: $('#extention_days').val() , errorMessage:'Duration is required'}];
+            validation_message = validateForm (login);  
+            if(submitToServer(validation_message)){
+                $.ajax({
+                    url: $('form').attr('action'),
+                    type: $('form').attr('method'),
+                    data: login,
+                    success: function(response){
+                        console.log(response);
+                    },
+                    error: function(xhr, desc, err){
+                        console.log(desc);
+                    }
+                });
+            } 
+            else{
+                body = document.getElementById('extention_days_label');
+                writeError(validation_message[0],body);
+                return false;
+            }
+            //return false;
+        }   
+
+    </script>   
 </body>
 </html>
