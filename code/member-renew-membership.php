@@ -34,7 +34,7 @@
             var validation_message;
             var renew = [{ type : 'text' , value: $('#memid').val() , errorMessage:'Member Id is required' }, 
                     { type:'text' , value: $('#memname').val() , errorMessage:'Member name is required' }];
-            validation_message = validateForm (login); 
+            validation_message = validateForm (renew); 
 
             var renew_details = {memid: $('#memid').val(),memname: $('#memname').val()};
             if(submitToServer(validation_message)){
