@@ -37,17 +37,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
                     <a class="navbar-brand" href="index.php" style="margin-top:10px;">
                     	<h1>UXR LIBRARY</h1>
                     </a>
-                    
-                </div>
+                </div>        
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="apply-membership.php">Apply for a Membership</a></li>
-                        <li><a href="login.php ">Login</a></li>                    
+                       <?php include ("active-menu-item.php");?>
+                        <li class="<?php echo ($page_name=='index.php')?'active':'';?>" href="index.php"><a>Home</a></li>
+                        <li class="<?php echo ($page_name=='apply-membership.php')?'active':'';?>"href="apply-membership.php"><a>Apply for a Membership</a></li>
+                        <li class="<?php echo ($page_name=='login.php')?'active':'';?>"href="login.php"><a>Login</a></li>                    
                     </ul>
                 </div>
             </div>

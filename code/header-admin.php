@@ -43,23 +43,24 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="our-library.php">Our library</a></li>
-                        <li><a href="admin-add-book.php">Add New Book</a></li>
+                        <?php include ("active-menu-item.php");?>
+                        <li class="<?php echo ($page_name=='our-library.php')?'active':'';?>"><a href="our-library.php">Our library</a></li>
+                        <li class="<?php echo ($page_name=='admin-add-book.php')?'active':'';?>"><a href="admin-add-book.php">Add New Book</a></li>
                         <li class="dropdown"><a>Issue<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                                <li><a href="admin-issue-book.php">Issue New Book</a></li>
-                                <li><a href="admin-manage-book.php">Manage Issued Books</a></li>
+                                <li class="<?php echo ($page_name=='admin-issue-book.php')?'active':'';?>"><a href="admin-issue-book.php">Issue New Book</a></li>
+                                <li class="<?php echo ($page_name=='admin-manage-book.php')?'active':'';?>"><a href="admin-manage-book.php">Manage Issued Books</a></li>
                             </ul>
                         </li>    
                         <li class="dropdown "> <a>Requests<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                                <li><a href="admin-new-book.php">New Books</a></li>
-                                <li><a href="admin-accept-membership.php">New Memberships</a></li>
-                                <li><a href="admin-book-renewal.php">Renew Books</a></li>
-                                <li><a href="admin-membership-renewal.php">Renew Memberships</a></li>
+                                <li class="<?php echo ($page_name=='admin-new-book.php')?'active':'';?>"><a href="admin-new-book.php">New Books</a></li>
+                                <li class="<?php echo ($page_name=='admin-accept-membership.php')?'active':'';?>"><a href="admin-accept-membership.php">New Memberships</a></li>
+                                <li class="<?php echo ($page_name=='admin-book-renewal.php')?'active':'';?>"><a href="admin-book-renewal.php">Renew Books</a></li>
+                                <li class="<?php echo ($page_name=='admin-membership-renewal.php')?'active':'';?>"><a href="admin-membership-renewal.php">Renew Memberships</a></li>
                             </ul>
                         </li>                         
-                        <li><a href="index.php ">Logout</a></li>                    
+                        <li class="<?php echo ($page_name=='our-library.php')?'active':'';?>"><a href="index.php ">Logout</a></li>                    
                     </ul>
                 </div>
             </div>
