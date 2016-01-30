@@ -23,7 +23,7 @@
 	}
 	/**
 	 * @addNewBook : This function will add a new book in the database, where the details of book will be given by admin. The details are appended
-	 * in the database. The isbn and bookid will be stored in tbl_all_books table and rest of all details are stot=red in the tbl_book_varities table to reduce the redundense data
+	 * in the database. The isbn and bookid will be stored in tbl_all_books table and rest of all details are stored in the tbl_book_varities table to reduce the redundense data
 	 * @author : Mohan, Bala
 	 *
 	 * @param : integer - isbn
@@ -35,7 +35,7 @@
 	 * @param : string - authorname
 	 * @param : integer - quantity  
 	 *
-	 * @return/outcome : Adds the newbook into the database.
+	 * @return/outcome : Adds the newbook into the database and returns a string with successful message.
 	 */
 	function addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){			
 
@@ -57,6 +57,7 @@
 				} else {
 				    return "Error: " . $sql . "<br>" . $conn->error;
 				}
+				return "New book added successfully";
 			}
 		}
 		$conn->close();
@@ -98,9 +99,9 @@
 		$sql = " SELECT category FROM tbl_book_varities WHERE category='$category_name' ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-			 echo "1"; // return value
+			 return "1"; // return value
 		}else{
-			echo "0"; // return value
+			return "0"; // return value
 		}
 
 		$conn->close();
@@ -129,14 +130,14 @@
 		$sql = " UPDATE tbl_all_books SET isbn='$isbn'  WHERE isbn='$old_isbn' ";
 		if ($conn->query($sql) === TRUE) {
 		} else {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		$sql = " UPDATE tbl_book_varities SET isbn = '$isbn' , price = '$price' , edition = '$edition' , publisher = '$publisher', category = '$category',
 				book_name = '$bookname' , author_name = '$authorname' WHERE isbn ='$old_isbn' ";
 		if ($conn->query($sql) === TRUE) {
-		    echo "Book details updated successfully";
+		    return "Book details updated successfully";
 		} else {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 
 		$conn->close();
@@ -148,7 +149,7 @@
 	 * @loadAllBooks : This function will display all the records of books from the database to the respective page it displays all the dettails of book along with count of the book.
 	 * @author : Mohan, Bala
 	 *
-	 * @return/outcome : Returns a json object where it consists all the records of books.
+	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
 	 */
 	function loadAllBooks(){
 		$arrayObject = array();
@@ -175,11 +176,11 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    echo "0 results"; 
+		    return "0 results"; 
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); //return value
+		return(json_encode($arrayObject)); //return value
 	}
 
 
@@ -187,7 +188,7 @@
 	 * @loadAllMembers : This function will display all the records of members from the database to the respective page.
 	 * @author : Mohan, Bala
 	 *
-	 * @return/outcome : Returns a json object where it consists all the records of memberes.
+	 * @return/outcome : Returns a json arrayobject where it consists all the records of memberes.
 	 */
 	function loadAllMembers(){
 		$arrayObject = array();
@@ -225,11 +226,11 @@
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); //return value
+		return(json_encode($arrayObject)); //return value
 	}
 
 
@@ -239,7 +240,7 @@
 	 *
 	 * @param : string - search_key
 	 *
-	 * @return/outcome : Returns a json object where it consists the record of particular book.
+	 * @return/outcome : Returns a json arrayobject where it consists the record of particular book.
 	 */
 	function searchForBook($search_key){
 		$arrayObject = array();
@@ -266,11 +267,11 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    echo "0 results"; 
+		    return "0 results"; 
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); //return value
+		return(json_encode($arrayObject)); //return value
 	}
 
 
@@ -280,7 +281,7 @@
 	 *
 	 * @param : string - search_key
 	 *
-	 * @return/outcome : Returns a json object where it consists the record of particular member.
+	 * @return/outcome : Returns a json arrayobject where it consists the record of particular member.
 	 */
 	function searchForMember($search_key){
 		$arrayObject = array();
@@ -312,11 +313,11 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); // return
+		return(json_encode($arrayObject)); // return
 	}
 
 
@@ -353,9 +354,9 @@
 		addr_city = '$addr_city' , addr_state = '$addr_state' , addr_pincode = '$addr_pincode' WHERE mem_id='$mem_id' ";
 
 		if ($conn->query($sql) === TRUE) {
-		    echo "Member details updated successfully";
+		    return "Member details updated successfully";
 		} else {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 
 		$conn->close();
@@ -430,7 +431,7 @@
 	 * @param : string - authorName
 	 * @param : string - edition
 	 *
-	 * @return/outcome : It will save the data in the databse.
+	 * @return/outcome : It will save the data in the databse and returns a string with successful message.
 	 */
 	function requestingForNewBook($bookName, $authorName){
 		$conn = connection();
@@ -471,7 +472,7 @@
 	 * @param : string - bookId
 	 * @param : string - extensionDays
 	 *
-	 * @return/outcome : It will save and update the due date in the database.
+	 * @return/outcome : It will save and update the duedate in the database and returns the successful message.
 		 */
 	function requestingForDueDateExtension($memberid, $bookid, $extensiondays){
 		$conn = connection();
@@ -479,14 +480,14 @@
 		$sql = "SELECT book_id FROM due_date_extension WHERE book_id = $bookid  ";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0){
-			echo "You have already requsted for duedate extension";
+			return "You have already requsted for duedate extension";
 		}else{
 			$sql = "INSERT INTO due_date_extension (mem_id, book_id, extension_days) VALUES ('$memberid',$bookid, $extensiondays)";
 
 			if ($conn->query($sql) === TRUE) {
-			    echo "New record created successfully";
+			    return "New request for duedate extension created successfully";
 			} else {
-			    echo "Error: " . $sql . "<br>" . $conn->error;
+			    return "Error: " . $sql . "<br>" . $conn->error;
 			}
 
 		
@@ -547,14 +548,14 @@
 			}
 		    $sql = "INSERT INTO tbl_members (mem_name, mem_moblieno, mem_email, mem_dob, mem_gender, mem_photo, mem_add_proof, ms_id, membership_on, expiry_on, addr_hno, addr_street, addr_city, addr_state, addr_pincode) VALUES ('$object[0]', '$object[1]', '$object[2]', '$object[3]', '$object[4]', '$object[5]', '$object[6]', '$object[12]', '$object[13]', '$object[14]', '$object[7]', '$object[8]', '$object[9]', '$object[10]', '$object[11]' )";
 		if ($conn->query($sql) === FALSE) {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 		$sql = "DELETE FROM tbl_mem_request WHERE mem_email='$emailId'";
 		if ($conn->query($sql) === FALSE) {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		$conn->close();
 	}
@@ -587,11 +588,11 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); //return value
+		return(json_encode($arrayObject)); //return value
 
 
 	}
@@ -618,7 +619,7 @@
 		    $row = $result->fetch_assoc();
 	    	$returndate = $row["return_expected"];
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 		$sql = " SELECT extension_days FROM due_date_extension WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
 		$result = $conn->query($sql);
@@ -628,15 +629,15 @@
 		    $row = $result->fetch_assoc();
 	    	$extension = $row["extension_days"];
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 
 		$date = date('Y-m-d', strtotime("+$extension days", strtotime($returndate)));
 		$sql = "UPDATE tbl_issued_books SET return_expected = '$date'  WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
 		if ($conn->query($sql) === TRUE) {
-		    echo "New record created successfully";
+		    return "New record created successfully";
 		} else {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		$conn->close();
 	}
@@ -663,7 +664,7 @@
 		    $expiry = $row["expiry_on"];
 
 		}else {
-			echo "0 Results";
+			return "0 Results";
 		}
 		if($extensionType == "Platinum"){
 			$membershipId = 1;
@@ -678,8 +679,9 @@
 
 		$sql = "UPDATE tbl_members SET expiry_on = '$expiry' WHERE mem_id='$memId'";
 		$sql = "DELETE FROM tbl_membership_renewal_request WHERE mem_id='$memId'";
+		return "Approved membership renewal request";
 		if ($conn->query($sql) === FALSE) {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		$conn->close();
 	}
@@ -729,7 +731,7 @@
 		$return_actual = date('Y-m-d');
 		$sql = "UPDATE tbl_issued_books SET return_actual = '$return_actual'  WHERE book_id = '$bookId' ";
 		if ($conn->query($sql) === FALSE) {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		$sql = "SELECT * FROM tbl_issued_books where book_id = '$bookId'";
 		$result = $conn->query($sql);
@@ -740,7 +742,7 @@
 		    $return_expected = $row["return_expected"];
 
 		}else {
-			echo "0 Results";
+			return "0 Results";
 		}
 		$diff = 0;
 		$return_actual_new = new DateTime($return_actual);
@@ -756,7 +758,7 @@
 		}
 		
 		if ($conn->query($sql) === FALSE) {
-		    echo "Error: " . $sql . "<br>" . $conn->error;
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		$conn->close();
 
@@ -793,18 +795,18 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); //return value
+		return(json_encode($arrayObject)); //return value
 
 
 	}
 
 
 /**
-	 * @loadAllBooks : This function is used to display the membership renewal requests which are requesterd from the users.
+	 * @loadAllBooks : This function is used to display the membership renewal requests which are requesterd from the members.
 	 * @author : Mohan, Bala
 	 *
 	 * @return/outcome : Returns a json object where it consists all the records of books.
@@ -834,7 +836,7 @@
 		    }
 		    return json_encode($arrayObject);
 		} else {
-		    echo "0 results"; 
+		    return "0 results"; 
 		}
  //return value
 		$conn->close();
@@ -843,7 +845,7 @@
 
 
 		/**
-	 * @viewNewBookRequests : This function is used to display the issued book details .
+	 * @viewNewBookRequests : This function is used to display the all issued books details .
 	 * @author : Mohan, Bala
 	 *
 	 *
@@ -868,18 +870,18 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); //return value
+		return(json_encode($arrayObject)); //return value
 
 
 	}
 
 
 			/**
-	 * @viewNewBookRequests : This function is used to display the issued book details .
+	 * @viewNewBookRequests : This function is used to display the details of all duedate extensions which are requested by the members.
 	 * @author : Mohan, Bala
 	 *
 	 *
@@ -901,11 +903,11 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    echo "0 results";
+		    return "0 results";
 		}
 
 		$conn->close();
-		print_r(json_encode($arrayObject)); //return value
+		return(json_encode($arrayObject)); //return value
 
 
 	}

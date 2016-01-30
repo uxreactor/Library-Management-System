@@ -12,6 +12,7 @@
     <link href="css/animate.min.css" rel="stylesheet" /> 
 	<link href="css/main.css" rel="stylesheet" />
 	<link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
     <!--[if lt IE 9]>
 	    <script src="js/html5shiv.js"></script>
@@ -22,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png" />
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png" />
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head><!--/head-->
 <body>
 	<header id="header">      

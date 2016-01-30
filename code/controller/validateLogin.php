@@ -4,7 +4,7 @@
 	$password = $_POST['password'];
 	$message=login($email,$password);
 	if ($message) {
-		header('Location: ../our-library.html');
+		header('Location:our-library.html');
 	}else{
 		echo $message;
 	}
