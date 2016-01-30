@@ -40,15 +40,15 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                   <a class="navbar-brand" href="index.html" style="margin-top:10px;">
+                   <a class="navbar-brand" href="index.php" style="margin-top:10px;">
                         <h1>UXR LIBRARY</h1>
                     </a>                  
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="member.html">My books</a></li>
-                        <li class="active"><a href="">Renew Membership</a></li>                       
-                        <li><a href="index.html ">Logout</a></li>                    
+                        <li><a href="member.php">My books</a></li>
+                        <li><a href="">Renew Membership</a></li>                       
+                        <li><a href="index.php ">Logout</a></li>                    
                     </ul>
                 </div>
             </div>
