@@ -10,8 +10,11 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/lightbox.css" rel="stylesheet" />  
     <link href="css/animate.min.css" rel="stylesheet" /> 
-    <link href="css/main.css" rel="stylesheet" />
-    <link href="css/responsive.css" rel="stylesheet" />
+
+	<link href="css/main.css" rel="stylesheet" />
+	<link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
 
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
