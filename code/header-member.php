@@ -42,23 +42,23 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="our-library.html">Our library</a></li>
-                        <li><a href="add-book.html">Add New Book</a></li>
+                        <li><a href="our-library.php">Our library</a></li>
+                        <li><a href="add-book.php">Add New Book</a></li>
                         <li class="dropdown"><a>Issue<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                                <li><a href="issue-book.html">Issue New Book</a></li>
-                                <li><a href="manage-book.html">Manage Issued Books</a></li>
+                                <li><a href="issue-book.php">Issue New Book</a></li>
+                                <li><a href="manage-book.php">Manage Issued Books</a></li>
                             </ul>
                         </li>    
                         <li class="dropdown "> <a>Requests<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                                <li><a href="new-book.html">New Books</a></li>
-                                <li><a href="admin-accept-membership.html">New Memberships</a></li>
-                                <li><a href="admin-book-renewal.html">Renew Books</a></li>
-                                <li><a href="renew-membership.html">Renew Memberships</a></li>
+                                <li><a href="new-book.php">New Books</a></li>
+                                <li><a href="admin-accept-membership.php">New Memberships</a></li>
+                                <li><a href="admin-book-renewal.php">Renew Books</a></li>
+                                <li><a href="renew-membership.php">Renew Memberships</a></li>
                             </ul>
                         </li>                         
-                        <li><a href="index.html ">Logout</a></li>                    
+                        <li><a href="index.php ">Logout</a></li>                    
                     </ul>
                 </div>
             </div>

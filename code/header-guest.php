@@ -37,16 +37,16 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="index.html" style="margin-top:10px;">
+                    <a class="navbar-brand" href="index.php" style="margin-top:10px;">
                     	<h1>UXR LIBRARY</h1>
                     </a>
                     
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="apply-membership.html">Apply for a Membership</a></li>
-                        <li><a href="login.html ">Login</a></li>                    
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="apply-membership.php">Apply for a Membership</a></li>
+                        <li><a href="login.php ">Login</a></li>                    
                     </ul>
                 </div>
             </div>
