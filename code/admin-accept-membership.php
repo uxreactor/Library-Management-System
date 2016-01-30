@@ -66,7 +66,9 @@
     </header>
     <!--/#header-->
     <div class="container"> 
-    <h2>New membership requests()</h3>
+        <div id="load_members">
+             <h2>New membership requests</h3>
+        </div>
         <!--table  class="table table-bordered table-striped">
             <thead>
               <tr>
@@ -103,37 +105,39 @@
         </div>
     </footer>
     <!--/#footer-->
-    <script type="text/javascript" src="js/jquery.js"></script>
+   <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="js/lightbox.min.js"></script>
     <script type="text/javascript" src="js/wow.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>    
+    <script type="text/javascript" src="js/main.js"></script>   
     <script type="text/javascript" src="js/script.js"></script>
-   <script type="text/javascript">
-        function postForm() {
-            $.ajax({             
-                url: 'controller/load_allmembers.php',
-                type: 'post',
-                success: function(response){                        
-                    console.log(response);
-                    obj = jQuery.parseJSON(response);
-                    viewData(obj);
-                },
-                error: function(xhr, desc, err){
-                    console.log(desc);
-                }
-            });
-        }
-
-        $("form#books").submit(function() {
-            postForm();
-            return false;
-        });
-
-        $(function() {
-            postForm();
-        });
+    <script type="text/javascript">
     </script>
+    <script type="text/javascript">
+            var parent = document.getElementById('load_members');
+            function postForm() {
+                $.ajax({             
+                    url: 'controller/load_allmembers.php',
+                    type: 'post',
+                    success: function(response){                        
+                        console.log(response);
+                        obj = jQuery.parseJSON(response);
+                        viewData(obj,parent);
+                    },
+                    error: function(xhr, desc, err){
+                        console.log(desc);
+                    }
+                });
+            }
+
+            $("form#books").submit(function() {
+                postForm();
+                return false;
+            });
+
+            $(function() {
+                postForm();
+            });
+        </script>
 </body>
 </html>
