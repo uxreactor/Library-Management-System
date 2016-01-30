@@ -61,13 +61,7 @@
                 <option>Silver</option>
             </select>
             <br/> <br/>
-            <p style=" font-size:18px;"> Identity Proofs</p>
-            <div class="form-group">
-                <label >Upload Photo here</label>
-                <input type="file" class="filestyle" data-buttonBefore="true" style="border:1px solid"/> <br/>
-                <label >Upload Address proof here</label>
-                <input type="file" class="filestyle" data-buttonBefore="true" style="border:1px solid"/>
-            </div>
+            
             <h2>Membership type details</h2>
         <table  class="table table-bordered table-striped" style="width:40%;">
             <thead>
