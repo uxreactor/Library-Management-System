@@ -202,35 +202,18 @@
 		$arrayObject = array();
 		$conn = connection();
 		$sql = " SELECT * FROM tbl_members " ;
-		//$result = mysql_query("$sql");
-		//print_r($result);
-		//header("Content-type: image/jpeg");
-		//echo mysql_result($result, 0);
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
 
 		    while($row = $result->fetch_assoc()) {  // Used to fetch the data from database.    
 		    	$object = array();
-		    	$object['mem_id'] = $row["mem_id"];
-		    	$object['mem_name'] = $row["mem_name"];
-		    	$object['mem_moblieno'] = $row["mem_moblieno"];
-		    	$object['mem_email'] = $row["mem_email"];
-		    	$object['mem_dob'] = $row["mem_dob"];
-		    	$object['mem_gender'] = $row["mem_gender"];
-		    	//header("Content-type: image/jpeg");
-		    	//$object['mem_photo'] = $row["mem_photo"];
-		    	//$object['mem_add_proof'] = $row["mem_add_proof"];
-		    	//echo $object['mem_photo'];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['membership_on'] = $row["membership_on"];
-		    	$object['expiry_on'] = $row["expiry_on"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
-				$object['action'] = "edit,delete";
+		    	$object['Member ID'] = $row["mem_id"];
+		    	$object['Member Name'] = $row["mem_name"];
+		    	$object['Validity'] = $row["expiry_on"];
+		    	$object['Phone No.'] = $row["mem_moblieno"];
+		    	$object['Mail ID'] = $row["mem_email"];
+				$object['action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
