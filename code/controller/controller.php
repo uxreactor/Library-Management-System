@@ -441,32 +441,24 @@
 	 *
 	 * @return/outcome : It will save the data in the databse and returns a string with successful message.
 	 */
-	function requestingForNewBook($bookName, $authorName){
+	function requestingForNewBook($memberId,$bookName, $authorName){
 		$conn = connection();
-		$sql = "SELECT  * FROM tbl_new_book_request where book_name = '$bookName' AND author_name = '$authorName' ";
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0 ){
-			$row = $result->fetch_assoc();
-			$reqNumber = $row["requests"]+1;
-			$sql_update = "UPDATE tbl_new_book_request SET requests='$reqNumber' WHERE book_name = '$bookName' AND author_name = '$authorName' ";
-			if ($conn->query($sql_update) === FALSE) {
-		    return "Error: " . $sql_update . "<br>" . $conn->error;
-			} else{
-				return "Requset updated sucessfully";
+			$sql = "SELECT  * FROM tbl_new_book_request where  mem_id = $memberId";
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0 ){
+				return "This book is already requested";
+			}else {
+				$sql = "INSERT INTO tbl_new_book_request (book_name, author_name,mem_id) VALUES ('$bookName', '$authorName',$memberId)";
+				if ($conn->query($sql) === FALSE) {
+			    return "Error: " . $sql . "<br>" . $conn->error;
+				} else{
+					return "New request added sucessfully";
+				}
 			}
-		}else {
-			$sql = "INSERT INTO tbl_new_book_request (book_name, author_name,requests) VALUES ('$bookName', '$authorName', '1')";
-			if ($conn->query($sql) === FALSE) {
-		    return "Error: " . $sql . "<br>" . $conn->error;
-			} else{
-				return "New request added sucessfully";
+			
+			if ($conn->query($sql_select) === FALSE) {
+			    return "Error: " . $sql_select . "<br>" . $conn->error;
 			}
-		}
-		
-		if ($conn->query($sql_select) === FALSE) {
-		    return "Error: " . $sql_select . "<br>" . $conn->error;
-		}
-		
 		$conn->close();
 	}
 
@@ -696,7 +688,7 @@
 
 
 	/**
-	 * @issueBook : This function is used to issue a book to the member and also it consists local variable for current date and returning.
+	 * @requestingForNewBookrequestingForNewBookrequestingForNewBook : This function is used to issue a book to the member and also it consists local variable for current date and returning.
 	 * current date is taken from the system and returning date is taken from the profile.
 	 * @author : Mohan, Bala
 	 *
