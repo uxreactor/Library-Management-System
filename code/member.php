@@ -18,9 +18,6 @@
     <br/>
     <br/>
     <!--/#searchbar--> 
-    
-    <h3><a class="pull-right" href="mem_request_new_book.html">
-      <i class="glyphicon glyphicon-plus-sign"></i>Request new book </a>
     </h3>
     <div id="load_books">
       <h2>My books</h2>

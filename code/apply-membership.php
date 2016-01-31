@@ -2,6 +2,7 @@
     <!--/#header-->
 
     <div class="container">
+        <div class = "notification" style="font-size: 40px; color:green"></div>
         <h2>Apply for new membership</h2>
         <form name="add_book" method="post" action="controller/submit_new_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="name_id_label">
@@ -26,8 +27,10 @@
             </div>
             <div class="form-group">
                 <h3> Gender : </h3>    
-                <label class="radio-inline"> <input type="radio"  class="radio" name="radio" value="male" checked="checked"> Male</label>
-                <label class="radio-inline"> <input type="radio"  class="radio" name="radio" value="female"> Female</label>         
+                <label class="radio-inline">
+                <input type="radio"  class ="radio" name="radio" value="male" checked> Male</label>
+                <label class="radio-inline">
+                <input type="radio"   class ="radio" name="radio" value="female"> Female</label>         
             </div>            
             <h3>Address</h3>
             <div class="form-group" id="hno_label">
@@ -56,11 +59,11 @@
                 <span class="error"></span>               
             </div>
             <span style=" font-size:18px;"> Membership type</span>
-            <select class="select_list" id="membership_type" style=" width:24%;">
+            <select class="select_list" id="membership_type" style=" width:23%;">
                 <option>Platinum</option>
                 <option>Gold</option>
                 <option>Silver</option>
-            </select><a href="" data-toggle="modal" data-target="#help">Help</a>
+            </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help"style="width:20px;height:20px; margin-left:1%;">
             <br/><br />
             <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">
@@ -105,26 +108,10 @@
             </div>
         </div>
             
-            <button type="submit" class="btn btn-default btn-lg btn-info" data-toggle="modal" data-target="#myModal"/>Submit</button>
+            <button type="submit" class="btn btn-default btn-lg btn-info" >Submit</button>
             <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Acknowledgement</h4>
-                    </div>
-                    <div class="modal-body">
-                     <!-- <p> Sucess </p>-->
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>  
-            </div>
-        </div>
+       
 
         <!--/#issue book form -->
     </div>
@@ -182,7 +169,7 @@
                     phoneno: $('#phoneno_id').val(),
                     email: $('#input_email').val(),
                     dob: $('#dob').val(),
-                    gender: $('.radio').val(),
+                    gender: $("input:checked").val(),
                     membership_type: $('#membership_type').val(),
                     hno: $('#hno').val(),
                     street: $('#street').val(),
@@ -196,9 +183,7 @@
                     type: $('form').attr('method'),
                     data: member_details,
                     success: function(response){
-                       // if(response === "success") {
-                       // $('#myModal .modal-body').text("Sucessfully Applied");
-                        //}
+                        $('.notification').text(response);
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

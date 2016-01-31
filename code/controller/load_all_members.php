@@ -1,5 +1,5 @@
 <?php
 	require('controller.php');
-	$books_data=loadAllMembers();
-	echo $books_data;
+	$members_data=loadAllMembers();
+	echo $members_data;
 ?>
