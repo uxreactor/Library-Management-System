@@ -27,8 +27,10 @@
             </div>
             <div class="form-group">
                 <h3> Gender : </h3>    
-                <label class="radio-inline"> <input type="radio"  class="radio" name="radio" value="male" checked="checked"> Male</label>
-                <label class="radio-inline"> <input type="radio"  class="radio" name="radio" value="female"> Female</label>         
+                <label class="radio-inline">
+                <input type="radio"  class ="radio" name="radio" value="male" checked> Male</label>
+                <label class="radio-inline">
+                <input type="radio"   class ="radio" name="radio" value="female"> Female</label>         
             </div>            
             <h3>Address</h3>
             <div class="form-group" id="hno_label">
@@ -167,7 +169,7 @@
                     phoneno: $('#phoneno_id').val(),
                     email: $('#input_email').val(),
                     dob: $('#dob').val(),
-                    gender: $('.radio').val(),
+                    gender: $("input:checked").val(),
                     membership_type: $('#membership_type').val(),
                     hno: $('#hno').val(),
                     street: $('#street').val(),
