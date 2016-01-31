@@ -4,9 +4,11 @@
 		if($type == 'admin'){
 			$_SESSION["admin"] = $email;
 			$_SESSION["type"] = "admin";
-		}else{
+		}else if ($type == 'user'){
 			$_SESSION["user"] = $email;
 			$_SESSION["type"] = $memid;
+		}else{
+			return false;
 		}
 		return $_SESSION["type"];
 	}

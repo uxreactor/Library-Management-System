@@ -4,12 +4,16 @@
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$type = $_POST['type'];
+	if($type == 'admin'){
+		$message=adminLogin($email,$password);
+	}else{
+		$message=login($email,$password);
+	}
 	
-	$message=login($email,$password);
 	if ($message) {
 		echo setSession($email,$type,$message);
 	} else {
-		echo 0;
+		echo false;
 	}
 
 ?>

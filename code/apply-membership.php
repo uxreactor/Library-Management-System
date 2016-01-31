@@ -26,8 +26,8 @@
             </div>
             <div class="form-group">
                 <h3> Gender : </h3>    
-                <label class="radio-inline"> <input type="radio"  class="radio1" name="radio" value="male" checked="checked"> Male</label>
-                <label class="radio-inline"> <input type="radio"  class="radio1" name="radio" value="female"> Female</label>         
+                <label class="radio-inline"> <input type="radio"  class="radio" name="radio" value="male" checked="checked"> Male</label>
+                <label class="radio-inline"> <input type="radio"  class="radio" name="radio" value="female"> Female</label>         
             </div>            
             <h3>Address</h3>
             <div class="form-group" id="hno_label">
@@ -56,59 +56,73 @@
                 <span class="error"></span>               
             </div>
             <span style=" font-size:18px;"> Membership type</span>
-            <select class="select_list" id="membership_type">
+            <select class="select_list" id="membership_type" style=" width:24%;">
                 <option>Platinum</option>
                 <option>Gold</option>
                 <option>Silver</option>
-            </select>
-            <br/> <br/>
+            </select><a href="" data-toggle="modal" data-target="#help">Help</a>
+            <br/><br />
+            <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Membership type details</h4>
+                    </div>
+                    <div class="modal-body">
+                     <table  class="table table-bordered table-striped" style="width:40%;">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Cost</th>
+                                <th>Validation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Platinum</td>
+                                <td>300</td>
+                                <td>12 months</td>
+                            </tr>
+                            <tr>
+                                <td>Gold</td>
+                                <td>200</td>
+                                <td>6 months</td>
+                            </tr>
+                            <tr>
+                                <td>Silver</td>
+                                <td>100</td>
+                                <td>3 months</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
             
-            <h2>Membership type details</h2>
-        <table  class="table table-bordered table-striped" style="width:40%;">
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Cost</th>
-                    <th>Validation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Platinum</td>
-                    <td>300</td>
-                    <td>12 months</td>
-                </tr>
-                <tr>
-                    <td>Gold</td>
-                    <td>200</td>
-                    <td>6 months</td>
-                </tr>
-                <tr>
-                    <td>Silver</td>
-                    <td>100</td>
-                    <td>3 months</td>
-                </tr>
-            </tbody>
-        </table>
-            <button type="submit" class="btn btn-default btn-lg btn-info" data-toggle="modal" data-target="#myModal">Submit</button>
+            <button type="submit" class="btn btn-default btn-lg btn-info" data-toggle="modal" data-target="#myModal"/>Submit</button>
             <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-            
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Acknowledgement</h4>
-                </div>
-                <div class="modal-body">
-                  <p>Applied Successfully !</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                </div>
-              </div>  
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Acknowledgement</h4>
+                    </div>
+                    <div class="modal-body">
+                     <!-- <p> Sucess </p>-->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>  
             </div>
         </div>
 
@@ -118,41 +132,80 @@
     <!--/#footer-->
 
     <?php include ("javascript-links.php");?>   
+
     <script type="text/javascript">
-        $(function () {
-                  //$('#myTab li:eq(1) a').tab('show');
+        function submitForm() {
 
-               });
-
-        var submitForm = function() {
             var validation_message;
-            add_member = [{ type : 'text' , value: $('#name_id').val() , errorMessage:'Name is required' }, 
-                        { type:'number' , value: $('#phoneno_id').val() , errorMessage:'Phone number is required' },
-                        { type:'email' , value: $('#input_email').val() , errorMessage:'Email is required' },
-                        { type:'date' , value: $('#dob').val() , errorMessage:'Date of birth is required' },
-                        { type:'text' , value: $('#hno').val() , errorMessage:'House No is required' },
-                        { type:'text' , value: $('#street').val() , errorMessage:'Street is required' },
-                        { type:'text' , value: $('#city').val() , errorMessage:'City is required' },
-                        { type:'text' , value: $('#state').val() , errorMessage:'State is required' },
-                        { type:'text' , value: $('#pin').val() , errorMessage:'Pin Code is required' }];
+            add_member = [{ 
+                type : 'text' , 
+                value: $('#name_id').val() , 
+                errorMessage:'Name is required' 
+            }, { 
+                type:'number' , 
+                value: $('#phoneno_id').val() , 
+                errorMessage:'Phone number is required' 
+            }, { type:'email' ,
+                 value: $('#input_email').val() , 
+                 errorMessage:'Email is required'
+            },{ 
+                type:'date' , 
+                value: $('#dob').val() ,
+                errorMessage:'Date of birth is required'
+            },{ 
+                type:'text' ,
+                value: $('#hno').val() , 
+                errorMessage:'House No is required' 
+            },{ 
+                type:'text' ,
+                value: $('#street').val() , 
+                errorMessage:'Street is required' 
+            },{ 
+                type:'text' , 
+                value: $('#city').val() , 
+                errorMessage:'City is required' 
+            },{ 
+                type:'text' , 
+                value: $('#state').val() , 
+                errorMessage:'State is required' 
+            },{ 
+                type:'text' , 
+                value: $('#pin').val() , 
+                errorMessage:'Pin Code is required' 
+            }];
 
-            var member_details = { name_id:$('#name_id').val(),phoneno_id:$('#phoneno_id').val(),input_email:$('#input_email').val(),dob:$('#dob').val(),radio1:$('.radio1').val(),membership_type:$('#membership_type').val(),hno:$('#hno').val(),street:$('#street').val(),city:$('#city').val(),state:$('#state').val(),pin:$('#pin').val()}
-            validation_message = validateForm (add_member);  
-            
-              if(submitToServer(validation_message)){
+            validation_message = validateForm(add_member);  
+          
+            if(submitToServer(validation_message)){
+              var  member_details = { 
+                    name: $('#name_id').val(),
+                    phoneno: $('#phoneno_id').val(),
+                    email: $('#input_email').val(),
+                    dob: $('#dob').val(),
+                    gender: $('.radio').val(),
+                    membership_type: $('#membership_type').val(),
+                    hno: $('#hno').val(),
+                    street: $('#street').val(),
+                    city: $('#city').val(),
+                    state: $('#state').val(),
+                    pin: $('#pin').val()
+                };
+
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
                     data: member_details,
                     success: function(response){
-                        console.log(response);
+                       // if(response === "success") {
+                       // $('#myModal .modal-body').text("Sucessfully Applied");
+                        //}
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
                     }
                 });
                
-            }else{
+            } else {
                 body = document.getElementById('name_id_label');
                 writeError(validation_message[0],body);
                 body = document.getElementById('phoneno_id_label');
@@ -171,7 +224,7 @@
                 writeError(validation_message[7],body);
                 body = document.getElementById('pin_label');
                 writeError(validation_message[8],body);
-                return false;
+               
             }
             return false;
         }

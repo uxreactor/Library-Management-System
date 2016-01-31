@@ -78,17 +78,38 @@
 		$sql = " SELECT username , password FROM tbl_login WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
-        	$sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
+			 $sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
         	$result = $conn->query($sql);
         	if ($result->num_rows > 0) {
         		$row = $result->fetch_assoc();
         		$returnVal = $row["mem_id"];
         		return $returnVal; // return value
         	}
-        	
-			 
 		}else{
-			return 0; // return value
+			return FALSE; // return value
+		}
+		$conn->close();
+	}
+
+
+
+	/**
+	 * @login : This function will check the details of the admin in the database and if the details are matched then it allows to login else it just displays an error message.
+	 * @author : Prabhakar
+	 *
+	 * @param : string - username
+	 * @param : password - password
+	 *
+	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
+	 */
+	function adminLogin($username,$password){
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_admin_login WHERE username = '$username' AND password = '$password'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+			 return 1; // return value
+		}else{
+			return FALSE; // return value
 		}
 		$conn->close();
 	}
@@ -180,7 +201,6 @@
 		    	$object['book_name'] = $row["book_name"];
 		    	$object['author_name'] = $row["author_name"];
 		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -191,6 +211,47 @@
 		return(json_encode($arrayObject)); //return value
 	}
 
+
+
+
+
+	/**
+	 * @loadAllBooks : This function will display all the records of books from the database to the respective page it displays all the dettails of book along with count of the book.
+	 * @author : Mohan, Bala
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
+	 */
+	function loadAllBooksInLibrary(){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_book_varities " ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
+		    	$isbn = $row["isbn"];
+		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
+		    	$result_isbn = $conn->query($sql);
+		    	$row_isbn = $result_isbn->fetch_assoc();
+				$object = array();
+		    	$object['isbn'] = $row["isbn"];
+		    	$object['price'] = $row["price"];
+		    	$object['edition'] = $row["edition"];
+		    	$object['publisher'] = $row["publisher"];
+		    	$object['category'] = $row["category"];
+		    	$object['book_name'] = $row["book_name"];
+		    	$object['author_name'] = $row["author_name"];
+		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['action'] = "edit,delete";
+		    	array_push($arrayObject, $object);
+		    }
+		} else {
+		    return "0 results"; 
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
 
 	/**
 	 * @loadAllMembers : This function will display all the records of members from the database to the respective page.
@@ -869,7 +930,7 @@
 	}
 
 
-			/**
+	/**
 	 * @viewNewBookRequests : This function is used to display the details of all duedate extensions which are requested by the members.
 	 * @author : Mohan, Bala
 	 *
@@ -897,8 +958,6 @@
 
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
-
-
 	}
 
 
@@ -912,7 +971,6 @@
 	 */
 	function emailCheck($email){
 		$conn = connection();
-		echo "Ba;";
 		$sql = " SELECT mem_email FROM tbl_mem_request WHERE mem_email = '$email' ";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -922,5 +980,7 @@
 		}
 		$conn->close();
 	}
+
+
 
 ?>
