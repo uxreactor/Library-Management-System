@@ -48,6 +48,10 @@
 
                     <ul class="nav navbar-nav navbar-right">
 
+                        <li><a href="member.php">My books</a></li>
+                        <li><a href="member-renew-membership.php">Renew Membership</a></li>                       
+                        <li><a href="index.php ">Logout</a></li>                    
+
                     </ul>
                 </div>
             </div>
