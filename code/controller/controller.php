@@ -790,7 +790,13 @@
 		    	$object['City'] = $row["addr_city"];
 		    	$object['State'] = $row["addr_state"];
 		    	$object['Pincode'] = $row["addr_pincode"];
-		    	$object['Membership Id'] = $row["ms_id"];
+		    	if($row["ms_id"]==1){
+		    		$object['Membership type'] = "Platinum";
+		    	}else if($row["ms_id"]==2){
+		    		$object['Membership typetype'] = "Gold";
+		    	}else{
+		    		$object['Membership type'] = "Silver";
+		    	}
 		    	$object['Actions'] ="approve,reject";
 		    	array_push($arrayObject, $object);
 		    }
@@ -910,6 +916,28 @@
 		return(json_encode($arrayObject)); //return value
 
 
+	}
+
+
+	/**
+	 * @emailCheck : This function is used to check the duplicate email Id for appling a membership.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - email
+	 *
+	 * @return/outcome : It will returns 1 if the email is exist else returns 0.
+	 */
+	function emailCheck($email){
+		$conn = connection();
+		echo "Ba;";
+		$sql = " SELECT mem_email FROM tbl_mem_request WHERE mem_email = '$email' ";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+			 return 1; // return value
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
 	}
 
 ?>
