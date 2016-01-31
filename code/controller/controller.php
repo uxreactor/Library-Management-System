@@ -78,7 +78,15 @@
 		$sql = " SELECT username , password FROM tbl_login WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
-			 return 1; // return value
+        	$sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
+        	$result = $conn->query($sql);
+        	if ($result->num_rows > 0) {
+        		$row = $result->fetch_assoc();
+        		$returnVal = $row["mem_id"];
+        		return $returnVal; // return value
+        	}
+        	
+			 
 		}else{
 			return 0; // return value
 		}
@@ -781,17 +789,23 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$object['mem_name'] = $row["mem_name"];
-		    	$object['mem_mobileno'] = $row["mem_mobileno"];
-		    	$object['mem_email'] = $row["mem_email"];
-		    	$object['mem_gender'] = $row["mem_gender"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['action'] ="approve,reject";
+		    	$object['Name'] = $row["mem_name"];
+		    	$object['Mobile No'] = $row["mem_mobileno"];
+		    	$object['Email Id'] = $row["mem_email"];
+		    	$object['Gender'] = $row["mem_gender"];
+		    	$object['#'] = $row["addr_hno"];
+		    	$object['Street'] = $row["addr_street"];
+		    	$object['City'] = $row["addr_city"];
+		    	$object['State'] = $row["addr_state"];
+		    	$object['Pincode'] = $row["addr_pincode"];
+		    	if($row["ms_id"]==1){
+		    		$object['Membership type'] = "Platinum";
+		    	}else if($row["ms_id"]==2){
+		    		$object['Membership typetype'] = "Gold";
+		    	}else{
+		    		$object['Membership type'] = "Silver";
+		    	}
+		    	$object['Actions'] ="approve,reject";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -910,6 +924,28 @@
 		return(json_encode($arrayObject)); //return value
 
 
+	}
+
+
+	/**
+	 * @emailCheck : This function is used to check the duplicate email Id for appling a membership.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - email
+	 *
+	 * @return/outcome : It will returns 1 if the email is exist else returns 0.
+	 */
+	function emailCheck($email){
+		$conn = connection();
+		echo "Ba;";
+		$sql = " SELECT mem_email FROM tbl_mem_request WHERE mem_email = '$email' ";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+			 return 1; // return value
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
 	}
 
 ?>

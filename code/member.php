@@ -1,4 +1,8 @@
-<?php include ("header-member.php");?>
+<?php 
+    include ("header-member.php");
+    require 'controller/session.php';
+    //echo checkSession();
+?>
     <!--/#header-->
     <div class="container">
         <div class="input-group col-xs-6 col-xs-offset-3">

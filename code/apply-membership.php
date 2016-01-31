@@ -1,5 +1,6 @@
 <?php include ("header-guest.php");?> 
     <!--/#header-->
+
     <div class="container">
         <h2>Apply for new membership</h2>
         <form name="add_book" method="post" action="controller/submit_new_membership.php" onsubmit="return submitForm();">
@@ -89,9 +90,28 @@
                 </tr>
             </tbody>
         </table>
-            <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
-            <a href="" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+            <button type="submit" class="btn btn-default btn-lg btn-info" data-toggle="modal" data-target="#myModal">Submit</button>
+            <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Acknowledgement</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Applied Successfully !</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+              </div>  
+            </div>
+        </div>
+
         <!--/#issue book form -->
     </div>
     <?php include ("footer.php");?> 

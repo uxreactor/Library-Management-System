@@ -80,7 +80,7 @@
                         //redirect to dashboard
                         if(response == 'admin'){
                             window.location.href = "our-library.php";
-                        }else if(response == 'user'){
+                        }else if(response){
                             window.location.href = "member.php";
                         }else{
                             //Show login failure
