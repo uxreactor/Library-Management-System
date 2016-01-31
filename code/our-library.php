@@ -9,7 +9,7 @@
             <div class="col-xs-8 col-xs-offset-2">
                 <div class="input-group">
                     <div class="input-group-btn">
-                        <select class="select_list select-books-members">
+                        <select class="select_list select-books-members" id="option" onchange="loadDetails()">
                             <option selected="selected">Books</option>
                             <option>Members</option>
                         </select>
@@ -26,48 +26,6 @@
         <div id="load-books">
             <h2>All books</h2>      
         </div> 
-        <!--/#search bar and dropdown-->  
-        <!--<table  class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Member ID</th>
-                <th>Name</th>
-                <th>Validity</th>
-                <th>Phone No.</th>
-                <th>Mail ID</th>
-                <th colspan="2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1001</td>
-                    <td>Anurag</td>
-                    <td>26/12/2016</td>
-                    <td>9059638871</td>
-                    <td>abc@gmail.com</td>
-                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
-                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
-                </tr>
-                <tr>
-                    <td>1001</td>
-                    <td>Anurag</td>
-                    <td>26/12/2016</td>
-                    <td>9059638871</td>
-                    <td>abc@gmail.com</td>
-                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
-                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
-                </tr>
-                <tr>
-                    <td>1001</td>
-                    <td>Anurag</td>
-                    <td>26/12/2016</td>
-                    <td>9059638871</td>
-                    <td>abc@gmail.com</td>
-                    <td><input type="button" class="btn btn-info" value="Edit" /></td>
-                    <td><input type="button" class="btn btn-info" value="Delete" /></td>
-                </tr>
-           </tbody>
-          </table>
     </div>
     <!--/#table-->
     <?php include ("footer.php");?>
@@ -77,12 +35,29 @@
     <script type="text/javascript">
         var parent = document.getElementById('load-books');
         var error = document.getElementById('book_name_label');
-        function postForm() {
+        
+        $(function() {
+            loadDetails()
+        });
+
+        function loadDetails(){
+            var select = document.getElementById('option').value;
+            var url;
+            if(select == "Books"){
+                url = 'controller/load_all_books_in_library.php';
+      
+            } else if(select == "Members") {
+                url = 'controller/load_all_members.php';
+            }
+            postForm(url);  
+        }
+
+        function postForm(url) {
+            $('.table').remove();
             $.ajax({             
-                url: 'controller/load_all_books_in_library.php',
+                url: url,
                 type: 'post',
                 success: function(response){                        
-                    console.log(response);
                     obj = jQuery.parseJSON(response);
                     viewData(obj,parent);
                 },
@@ -91,15 +66,6 @@
                 }
             });
         }
-
-        $("form#books").submit(function() {
-            postForm();
-            return false;
-        });
-
-        $(function() {
-            postForm();
-        });
     </script>
 </body>
 </html>

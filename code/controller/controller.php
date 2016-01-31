@@ -234,14 +234,14 @@
 		    	$result_isbn = $conn->query($sql);
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
-		    	$object['isbn'] = $row["isbn"];
-		    	$object['price'] = $row["price"];
-		    	$object['edition'] = $row["edition"];
-		    	$object['publisher'] = $row["publisher"];
-		    	$object['category'] = $row["category"];
-		    	$object['book_name'] = $row["book_name"];
-		    	$object['author_name'] = $row["author_name"];
-		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['ISBN'] = $row["isbn"];
+		    	$object['Price'] = $row["price"];
+		    	$object['Edition'] = $row["edition"];
+		    	$object['Publisher'] = $row["publisher"];
+		    	$object['Category'] = $row["category"];
+		    	$object['Book Name'] = $row["book_name"];
+		    	$object['Author Name'] = $row["author_name"];
+		    	$object['Book Quantity'] = $row_isbn["COUNT(isbn)"];
 		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
