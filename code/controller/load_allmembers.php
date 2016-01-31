@@ -1,5 +1,5 @@
 <?php
 	require('controller.php');
-	$members_data=loadAllMembers();
+	$members_data=viewMembershipRequests();
 	echo $members_data;
 ?>
