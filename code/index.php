@@ -52,12 +52,7 @@
         </table>
         <!--/#table-->
         <center>
-            <ul class="pagination">
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+            <ul class="pagination" id="pagination1">
             </ul>
         </center>
     </div>
@@ -65,32 +60,26 @@
     <!--/#footer-->
     <?php include ("javascript-links.php");?> 
     <script type="text/javascript">
+        var parent = document.getElementById('load-books');
+        var books;
+        function postForm() {
+            $.ajax({             
+                url: 'controller/load_all_books.php',
+                type: 'post',
+                success: function(response){                        
+                    console.log(response);
+                    books = jQuery.parseJSON(response);                     
+                    viewData(books,parent);
+                    paginationView(books,2);                       
+                },
+                error: function(xhr, desc, err){
+                    console.log(desc);
+                }
+            });
+        }
+        $(function() {
+            postForm();
+        });
     </script>
-    <script type="text/javascript">
-            var parent = document.getElementById('load-books');
-            function postForm() {
-                $.ajax({             
-                    url: 'controller/load_all_books.php',
-                    type: 'post',
-                    success: function(response){                        
-                        console.log(response);
-                        obj = jQuery.parseJSON(response);
-                        viewData(obj,parent);
-                    },
-                    error: function(xhr, desc, err){
-                        console.log(desc);
-                    }
-                });
-            }
-
-            $("form#books").submit(function() {
-                postForm();
-                return false;
-            });
-
-            $(function() {
-                postForm();
-            });
-        </script>
 </body>
 </html>
