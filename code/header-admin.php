@@ -60,7 +60,7 @@
                                 <li class="<?php echo ($page_name=='admin-membership-renewal.php')?'active':'';?>"><a href="admin-membership-renewal.php">Renew Memberships</a></li>
                             </ul>
                         </li>                         
-                        <li><a href="index.php ">Logout</a></li>                    
+                        <li><a href="controller/logout.php">Logout</a></li>                    
                     </ul>
                 </div>
             </div>

@@ -53,7 +53,7 @@
                         <?php include ("active-menu-item.php");?>
                         <li class="<?php echo ($page_name=='member.php')?'active':'';?>"><a href="member.html">My books</a></li>
                         <li class="<?php echo ($page_name=='member-renew-membership.php')?'active':'';?>"><a href="member-renew-membership.php">Renew Membership</a></li>                       
-                        <li class="<?php echo ($page_name=='index.php')?'active':'';?>"><a href="index.php ">Logout</a></li>                    
+                        <li class="<?php echo ($page_name=='index.php')?'active':'';?>"><a href="controller/logout.php ">Logout</a></li>                    
                     </ul>
                 </div>
             </div>
