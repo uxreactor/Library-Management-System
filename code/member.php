@@ -16,9 +16,6 @@
     <br/>
     <br/>
     <!--/#searchbar--> 
-    
-    <h3><a class="pull-right" href="mem_request_new_book.php">
-      <i class="glyphicon glyphicon-plus-sign"></i>Request new book </a>
     </h3>
     <h2>My books</h2>
     <table  class="table table-bordered table-striped">
