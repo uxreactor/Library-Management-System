@@ -61,7 +61,7 @@
                 <option>Platinum</option>
                 <option>Gold</option>
                 <option>Silver</option>
-            </select><a href="" data-toggle="modal" data-target="#help" style=" margin-left:1%;">Help</a>
+            </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help"style="width:20px;height:20px; margin-left:1%;">
             <br/><br />
             <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">
