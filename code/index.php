@@ -2,17 +2,20 @@
     </header>
     <!--/#header-->
     <div class="container">
-        <div class="input-group col-xs-5 col-xs-offset-4">
-            <input type="text" class="textbox_size form-control input-lg" placeholder="Search book by authorname/bookname" />
-            <span class="input-group-btn">
-                <button class="btn btn-default btn-lg" type="button">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span>
-        </div>
+        <form name="search_book" method="post" action="controller/search_book.php" onsubmit="return submitForm();">
+            <div class="input-group col-xs-5 col-xs-offset-3" id="book_name_label">
+                <input type="text" class="textbox_size form-control input-lg" id="search" placeholder="Search book by authorname/bookname" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-lg" type="submit" >
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+                <span></span>
+            </div>
+        </form>
         <br/>
         <br/>
-       <div id="load-books">
+        <div id="load-books">
             <h2>All books</h2>      
         </div>      
         <!--/#search bar-->   
@@ -67,30 +70,76 @@
     <script type="text/javascript">
     </script>
     <script type="text/javascript">
-            var parent = document.getElementById('load-books');
-            function postForm() {
-                $.ajax({             
-                    url: 'controller/load_all_books.php',
-                    type: 'post',
-                    success: function(response){                        
+        var parent = document.getElementById('load-books');
+        var error = document.getElementById('book_name_label');
+        function postForm() {
+            $.ajax({             
+                url: 'controller/load_all_books.php',
+                type: 'post',
+                success: function(response){                        
+                    console.log(response);
+                    obj = jQuery.parseJSON(response);
+                    viewData(obj,parent);
+                },
+                error: function(xhr, desc, err){
+                    writeError('No results found',error);
+                }
+            });
+        }
+
+        $("form#books").submit(function() {
+            postForm();
+            return false;
+        });
+
+        $(function() {
+            postForm();
+        });
+
+
+        var submitForm = function() {
+            var validation_message;
+            search_book = [{ 
+                type: 'text',
+                value: $('#search').val(),
+                errorMessage:'Book or author name is required' 
+            }];
+            validation_message = validateForm(search_book);  
+            search_book_details = {
+                search: $('#search').val()
+            };
+            
+            if(submitToServer(validation_message)){
+                $.ajax({
+                    url: $('form').attr('action'),
+                    type: $('form').attr('method'),
+                    data: search_book_details,
+                    success: function(response){
                         console.log(response);
-                        obj = jQuery.parseJSON(response);
-                        viewData(obj,parent);
+                        parent.removeChild(parent.childNodes[3]);
+                        
+                        if (response){
+                            obj = jQuery.parseJSON(response);
+                            viewData(obj,parent);  
+                        }else{
+                            results = document.createElement('h2');
+
+                            results.innerText = "No results";
+                            parent.appendChild(results);
+                        }
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
                     }
                 });
-            }
-
-            $("form#books").submit(function() {
-                postForm();
+                
+            }else{
+                body = document.getElementById('book_name_label');
+                writeError(validation_message[0],body);
                 return false;
-            });
-
-            $(function() {
-                postForm();
-            });
-        </script>
+            }
+            return false;
+        }
+    </script>
 </body>
 </html>
