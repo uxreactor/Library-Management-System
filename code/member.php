@@ -57,12 +57,8 @@
   	
 	</table>
 	<!--/#table-->
-    <?php include ("footer.php");?>
-    <!--/#footer-->
-
-   
-
-
-    <?php include ("javascript-links.php");?>   
+  <?php include ("footer.php");?>
+  <!--/#footer-->
+  <?php include ("javascript-links.php");?>   
 </body>
 </html>

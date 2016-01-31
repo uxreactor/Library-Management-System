@@ -267,7 +267,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results"; 
+		    return false; 
 		}
 
 		$conn->close();
