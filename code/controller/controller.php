@@ -78,7 +78,15 @@
 		$sql = " SELECT username , password FROM tbl_login WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
-			 return 1; // return value
+        	$sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
+        	$result = $conn->query($sql);
+        	if ($result->num_rows > 0) {
+        		$row = $result->fetch_assoc();
+        		$returnVal = $row["mem_id"];
+        		return $returnVal; // return value
+        	}
+        	
+			 
 		}else{
 			return 0; // return value
 		}
