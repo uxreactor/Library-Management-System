@@ -89,7 +89,7 @@ var viewData = function(records,parent) {
        tab_row = document.createElement('tr');
        object = records[key];
        for (var key in object) {
-           if(key == 'action'){
+           if(key == 'Action'){
                s = object[key].split(",") ;
                for(var i=0; i< s.length;i++){
                    tab_data = document.createElement('th');

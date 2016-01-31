@@ -981,6 +981,70 @@
 		$conn->close();
 	}
 
+	/**
+	 * @viewAllBooks : This function is used to display the details of all books that membertaken.
+	 * @author : Yaswanth.
+	 *
+	 *
+	 * @return/outcome : It will display all the books that are user taken.
+	 */
+	function loadMemberBooks($memberId){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = "SELECT * FROM tbl_issued_books WHERE mem_id = $memberId";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {
+		    	$object = array();
+		    	$bookName = bookname($memberId);
+		    	if($bookName !== "No books  are taken" ) {
+			    	$object['Book name'] = $bookName;
+	 		    	$object['Book Id'] = $row["book_id"];
+			    	$object['Issue date'] = $row["issue_date"];
+			    	$object['Return date'] = $row["return_expected"];
+			    	$object['Action'] ="Request Extension";
+			    	array_push($arrayObject, $object);
+		    	}
+		    }
+		} else {
+		    return "0 results";
+		}
 
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
+
+	function bookname($memberId){
+		$conn = connection();
+		$sql = " SELECT book_id FROM tbl_issued_books WHERE mem_id=$memberId ";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	$row = $result->fetch_assoc();
+			$book_id =  $row['book_id'];
+			$getIsbn = "SELECT isbn FROM tbl_all_books WHERE book_id = $book_id";
+			$getisbn1 = $conn->query($getIsbn);
+			if ($getisbn1->num_rows > 0) {
+				$row = $getisbn1->fetch_assoc();
+				$isbn = $row['isbn'];	
+				$getBookName1 = "SELECT book_name FROM tbl_book_varities WHERE isbn = $isbn";
+				//echo $getBookName1;
+				$getBookName = $conn->query($getBookName1);
+				if ($getBookName->num_rows > 0) {
+					$row = $getBookName->fetch_assoc();
+					$bookname = $row['book_name'];
+				} else{
+					return "No books  are taken";
+				}
+			} else {
+				return "No books  are taken";
+			} 
+		} else {
+			return "No books are taken";
+		}
+		return $bookname;
+		$conn->close();
+
+	}
 
 ?>

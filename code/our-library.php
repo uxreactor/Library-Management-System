@@ -27,11 +27,7 @@
     <!--/#footer-->
 
     <?php include ("javascript-links.php");?>    
-    <script type="text/javascript">
-    //Adding script section
-    </script>
-     <script type="text/javascript">
-    </script>
+    
     <script type="text/javascript">
         var parent = document.getElementById('load-all-members');
         var error = document.getElementById('book_name_label');
