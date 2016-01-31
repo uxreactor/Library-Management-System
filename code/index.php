@@ -122,9 +122,9 @@
                             obj = jQuery.parseJSON(response);
                             viewData(obj,parent);  
                         }else{
-                            results = document.createElement('h2');
+                            results = document.createElement('h3');
 
-                            results.innerText = "No results";
+                            results.innerText = "No results found";
                             parent.appendChild(results);
                         }
                     },

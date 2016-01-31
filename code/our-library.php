@@ -23,8 +23,11 @@
         </div>
         <br/>
         <br/>
+        <div id="load-books">
+            <h2>All books</h2>      
+        </div> 
         <!--/#search bar and dropdown-->  
-        <table  class="table table-bordered table-striped">
+        <!--<table  class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Member ID</th>
@@ -72,7 +75,31 @@
 
     <?php include ("javascript-links.php");?>    
     <script type="text/javascript">
-    //Adding script section
+        var parent = document.getElementById('load-books');
+        var error = document.getElementById('book_name_label');
+        function postForm() {
+            $.ajax({             
+                url: 'controller/load_all_books_in_library.php',
+                type: 'post',
+                success: function(response){                        
+                    console.log(response);
+                    obj = jQuery.parseJSON(response);
+                    viewData(obj,parent);
+                },
+                error: function(xhr, desc, err){
+                    writeError('No results found',error);
+                }
+            });
+        }
+
+        $("form#books").submit(function() {
+            postForm();
+            return false;
+        });
+
+        $(function() {
+            postForm();
+        });
     </script>
 </body>
 </html>

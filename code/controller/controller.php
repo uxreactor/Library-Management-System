@@ -201,7 +201,6 @@
 		    	$object['book_name'] = $row["book_name"];
 		    	$object['author_name'] = $row["author_name"];
 		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -212,6 +211,47 @@
 		return(json_encode($arrayObject)); //return value
 	}
 
+
+
+
+
+	/**
+	 * @loadAllBooks : This function will display all the records of books from the database to the respective page it displays all the dettails of book along with count of the book.
+	 * @author : Mohan, Bala
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
+	 */
+	function loadAllBooksInLibrary(){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_book_varities " ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
+		    	$isbn = $row["isbn"];
+		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
+		    	$result_isbn = $conn->query($sql);
+		    	$row_isbn = $result_isbn->fetch_assoc();
+				$object = array();
+		    	$object['isbn'] = $row["isbn"];
+		    	$object['price'] = $row["price"];
+		    	$object['edition'] = $row["edition"];
+		    	$object['publisher'] = $row["publisher"];
+		    	$object['category'] = $row["category"];
+		    	$object['book_name'] = $row["book_name"];
+		    	$object['author_name'] = $row["author_name"];
+		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['action'] = "edit,delete";
+		    	array_push($arrayObject, $object);
+		    }
+		} else {
+		    return "0 results"; 
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
 
 	/**
 	 * @loadAllMembers : This function will display all the records of members from the database to the respective page.
@@ -907,7 +947,7 @@
 	}
 
 
-			/**
+	/**
 	 * @viewNewBookRequests : This function is used to display the details of all duedate extensions which are requested by the members.
 	 * @author : Mohan, Bala
 	 *
@@ -935,8 +975,6 @@
 
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
-
-
 	}
 
 
@@ -959,5 +997,7 @@
 		}
 		$conn->close();
 	}
+
+
 
 ?>
