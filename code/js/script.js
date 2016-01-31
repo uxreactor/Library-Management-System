@@ -108,7 +108,7 @@ var viewData = function(records,parent) {
        }   
        tbody.appendChild(tab_row);
    }
-    table.appendChild(thead);
-   table.appendChild(tbody);
-   parent.appendChild(table);
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  parent.appendChild(table);
 }

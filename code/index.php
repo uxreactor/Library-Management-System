@@ -2,7 +2,7 @@
     </header>
     <!--/#header-->
     <div class="container">
-        <form name="search_book" method="post" action="controller/search_book.php" onsubmit="return submitForm();">
+        <form name="search_book" method="post" action="controller/search_Index_book.php" onsubmit="return submitForm();">
             <div class="input-group col-xs-5 col-xs-offset-3" id="book_name_label">
                 <input type="text" class="textbox_size form-control input-lg" id="search" placeholder="Search book by authorname/bookname" />
                 <span class="input-group-btn">
@@ -106,7 +106,7 @@
             }];
             validation_message = validateForm(search_book);  
             search_book_details = {
-                search: $('#search').val()
+                search: $('#search').val().toLowerCase()
             };
             
             if(submitToServer(validation_message)){
@@ -122,8 +122,7 @@
                             obj = jQuery.parseJSON(response);
                             viewData(obj,parent);  
                         }else{
-                            results = document.createElement('h3');
-
+                            results = document.createElement('h2');
                             results.innerText = "No results found";
                             parent.appendChild(results);
                         }

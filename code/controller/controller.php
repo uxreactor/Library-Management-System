@@ -263,35 +263,18 @@
 		$arrayObject = array();
 		$conn = connection();
 		$sql = " SELECT * FROM tbl_members " ;
-		//$result = mysql_query("$sql");
-		//print_r($result);
-		//header("Content-type: image/jpeg");
-		//echo mysql_result($result, 0);
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
 
 		    while($row = $result->fetch_assoc()) {  // Used to fetch the data from database.    
 		    	$object = array();
-		    	$object['mem_id'] = $row["mem_id"];
-		    	$object['mem_name'] = $row["mem_name"];
-		    	$object['mem_moblieno'] = $row["mem_moblieno"];
-		    	$object['mem_email'] = $row["mem_email"];
-		    	$object['mem_dob'] = $row["mem_dob"];
-		    	$object['mem_gender'] = $row["mem_gender"];
-		    	//header("Content-type: image/jpeg");
-		    	//$object['mem_photo'] = $row["mem_photo"];
-		    	//$object['mem_add_proof'] = $row["mem_add_proof"];
-		    	//echo $object['mem_photo'];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['membership_on'] = $row["membership_on"];
-		    	$object['expiry_on'] = $row["expiry_on"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
-				$object['action'] = "edit,delete";
+		    	$object['Member ID'] = $row["mem_id"];
+		    	$object['Member Name'] = $row["mem_name"];
+		    	$object['Validity'] = $row["expiry_on"];
+		    	$object['Phone No.'] = $row["mem_moblieno"];
+		    	$object['Mail ID'] = $row["mem_email"];
+				$object['action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
@@ -314,7 +297,7 @@
 	function searchForBook($search_key){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities WHERE book_name LIKE '$search_key%' || author_name LIKE '$search_key%' || category LIKE '$search_key%'" ;
+		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
@@ -345,6 +328,46 @@
 
 
 	/**
+	 * @searchForBook : This function will search for a particular book based on the users criteria. This function will not return any action items.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - search_key
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists the record of particular book.
+	 */
+	function searchForBookInIndex($search_key){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {		    	
+		    	$isbn = $row["isbn"];
+		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
+		    	$result_isbn = $conn->query($sql);
+		    	$row_isbn = $result_isbn->fetch_assoc();
+				$object = array();
+		    	$object['isbn'] = $row["isbn"];
+		    	$object['price'] = $row["price"];
+		    	$object['edition'] = $row["edition"];
+		    	$object['publisher'] = $row["publisher"];
+		    	$object['category'] = $row["category"];
+		    	$object['book_name'] = $row["book_name"];
+		    	$object['author_name'] = $row["author_name"];
+		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	array_push($arrayObject, $object);
+		    }
+		} else {
+		    return false; 
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
+
+
+	/**
 	 * @searchForMember : This function will search for a particular member based on the users criteria.
 	 * @author : Mohan, Bala
 	 *
@@ -355,7 +378,7 @@
 	function searchForMember($search_key){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_members WHERE mem_id LIKE '$search_key%' || mem_name LIKE '$search_key%' " ;
+		$sql = " SELECT * FROM tbl_members WHERE mem_id LIKE '$search_key%' || LOWER(mem_name) LIKE '$search_key%' " ;
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -370,19 +393,19 @@
 		    	$object['mem_gender'] = $row["mem_gender"];
 		    	//$object['mem_photo'] = $row["mem_photo"];
 		    	//$object['mem_add_proof'] = $row["mem_add_proof"];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['membership_on'] = $row["membership_on"];
-		    	$object['expiry_on'] = $row["expiry_on"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
+		    	//$object['ms_id'] = $row["ms_id"];
+		    	//$object['membership_on'] = $row["membership_on"];
+		    	//$object['expiry_on'] = $row["expiry_on"];
+		    	//$object['addr_hno'] = $row["addr_hno"];
+		    	//$object['addr_street'] = $row["addr_street"];
+		    	//$object['addr_city'] = $row["addr_city"];
+		    	//$object['addr_state'] = $row["addr_state"];
+		    	//$object['addr_pincode'] = $row["addr_pincode"];
 		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();

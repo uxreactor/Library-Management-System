@@ -13,10 +13,13 @@
 	$place = $_POST['state'];
 	$zip = $_POST['pin'];
 
-	//if(emailCheck($$emailId)){
-	//	$validate = "Duplicate email";
-	//} else {
+	if(emailCheck($emailId)){
+		$validate = "Duplicate email, Please enter different";
+
+	} else {
 		$validate = requestingMembership($name, $phoneNumber, $emailId, $dob, $gender, $membershipType, $hNo, $street, $place, $city, $zip);
-	//}
-	//echo $validate;
+		$validate = "Successfully Applied your form";
+	}
+	echo $validate;
+	
 ?>
