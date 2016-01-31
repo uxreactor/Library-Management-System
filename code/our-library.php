@@ -1,7 +1,6 @@
 <?php 
     include ("header-admin.php");
     require 'controller/session.php';
-    echo checkSession();
 ?>
     <!--/#header-->
     <div class="container">

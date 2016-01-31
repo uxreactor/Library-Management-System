@@ -26,7 +26,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png" />
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png" />
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
-</head><!--/head-->
+</head><!--/head-->  
 
 <body>
     <header id="header">      
@@ -45,7 +45,6 @@
                     </a>                  
                 </div>
                 <div class="collapse navbar-collapse">
-
                     <ul class="nav navbar-nav navbar-right">                   
                         <?php include ("active-menu-item.php");?>
                         <li class="<?php echo ($page_name=='member.php')?'active':'';?>"><a href="member.php">My books</a></li>
