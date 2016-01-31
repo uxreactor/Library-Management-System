@@ -78,17 +78,38 @@
 		$sql = " SELECT username , password FROM tbl_login WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
-        	$sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
+			 $sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
         	$result = $conn->query($sql);
         	if ($result->num_rows > 0) {
         		$row = $result->fetch_assoc();
         		$returnVal = $row["mem_id"];
         		return $returnVal; // return value
         	}
-        	
-			 
 		}else{
-			return 0; // return value
+			return FALSE; // return value
+		}
+		$conn->close();
+	}
+
+
+
+	/**
+	 * @login : This function will check the details of the admin in the database and if the details are matched then it allows to login else it just displays an error message.
+	 * @author : Prabhakar
+	 *
+	 * @param : string - username
+	 * @param : password - password
+	 *
+	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
+	 */
+	function adminLogin($username,$password){
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_admin_login WHERE username = '$username' AND password = '$password'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+			 return 1; // return value
+		}else{
+			return FALSE; // return value
 		}
 		$conn->close();
 	}

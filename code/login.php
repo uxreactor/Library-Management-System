@@ -68,7 +68,7 @@
             }
 
             validation_message = validateForm(login);          
-             console.log(login_details);
+            //console.log(login_details);
             if(submitToServer(validation_message)){
                 //alert(login_details);
                 $.ajax({             

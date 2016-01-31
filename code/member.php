@@ -64,8 +64,6 @@
     <?php include ("footer.php");?>
     <!--/#footer-->
 
-   
-
 
     <?php include ("javascript-links.php");?>   
 </body>
