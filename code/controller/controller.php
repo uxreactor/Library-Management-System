@@ -929,7 +929,6 @@
 	 */
 	function emailCheck($email){
 		$conn = connection();
-		echo "Ba;";
 		$sql = " SELECT mem_email FROM tbl_mem_request WHERE mem_email = '$email' ";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
