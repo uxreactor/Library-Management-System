@@ -1,4 +1,8 @@
-<?php include ("header-member.php");?>
+<?php 
+    include ("header-member.php");
+    require 'controller/session.php';
+    //echo checkSession();
+?>
     <!--/#header-->
     <div class="container">
         <div class="input-group col-xs-6 col-xs-offset-3">
@@ -12,9 +16,6 @@
     <br/>
     <br/>
     <!--/#searchbar--> 
-    
-    <h3><a class="pull-right" href="mem_request_new_book.html">
-      <i class="glyphicon glyphicon-plus-sign"></i>Request new book </a>
     </h3>
     <h2>My books</h2>
     <table  class="table table-bordered table-striped">
@@ -59,8 +60,6 @@
 	<!--/#table-->
     <?php include ("footer.php");?>
     <!--/#footer-->
-
-   
 
 
     <?php include ("javascript-links.php");?>   

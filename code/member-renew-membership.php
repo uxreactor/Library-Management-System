@@ -1,4 +1,8 @@
-<?php include ("header-member.php");?> 
+<?php 
+    include ("header-member.php");
+    require 'controller/session.php';
+    //echo checkSession();
+?>
     <!--/#header-->
     <div class="container">
         <h2>Membership renewal extension </h2>

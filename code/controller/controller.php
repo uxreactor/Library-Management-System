@@ -78,9 +78,38 @@
 		$sql = " SELECT username , password FROM tbl_login WHERE username = '$username' AND password = '$password'";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
+			 $sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
+        	$result = $conn->query($sql);
+        	if ($result->num_rows > 0) {
+        		$row = $result->fetch_assoc();
+        		$returnVal = $row["mem_id"];
+        		return $returnVal; // return value
+        	}
+		}else{
+			return FALSE; // return value
+		}
+		$conn->close();
+	}
+
+
+
+	/**
+	 * @login : This function will check the details of the admin in the database and if the details are matched then it allows to login else it just displays an error message.
+	 * @author : Prabhakar
+	 *
+	 * @param : string - username
+	 * @param : password - password
+	 *
+	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
+	 */
+	function adminLogin($username,$password){
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_admin_login WHERE username = '$username' AND password = '$password'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
 			 return 1; // return value
 		}else{
-			return 0; // return value
+			return FALSE; // return value
 		}
 		$conn->close();
 	}
@@ -172,7 +201,6 @@
 		    	$object['book_name'] = $row["book_name"];
 		    	$object['author_name'] = $row["author_name"];
 		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -184,6 +212,47 @@
 	}
 
 
+
+
+
+	/**
+	 * @loadAllBooks : This function will display all the records of books from the database to the respective page it displays all the dettails of book along with count of the book.
+	 * @author : Mohan, Bala
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
+	 */
+	function loadAllBooksInLibrary(){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_book_varities " ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
+		    	$isbn = $row["isbn"];
+		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
+		    	$result_isbn = $conn->query($sql);
+		    	$row_isbn = $result_isbn->fetch_assoc();
+				$object = array();
+		    	$object['ISBN'] = $row["isbn"];
+		    	$object['Price'] = $row["price"];
+		    	$object['Edition'] = $row["edition"];
+		    	$object['Publisher'] = $row["publisher"];
+		    	$object['Category'] = $row["category"];
+		    	$object['Book Name'] = $row["book_name"];
+		    	$object['Author Name'] = $row["author_name"];
+		    	$object['Book Quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['action'] = "edit,delete";
+		    	array_push($arrayObject, $object);
+		    }
+		} else {
+		    return "0 results"; 
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
+
 	/**
 	 * @loadAllMembers : This function will display all the records of members from the database to the respective page.
 	 * @author : Mohan, Bala
@@ -194,35 +263,18 @@
 		$arrayObject = array();
 		$conn = connection();
 		$sql = " SELECT * FROM tbl_members " ;
-		//$result = mysql_query("$sql");
-		//print_r($result);
-		//header("Content-type: image/jpeg");
-		//echo mysql_result($result, 0);
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
 
 		    while($row = $result->fetch_assoc()) {  // Used to fetch the data from database.    
 		    	$object = array();
-		    	$object['mem_id'] = $row["mem_id"];
-		    	$object['mem_name'] = $row["mem_name"];
-		    	$object['mem_moblieno'] = $row["mem_moblieno"];
-		    	$object['mem_email'] = $row["mem_email"];
-		    	$object['mem_dob'] = $row["mem_dob"];
-		    	$object['mem_gender'] = $row["mem_gender"];
-		    	//header("Content-type: image/jpeg");
-		    	//$object['mem_photo'] = $row["mem_photo"];
-		    	//$object['mem_add_proof'] = $row["mem_add_proof"];
-		    	//echo $object['mem_photo'];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['membership_on'] = $row["membership_on"];
-		    	$object['expiry_on'] = $row["expiry_on"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
-				$object['action'] = "edit,delete";
+		    	$object['Member ID'] = $row["mem_id"];
+		    	$object['Member Name'] = $row["mem_name"];
+		    	$object['Validity'] = $row["expiry_on"];
+		    	$object['Phone No.'] = $row["mem_moblieno"];
+		    	$object['Mail ID'] = $row["mem_email"];
+				$object['action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
@@ -245,7 +297,7 @@
 	function searchForBook($search_key){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities WHERE book_name LIKE '$search_key%' || author_name LIKE '$search_key%' || category LIKE '$search_key%'" ;
+		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
@@ -267,7 +319,47 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results"; 
+		    return false; 
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
+
+
+	/**
+	 * @searchForBook : This function will search for a particular book based on the users criteria. This function will not return any action items.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - search_key
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists the record of particular book.
+	 */
+	function searchForBookInIndex($search_key){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {		    	
+		    	$isbn = $row["isbn"];
+		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
+		    	$result_isbn = $conn->query($sql);
+		    	$row_isbn = $result_isbn->fetch_assoc();
+				$object = array();
+		    	$object['isbn'] = $row["isbn"];
+		    	$object['price'] = $row["price"];
+		    	$object['edition'] = $row["edition"];
+		    	$object['publisher'] = $row["publisher"];
+		    	$object['category'] = $row["category"];
+		    	$object['book_name'] = $row["book_name"];
+		    	$object['author_name'] = $row["author_name"];
+		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	array_push($arrayObject, $object);
+		    }
+		} else {
+		    return false; 
 		}
 
 		$conn->close();
@@ -286,7 +378,7 @@
 	function searchForMember($search_key){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_members WHERE mem_id LIKE '$search_key%' || mem_name LIKE '$search_key%' " ;
+		$sql = " SELECT * FROM tbl_members WHERE mem_id LIKE '$search_key%' || LOWER(mem_name) LIKE '$search_key%' " ;
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -301,19 +393,19 @@
 		    	$object['mem_gender'] = $row["mem_gender"];
 		    	//$object['mem_photo'] = $row["mem_photo"];
 		    	//$object['mem_add_proof'] = $row["mem_add_proof"];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['membership_on'] = $row["membership_on"];
-		    	$object['expiry_on'] = $row["expiry_on"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
+		    	//$object['ms_id'] = $row["ms_id"];
+		    	//$object['membership_on'] = $row["membership_on"];
+		    	//$object['expiry_on'] = $row["expiry_on"];
+		    	//$object['addr_hno'] = $row["addr_hno"];
+		    	//$object['addr_street'] = $row["addr_street"];
+		    	//$object['addr_city'] = $row["addr_city"];
+		    	//$object['addr_state'] = $row["addr_state"];
+		    	//$object['addr_pincode'] = $row["addr_pincode"];
 		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -433,32 +525,24 @@
 	 *
 	 * @return/outcome : It will save the data in the databse and returns a string with successful message.
 	 */
-	function requestingForNewBook($bookName, $authorName){
+	function requestingForNewBook($memberId,$bookName, $authorName){
 		$conn = connection();
-		$sql = "SELECT  * FROM tbl_new_book_request where book_name = '$bookName' AND author_name = '$authorName' ";
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0 ){
-			$row = $result->fetch_assoc();
-			$reqNumber = $row["requests"]+1;
-			$sql_update = "UPDATE tbl_new_book_request SET requests='$reqNumber' WHERE book_name = '$bookName' AND author_name = '$authorName' ";
-			if ($conn->query($sql_update) === FALSE) {
-		    return "Error: " . $sql_update . "<br>" . $conn->error;
-			} else{
-				return "Requset updated sucessfully";
+			$sql = "SELECT  * FROM tbl_new_book_request where  mem_id = $memberId";
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0 ){
+				return "This book is already requested";
+			}else {
+				$sql = "INSERT INTO tbl_new_book_request (book_name, author_name,mem_id) VALUES ('$bookName', '$authorName',$memberId)";
+				if ($conn->query($sql) === FALSE) {
+			    return "Error: " . $sql . "<br>" . $conn->error;
+				} else{
+					return "New request added sucessfully";
+				}
 			}
-		}else {
-			$sql = "INSERT INTO tbl_new_book_request (book_name, author_name,requests) VALUES ('$bookName', '$authorName', '1')";
-			if ($conn->query($sql) === FALSE) {
-		    return "Error: " . $sql . "<br>" . $conn->error;
-			} else{
-				return "New request added sucessfully";
+			
+			if ($conn->query($sql_select) === FALSE) {
+			    return "Error: " . $sql_select . "<br>" . $conn->error;
 			}
-		}
-		
-		if ($conn->query($sql_select) === FALSE) {
-		    return "Error: " . $sql_select . "<br>" . $conn->error;
-		}
-		
 		$conn->close();
 	}
 
@@ -688,7 +772,7 @@
 
 
 	/**
-	 * @issueBook : This function is used to issue a book to the member and also it consists local variable for current date and returning.
+	 * @requestingForNewBookrequestingForNewBookrequestingForNewBook : This function is used to issue a book to the member and also it consists local variable for current date and returning.
 	 * current date is taken from the system and returning date is taken from the profile.
 	 * @author : Mohan, Bala
 	 *
@@ -781,17 +865,23 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$object['mem_name'] = $row["mem_name"];
-		    	$object['mem_mobileno'] = $row["mem_mobileno"];
-		    	$object['mem_email'] = $row["mem_email"];
-		    	$object['mem_gender'] = $row["mem_gender"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['action'] ="approve,reject";
+		    	$object['Name'] = $row["mem_name"];
+		    	$object['Mobile No'] = $row["mem_mobileno"];
+		    	$object['Email Id'] = $row["mem_email"];
+		    	$object['Gender'] = $row["mem_gender"];
+		    	$object['#'] = $row["addr_hno"];
+		    	$object['Street'] = $row["addr_street"];
+		    	$object['City'] = $row["addr_city"];
+		    	$object['State'] = $row["addr_state"];
+		    	$object['Pincode'] = $row["addr_pincode"];
+		    	if($row["ms_id"]==1){
+		    		$object['Membership type'] = "Platinum";
+		    	}else if($row["ms_id"]==2){
+		    		$object['Membership typetype'] = "Gold";
+		    	}else{
+		    		$object['Membership type'] = "Silver";
+		    	}
+		    	$object['Actions'] ="approve,reject";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -880,7 +970,7 @@
 	}
 
 
-			/**
+	/**
 	 * @viewNewBookRequests : This function is used to display the details of all duedate extensions which are requested by the members.
 	 * @author : Mohan, Bala
 	 *
@@ -908,8 +998,29 @@
 
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
-
-
 	}
+
+
+	/**
+	 * @emailCheck : This function is used to check the duplicate email Id for appling a membership.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - email
+	 *
+	 * @return/outcome : It will returns 1 if the email is exist else returns 0.
+	 */
+	function emailCheck($email){
+		$conn = connection();
+		$sql = " SELECT mem_email FROM tbl_mem_request WHERE mem_email = '$email' ";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+			 return 1; // return value
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+	}
+
+
 
 ?>

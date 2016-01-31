@@ -68,7 +68,7 @@
             }
 
             validation_message = validateForm(login);          
-             console.log(login_details);
+            //console.log(login_details);
             if(submitToServer(validation_message)){
                 //alert(login_details);
                 $.ajax({             
@@ -80,7 +80,7 @@
                         //redirect to dashboard
                         if(response == 'admin'){
                             window.location.href = "our-library.php";
-                        }else if(response == 'user'){
+                        }else if(response){
                             window.location.href = "member.php";
                         }else{
                             //Show login failure

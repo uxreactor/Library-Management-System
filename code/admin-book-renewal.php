@@ -1,4 +1,8 @@
-<?php include ("header-admin.php");?> 
+<?php 
+    include ("header-admin.php");
+    require 'controller/session.php';
+    //echo checkSession();
+?>
     <!--/#header-->
     <div class="container"> 
         <div id="load-renew-book">
