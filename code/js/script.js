@@ -77,14 +77,14 @@ function pagination(array,page_size,page_no){
      tab_row = document.createElement('tr');
      object = array[i];
      for (var key in object) {
-         if(key == 'action'){
+         if(key == 'Action'){
              s = object[key].split(",") ;
              for(var j=0; j< s.length;j++){
                  tab_data = document.createElement('th');
                  button = document.createElement('input');
                  button.setAttribute("type","button");
                  button.setAttribute("class","btn btn-info");
-                 button.setAttribute("value",s[i]);
+                 button.setAttribute("value",s[j]);
                  tab_data.appendChild(button);
                  tab_row.appendChild(tab_data);
              }
