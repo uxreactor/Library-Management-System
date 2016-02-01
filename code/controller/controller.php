@@ -204,16 +204,12 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results"; 
+		    return false; 
 		}
 
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
 	}
-
-
-
-
 
 	/**
 	 * @loadAllBooks : This function will display all the records of books from the database to the respective page it displays all the dettails of book along with count of the book.
@@ -234,19 +230,19 @@
 		    	$result_isbn = $conn->query($sql);
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
-		    	$object['isbn'] = $row["isbn"];
-		    	$object['price'] = $row["price"];
-		    	$object['edition'] = $row["edition"];
-		    	$object['publisher'] = $row["publisher"];
-		    	$object['category'] = $row["category"];
-		    	$object['book_name'] = $row["book_name"];
-		    	$object['author_name'] = $row["author_name"];
-		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['ISBN'] = $row["isbn"];
+		    	$object['Price'] = $row["price"];
+		    	$object['Edition'] = $row["edition"];
+		    	$object['Publisher'] = $row["publisher"];
+		    	$object['Category'] = $row["category"];
+		    	$object['Book Name'] = $row["book_name"];
+		    	$object['Author Name'] = $row["author_name"];
+		    	$object['Book Quantity'] = $row_isbn["COUNT(isbn)"];
 		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results"; 
+		    return false; 
 		}
 
 		$conn->close();
@@ -278,7 +274,7 @@
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -297,7 +293,7 @@
 	function searchForBook($search_key){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities WHERE book_name LIKE '$search_key%' || author_name LIKE '$search_key%' || category LIKE '$search_key%'" ;
+		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
@@ -328,6 +324,46 @@
 
 
 	/**
+	 * @searchForBook : This function will search for a particular book based on the users criteria. This function will not return any action items.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - search_key
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists the record of particular book.
+	 */
+	function searchForBookInIndex($search_key){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {		    	
+		    	$isbn = $row["isbn"];
+		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
+		    	$result_isbn = $conn->query($sql);
+		    	$row_isbn = $result_isbn->fetch_assoc();
+				$object = array();
+		    	$object['isbn'] = $row["isbn"];
+		    	$object['price'] = $row["price"];
+		    	$object['edition'] = $row["edition"];
+		    	$object['publisher'] = $row["publisher"];
+		    	$object['category'] = $row["category"];
+		    	$object['book_name'] = $row["book_name"];
+		    	$object['author_name'] = $row["author_name"];
+		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	array_push($arrayObject, $object);
+		    }
+		} else {
+		    return false; 
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
+
+
+	/**
 	 * @searchForMember : This function will search for a particular member based on the users criteria.
 	 * @author : Mohan, Bala
 	 *
@@ -338,7 +374,7 @@
 	function searchForMember($search_key){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_members WHERE mem_id LIKE '$search_key%' || mem_name LIKE '$search_key%' " ;
+		$sql = " SELECT * FROM tbl_members WHERE mem_id LIKE '$search_key%' || LOWER(mem_name) LIKE '$search_key%' " ;
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -351,21 +387,11 @@
 		    	$object['mem_email'] = $row["mem_email"];
 		    	$object['mem_dob'] = $row["mem_dob"];
 		    	$object['mem_gender'] = $row["mem_gender"];
-		    	//$object['mem_photo'] = $row["mem_photo"];
-		    	//$object['mem_add_proof'] = $row["mem_add_proof"];
-		    	$object['ms_id'] = $row["ms_id"];
-		    	$object['membership_on'] = $row["membership_on"];
-		    	$object['expiry_on'] = $row["expiry_on"];
-		    	$object['addr_hno'] = $row["addr_hno"];
-		    	$object['addr_street'] = $row["addr_street"];
-		    	$object['addr_city'] = $row["addr_city"];
-		    	$object['addr_state'] = $row["addr_state"];
-		    	$object['addr_pincode'] = $row["addr_pincode"];
 		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -627,12 +653,12 @@
 		    	$object = array();
 		    	$object['book_name'] = $row["book_name"];
 		    	$object['author_name'] = $row["author_name"];
-		    	$object['edition'] = $row["edition"];
+		    	//$object['edition'] = $row["edition"];
 		    	$object['requests'] = $row["requests"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -884,12 +910,12 @@
 
 		    	array_push($arrayObject, $object);
 		    }
-		    return json_encode($arrayObject);
 		} else {
-		    return "0 results"; 
+		    return false; 
 		}
  //return value
 		$conn->close();
+		return json_encode($arrayObject);
 		
 	}
 
@@ -916,11 +942,11 @@
 		    	$object['return_expected'] = $row["return_expected"];
 		    	$object['return_actual'] = $row["return_actual"];
 		    	$object['penality'] = $row["penality"];
-		    	$object['action'] ="return";
+		    	$object['action'] ="Return";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -953,7 +979,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -978,6 +1004,71 @@
 		}else{
 			return 0; // return value
 		}
+		$conn->close();
+	}
+
+	/**
+	 * @viewAllBooks : This function is used to display the details of all books that membertaken.
+	 * @author : Yaswanth.
+	 *
+	 *
+	 * @return/outcome : It will display all the books that are user taken.
+	 */
+	function loadMemberBooks($memberId){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = "SELECT * FROM tbl_issued_books WHERE mem_id = $memberId";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {
+		    	$object = array();
+		    	$bookName = bookname($memberId);
+		    	if($bookName !== "No books  are taken" ) {
+			    	$object['Book name'] = $bookName;
+	 		    	$object['Book Id'] = $row["book_id"];
+			    	$object['Issue date'] = $row["issue_date"];
+			    	$object['Return date'] = $row["return_expected"];
+			    	$object['Action'] ="Request Extension";
+			    	array_push($arrayObject, $object);
+		    	}
+		    }
+		} else {
+		    return "0 results";
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
+
+	function bookname($memberId){
+		$conn = connection();
+		$sql = " SELECT book_id FROM tbl_issued_books WHERE mem_id=$memberId ";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	$row = $result->fetch_assoc();
+			$book_id =  $row['book_id'];
+			$getIsbn = "SELECT isbn FROM tbl_all_books WHERE book_id = $book_id";
+			$getisbn1 = $conn->query($getIsbn);
+			if ($getisbn1->num_rows > 0) {
+				$row = $getisbn1->fetch_assoc();
+				$isbn = $row['isbn'];	
+				$getBookName1 = "SELECT book_name FROM tbl_book_varities WHERE isbn = $isbn";
+				//echo $getBookName1;
+				$getBookName = $conn->query($getBookName1);
+				if ($getBookName->num_rows > 0) {
+					$row = $getBookName->fetch_assoc();
+					$bookname = $row['book_name'];
+				} else{
+					return "No books  are taken";
+				}
+			} else {
+				return "No books  are taken";
+			} 
+		} else {
+			return "No books are taken";
+		}
+		return $bookname;
 		$conn->close();
 	}
 
@@ -1007,7 +1098,7 @@
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
 	}
-
+	}
 
 
 ?>

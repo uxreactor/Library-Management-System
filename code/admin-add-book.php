@@ -51,7 +51,7 @@
                 <span></span>
             </div>
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
-            <a href="our-library.html" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+            <a href="our-library.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
         <!--/#issue book form -->
     </div>  
@@ -59,12 +59,7 @@
     <!--/#footer-->
     <?php include ("javascript-links.php");?>  
     <script type="text/javascript">
-        $(function () {
-                  //$('#myTab li:eq(1) a').tab('show');
-
-        });
-        var category = document.getElementById('category');
-        
+        var category = document.getElementById('category');  
         var new_option;
         $.ajax({
             url: 'controller/load_dropdown_options.php',
@@ -115,6 +110,9 @@
             validation_message = validateForm (add_book);  
             
              if(submitToServer(validation_message)){
+
+            add_book_details = {book_name: $('#book_name').val(), author_name: $('#author_name').val(),isbn : $('#isbn').val(),category: $('#category').val(),edition: $('#edition').val(),price: $('#price').val(),publisher: $('#publisher').val(),quantity: $('#quantity').val()};
+            if(submitToServer(validation_message)){
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
@@ -131,6 +129,7 @@
                         console.log(desc);
                     }
                 });
+                window.location = 'our-library.php';
                 
             }else{
                 body = document.getElementById('book_name_label');
@@ -154,6 +153,7 @@
                 return false;
             }
             return false;
+
         }
     </script>
     <script type="text/javascript">

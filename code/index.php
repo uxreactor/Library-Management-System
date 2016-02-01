@@ -2,7 +2,7 @@
     </header>
     <!--/#header-->
     <div class="container">
-        <form name="search_book" method="post" action="controller/search_book.php" onsubmit="return submitForm();">
+        <form name="search_book" method="post" action="controller/search_Index_book.php" onsubmit="return submitForm();">
             <div class="input-group col-xs-5 col-xs-offset-3" id="book_name_label">
                 <input type="text" class="textbox_size form-control input-lg" id="search" placeholder="Search book by authorname/bookname" />
                 <span class="input-group-btn">
@@ -55,12 +55,7 @@
         </table>
         <!--/#table-->
         <center>
-            <ul class="pagination">
-              <li><a href="#">1</a></li>
-              <li class="active"><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+            <ul class="pagination" id="pagination1">
             </ul>
         </center>
     </div>
@@ -68,9 +63,8 @@
     <!--/#footer-->
     <?php include ("javascript-links.php");?> 
     <script type="text/javascript">
-    </script>
-    <script type="text/javascript">
         var parent = document.getElementById('load-books');
+        var books;
         var error = document.getElementById('book_name_label');
         function postForm() {
             $.ajax({             
@@ -78,25 +72,18 @@
                 type: 'post',
                 success: function(response){                        
                     console.log(response);
-                    obj = jQuery.parseJSON(response);
-                    viewData(obj,parent);
+                    books = jQuery.parseJSON(response);                     
+                    viewData(books,parent);
+                    paginationView(books,2);                       
                 },
                 error: function(xhr, desc, err){
-                    writeError('No results found',error);
+                    console.log(desc);
                 }
             });
         }
-
-        $("form#books").submit(function() {
-            postForm();
-            return false;
-        });
-
         $(function() {
             postForm();
         });
-
-
         var submitForm = function() {
             var validation_message;
             search_book = [{ 
@@ -106,7 +93,7 @@
             }];
             validation_message = validateForm(search_book);  
             search_book_details = {
-                search: $('#search').val()
+                search: $('#search').val().toLowerCase()
             };
             
             if(submitToServer(validation_message)){
@@ -119,11 +106,11 @@
                         parent.removeChild(parent.childNodes[3]);
                         
                         if (response){
-                            obj = jQuery.parseJSON(response);
-                            viewData(obj,parent);  
+                            books = jQuery.parseJSON(response);
+                            viewData(books,parent); 
+                            paginationView(books,2);    
                         }else{
-                            results = document.createElement('h3');
-
+                            results = document.createElement('h2');
                             results.innerText = "No results found";
                             parent.appendChild(results);
                         }
@@ -136,7 +123,6 @@
             }else{
                 body = document.getElementById('book_name_label');
                 writeError(validation_message[0],body);
-                return false;
             }
             return false;
         }
