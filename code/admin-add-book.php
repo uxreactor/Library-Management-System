@@ -165,7 +165,7 @@
         }
         else {
             document.getElementById('div1').innerHTML='';
-            new_option =0;
+            new_option = 0 ;
         }
     }
     </script>   

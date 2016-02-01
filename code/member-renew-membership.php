@@ -1,6 +1,7 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
+    
     //echo checkSession();
 ?>
     <!--/#header-->

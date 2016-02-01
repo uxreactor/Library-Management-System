@@ -63,7 +63,6 @@ function submitToServer(validation_message){
     return true;
 }
 function pagination(array,page_size,page_no){ 
-  console.log(page_no);
   var start_page = page_size*(page_no-1);
   var end_page = (page_size*page_no)-1;
   if(document.getElementsByTagName('tbody').length == 0) {
@@ -191,3 +190,4 @@ var viewData = function(records,parent,page_size) {
   table.appendChild(thead);
   parent.appendChild(table);
 }
+
