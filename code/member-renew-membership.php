@@ -1,7 +1,13 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
+
     
+
+    $memberId = checkSession();
+    require 'controller/controller.php';
+    $memberName = getMemberName($memberId);
+
     //echo checkSession();
 ?>
     <!--/#header-->
@@ -10,12 +16,12 @@
         <form name="login" method="post" action="controller/submit_member_renew_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="mem_id_label">
                 <label >Member Id </label>
-                <input type="text" class="form-control" id="memid" />
+                <input type="text" class="form-control" id="memId" value=" <?php echo $memberId ?> " />
                 <span></span>
             </div>
             <div class="form-group" id="mem_name_label">
                 <label  >Member name </label>
-                <input type="text" class="form-control" id="memname"/>
+                <input type="text" class="form-control" id="memname" value="<?php echo $memberName ?>"/>
                 <span></span>
             </div>
             <div class="form-group" >

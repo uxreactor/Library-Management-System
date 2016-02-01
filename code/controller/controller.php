@@ -114,6 +114,47 @@
 		$conn->close();
 	}
 
+
+	/**
+	 * @login : This function will checks whether the emeil is exists or not
+	 * @author : Prabhakar
+	 *
+	 * @param : string - username
+	 *
+	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
+	 */
+	function adminForgotPassword($email){
+		$conn = connection();
+		$sql = " SELECT username FROM tbl_admin_login WHERE username = '$email'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	return $email; // return value
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+	}
+
+
+	/**
+	 * @updatePassword : This function will update the password against the matching email id.
+	 * @author : Prabhakar,Anurag
+	 *
+	 * @param : string - email
+	 * @param : string - password
+	 *
+	 * @return/outcome : It will update the password record in the table tbl_admmin_login.
+	 */
+	function updatePassword($email,$password){
+		$conn = connection();
+		$sql = "UPDATE tbl_admin_login SET password='$password' WHERE username = '$email'";
+		if ($conn->query($sql) === TRUE) {
+			echo  $email.$password;
+		}
+		
+		$conn->close();
+	}
+
 	/**
 	 * @checkCategoryExists : This function will check the category in the database and if it exists displays an error else allows user to continue.
 	 * @author : Mohan, Bala
@@ -1015,21 +1056,18 @@
 	function loadMemberBooks($memberId){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = "SELECT * FROM tbl_issued_books WHERE mem_id = $memberId";
+		$sql = "SELECT b.book_id,book_name,issue_date,return_expected FROM tbl_book_varities a join tbl_all_books b join tbl_issued_books c WHERE c.mem_id = $memberId AND c.book_id = b.book_id AND b.isbn = a.isbn GROUP BY book_name";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$bookName = bookname($memberId);
-		    	if($bookName !== "No books  are taken" ) {
-			    	$object['Book name'] = $bookName;
+			    	$object['Book name'] = $row["book_name"];
 	 		    	$object['Book Id'] = $row["book_id"];
 			    	$object['Issue date'] = $row["issue_date"];
 			    	$object['Return date'] = $row["return_expected"];
 			    	$object['Action'] ="Request Extension";
 			    	array_push($arrayObject, $object);
-		    	}
 		    }
 		} else {
 		    return "0 results";
@@ -1039,39 +1077,8 @@
 		return(json_encode($arrayObject)); //return value
 	}
 
-	function bookname($memberId){
-		$conn = connection();
-		$sql = " SELECT book_id FROM tbl_issued_books WHERE mem_id=$memberId ";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-        	$row = $result->fetch_assoc();
-			$book_id =  $row['book_id'];
-			$getIsbn = "SELECT isbn FROM tbl_all_books WHERE book_id = $book_id";
-			$getisbn1 = $conn->query($getIsbn);
-			if ($getisbn1->num_rows > 0) {
-				$row = $getisbn1->fetch_assoc();
-				$isbn = $row['isbn'];	
-				$getBookName1 = "SELECT book_name FROM tbl_book_varities WHERE isbn = $isbn";
-				//echo $getBookName1;
-				$getBookName = $conn->query($getBookName1);
-				if ($getBookName->num_rows > 0) {
-					$row = $getBookName->fetch_assoc();
-					$bookname = $row['book_name'];
-				} else{
-					return "No books  are taken";
-				}
-			} else {
-				return "No books  are taken";
-			} 
-		} else {
-			return "No books are taken";
-		}
-		return $bookname;
-		$conn->close();
-	}
-
-
-		/**
+	
+	/**
 	 * @emailCheck : This function is used to select all the categories in database.
 	 * @author : Mohan, Bala
 	 *
@@ -1095,6 +1102,29 @@
 		}
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
+	}
+
+	/**
+	 * @emailCheck : This function is used to fetch the member name with the help of the memberid.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : int - memberid
+	 *
+	 * @return/outcome : It will read the member name and return.
+	 */
+	function getMemberName($memberId){
+		$conn = connection();
+		$sql = " SELECT mem_name FROM tbl_members WHERE mem_id=$memberId;";
+		$arrayObject;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	$row = $result->fetch_assoc(); 
+	    	$arrayObject = $row["mem_name"];	
+	    	return $arrayObject;
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
 	}
 
 
