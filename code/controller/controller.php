@@ -135,6 +135,26 @@
 		$conn->close();
 	}
 
+
+	/**
+	 * @updatePassword : This function will update the password against the matching email id.
+	 * @author : Prabhakar,Anurag
+	 *
+	 * @param : string - email
+	 * @param : string - password
+	 *
+	 * @return/outcome : It will update the password record in the table tbl_admmin_login.
+	 */
+	function updatePassword($email,$password){
+		$conn = connection();
+		$sql = "UPDATE tbl_admin_login SET password='$password' WHERE username = '$email'";
+		if ($conn->query($sql) === TRUE) {
+			echo  $email.$password;
+		}
+		
+		$conn->close();
+	}
+
 	/**
 	 * @checkCategoryExists : This function will check the category in the database and if it exists displays an error else allows user to continue.
 	 * @author : Mohan, Bala
