@@ -2,15 +2,7 @@
     <!--/#header-->
  <div class="container">
     <div id = "myTabContent" class = "tab-content">
-        <form name="login" method="post" action="controller/validateForgotPassword.php" onsubmit="return submitForm();">
-            <div class="form-group" id="admin_email" >
-                <label for="exampleInputEmail1">Enter registered Email ID</label>
-                <input type="text" class="form-control" id="email" placeholder="Email" >
-                <span></span>
-            </div>
-            <input type="submit" id = "resetpassword" value="reset password" class="btn btn-info" />
-        </form>
-        <form name="changepassword" method="post" action="" onsubmit="return submitForm1()" id="changepassword">
+        <form name="login" method="post" action="" onsubmit="return submitForm()">
             <div class="form-group" id="admin_password1" >
                 <label for="exampleInputEmail1">Enter password</label>
                 <input type="password" class="form-control" id="password" placeholder="Enter new password" >
@@ -29,40 +21,7 @@
     <!--/#footer-->
     <?php include ("javascript-links.php");?> 
     <script>
-    $( "#changepassword" ).hide();
         var submitForm = function() {
-            var validation_message;
-            //var type = $('.nav-tabs li.active a').text().toLowerCase().trim();
-                login_details = { email:$('#email').val()};
-                login = [{ type : 'email' , value: $('#email').val() , errorMessage:'Email is required' }];
-
-            validation_message = validateForm(login);          
-            //console.log(login_details);
-            if(submitToServer(validation_message)){
-                //alert(login_details);
-                $.ajax({             
-                    url: $('form').attr('action'),
-                    type: $('form').attr('method'),
-                    data: { email:$('#email').val()},
-                    success: function(response){
-                        console.log(response);
-                        if(response){
-                            $( "#resetpassword" ).hide();
-                            $( "#changepassword" ).show();
-                        }
-                    },
-                    error: function(xhr, desc, err){
-                        console.log(desc);
-                    }
-                });
-            } 
-            else{
-                    body = document.getElementById('admin_email');
-                    writeError(validation_message[0],body);
-            }
-            return false;
-        }
-        var submitForm1 = function() {
             var validation_message,success=0;
             //var type = $('.nav-tabs li.active a').text().toLowerCase().trim();
                 login_details = { email:$('#email').val()};
@@ -79,11 +38,11 @@
                 }
             }
             //console.log(login_details);
-            if(submitToServer(validation_message) && validatePassword($('#password').val(),$('#repassword').val()) == 1){
+            if(submitToServer(validation_message) && validatePassword($('#password').val(),$('#repassword').val())){
                 $.ajax({             
-                    url: 'controller/update-password.php',
-                    type: 'post',
-                    data: {email: $('#email').val(), password: $('#password').val()},
+                    url: $('form').attr('action'),
+                    type: $('form').attr('method'),
+                    data: login_details,
                     success: function(response){
                         console.log(response);
                     },

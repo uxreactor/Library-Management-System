@@ -1,7 +1,7 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
-    $member_id = checkSession();
+    echo $member_id = checkSession();
 
     //echo "$member_id";
 ?>
@@ -22,15 +22,18 @@
     <div id="load_books">
       <h2>My books</h2>
     </div>
+    
 	<!--/#table-->
   <?php include ("footer.php");?>
   <!--/#footer-->
-
+  <center>
+      <ul class="pagination" id="pagination1">
+      </ul>
+  </center>
 
   <?php include ("javascript-links.php");?>   
   <script type="text/javascript">
     var member_id = <?php echo $member_id; ?>;
-    
     var parent = document.getElementById('load_books');
         
     $.ajax({             
@@ -41,6 +44,7 @@
           if(response) {
             obj = jQuery.parseJSON(response);
             viewData(obj,parent);
+            paginationView(obj,5);
           }
         },
         error: function(xhr, desc, err){

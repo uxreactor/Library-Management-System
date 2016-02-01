@@ -26,7 +26,7 @@
         </div>
         <br/>
         <br/>
-        <div id="load-books">
+        <div id = "load-books">
             <h2>All books</h2>      
         </div> 
 
@@ -43,7 +43,7 @@
     <?php include ("javascript-links.php");?>    
     
     <script type="text/javascript">
-
+        
         var parent = document.getElementById('load-books');
         var books;
         var error = document.getElementById('book_name_label');
@@ -52,7 +52,6 @@
                 url: 'controller/load_all_books_in_library.php',
                 type: 'post',
                  success: function(response){                        
-                    console.log(response);
                     books = jQuery.parseJSON(response);
                     viewData(books,parent);
                     paginationView(books,5);  
@@ -103,8 +102,6 @@
                 }
             });
         }
-
-
         var submitForm = function() {
             var validation_message;
             search_book = [{ 
@@ -157,6 +154,10 @@
             }
             return false;
         } 
+        $("input").click(function() {
+            alert("bala");
+        });
     </script>
+
 </body>
 </html>
