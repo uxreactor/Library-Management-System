@@ -8,6 +8,18 @@
 	$quantity = $_POST['quantity'];
 	$price = $_POST['price'];	
 	$publisher = $_POST['publisher'];
-	$message = addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity);
-	echo $message;	
+	$new = $_POST['type'];
+	if($new == 'new'){
+		$cate = checkCategoryExists($category);
+		if($cate){
+			echo "Category is already exists";
+		}else{
+			$message = addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity);
+			echo "New Book added sucessfully";
+		}
+	}else{
+		$message = addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity);
+		echo "New Book added sucessfully";	
+	}
+	
 ?>

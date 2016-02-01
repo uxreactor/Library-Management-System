@@ -128,9 +128,9 @@
 		$sql = " SELECT category FROM tbl_book_varities WHERE category='$category_name' ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-			 return "1"; // return value
+			 return 1; // return value
 		}else{
-			return "0"; // return value
+			return false; // return value
 		}
 
 		$conn->close();
@@ -935,7 +935,7 @@
 	 * @author : Mohan, Bala
 	 *
 	 *
-	 * @return/outcome : It will display all the requests for new book.
+	 * @return/outcome : It will display all the requests for new book by returing the json object.
 	 */
 	function viewDueDateExtensions(){
 		$arrayObject = array();
@@ -979,6 +979,33 @@
 			return 0; // return value
 		}
 		$conn->close();
+	}
+
+
+		/**
+	 * @emailCheck : This function is used to select all the categories in database.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - email
+	 *
+	 * @return/outcome : It will display all the categories fo the json object..
+	 */
+	function loadDropdownOptions(){
+		$conn = connection();
+		$sql = " SELECT DISTINCT category FROM tbl_book_varities;";
+		$arrayObject = array();
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	 while($row = $result->fetch_assoc()) {
+		    	$object = array();
+		    	$object['category'] = $row["category"];	
+		    	array_push($arrayObject, $object);
+		    }
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
 	}
 
 

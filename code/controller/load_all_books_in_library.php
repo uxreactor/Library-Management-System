@@ -1,5 +1,5 @@
 <?php
 	require('controller.php');
-	$books_data = loadAllBooksInLibrary();
+	$books_data = loadAllBooks();
 	echo $books_data;
 ?>
