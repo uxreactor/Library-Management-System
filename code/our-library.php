@@ -39,13 +39,13 @@
     <?php include ("javascript-links.php");?>    
     
     <script type="text/javascript">
-<<<<<<< HEAD
+
         var parent = document.getElementById('load-all-members');
         var error = document.getElementById('book_name_label');
         function postForm() {
             $.ajax({             
                 url: 'controller/load_all_members.php',
-=======
+
         var parent = document.getElementById('load-books');
         var url;
 
@@ -72,7 +72,6 @@
             $('.table').remove();
             $.ajax({
                 url: url,
->>>>>>> origin/master
                 type: 'post',
                 success: function(response){                        
                     console.log(response);
