@@ -74,7 +74,7 @@
                     console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,2);                       
+                    paginationView(books,5);                       
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
@@ -97,6 +97,7 @@
             };
             
             if(submitToServer(validation_message)){
+                $('#pagination1').empty();
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
@@ -108,7 +109,7 @@
                         if (response){
                             books = jQuery.parseJSON(response);
                             viewData(books,parent); 
-                            paginationView(books,2);    
+                            paginationView(books,5);    
                         }else{
                             results = document.createElement('h2');
                             results.innerText = "No results found";

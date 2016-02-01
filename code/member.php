@@ -3,7 +3,7 @@
     require 'controller/session.php';
     $member_id = checkSession();
 
-    echo "$member_id";
+    //echo "$member_id";
 ?>
     <!--/#header-->
     <div class="container">
