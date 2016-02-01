@@ -1097,7 +1097,6 @@
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
 	}
-	}
 
 
 ?>
