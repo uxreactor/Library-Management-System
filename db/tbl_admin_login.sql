@@ -38,7 +38,7 @@ CREATE TABLE `tbl_admin_login` (
 INSERT INTO `tbl_admin_login` (`username`, `password`) VALUES
 ('prabhakar@gmail.com', 'jimmy'),
 ('anurag', 'jimmy'),
-('anurag@gmail.com', 'jimmy');
+('aduddu@uxreactor.com', 'anurag');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

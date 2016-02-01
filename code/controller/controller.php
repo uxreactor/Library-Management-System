@@ -114,7 +114,6 @@
 		$conn->close();
 	}
 
-
 	/**
 	 * @checkCategoryExists : This function will check the category in the database and if it exists displays an error else allows user to continue.
 	 * @author : Mohan, Bala

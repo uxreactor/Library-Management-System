@@ -40,16 +40,24 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                   <a class="navbar-brand" href="index.php" style="margin-top:10px;">
+                    <a class="navbar-brand" href="index.php" style="margin-top:10px;">
                         <h1>UXR LIBRARY</h1>
                     </a>                  
                 </div>
                 <div class="collapse navbar-collapse">
+<<<<<<< Updated upstream
                     <ul class="nav navbar-nav navbar-right">                   
                         <?php include ("active-menu-item.php");?>
                         <li class="<?php echo ($page_name=='member.php')?'active':'';?>"><a href="member.php">My books</a></li>
                         <li class="<?php echo ($page_name=='member-renew-membership.php')?'active':'';?>"><a href="member-renew-membership.php">Renew Membership</a></li> 
                         <li class="<?php echo ($page_name=='mem_request_new_book.php')?'active':'';?>"><a href="mem_request_new_book.php">Request New Book</a></li>                      
+=======
+
+                    <ul class="nav navbar-nav navbar-right">            
+                        <?php include ("active-menu-item.php");?>
+                        <li class="<?php echo ($page_name=='member.php')?'active':'';?>"><a href="member.php">My books</a></li>
+                        <li class="<?php echo ($page_name=='member-renew-membership.php')?'active':'';?>"><a href="member-renew-membership.php">Renew Membership</a></li>                       
+>>>>>>> Stashed changes
                         <li class="<?php echo ($page_name=='index.php')?'active':'';?>"><a href="index.php ">Logout</a></li>                    
                     </ul>
                 </div>
