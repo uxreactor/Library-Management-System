@@ -29,7 +29,7 @@
                     console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,2);   
+                    paginationView(books,5);   
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);

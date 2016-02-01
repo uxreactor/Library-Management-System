@@ -55,7 +55,7 @@
                     console.log(response);
                     books = jQuery.parseJSON(response);
                     viewData(books,parent);
-                    paginationView(books,2);  
+                    paginationView(books,5);  
                 },
                 error: function(xhr, desc, err){
                     writeError('No results found',error);
@@ -97,7 +97,7 @@
                     console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,2);   
+                    paginationView(books,5);   
                 },
                 error: function(xhr, desc, err){
                     writeError('No results found',error);
@@ -140,7 +140,7 @@
                         if (response){
                             books = jQuery.parseJSON(response);
                             viewData(books,parent);  
-                            paginationView(books,2);  
+                            paginationView(books,5);  
                         }else{
                             results = document.createElement('h2');
                             results.className = "no_result";
