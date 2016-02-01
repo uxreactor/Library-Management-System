@@ -67,7 +67,6 @@
             postForm();
         });
 
-
         function loadDetails(){
             $('.no_result').remove();
             var select = document.getElementById('option').value;

@@ -5,8 +5,8 @@
 ?>
     <!--/#header-->
     <div class="container" id="book_name_label"> 
-        <div id="load_manage_books">
-            <h2>Manage issued books()</h2>
+        <div class="books_table" id="load_manage_books">
+            <h2>Manage issued books</h2>
         </div>
     </div>
     <center>
@@ -46,6 +46,6 @@
         $(function() {
             postForm();
         });
-    </script>       
+    </script>     
 </body>
 </html>

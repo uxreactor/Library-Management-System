@@ -156,7 +156,7 @@
 
              }
         }
-    </script>
+    </script> 
     <script type="text/javascript">
     function showfield(name){
         if(name=='Add new category'){

@@ -2,7 +2,7 @@
     <!--/#header-->
 
     <div class="container">
-        <div class = "notification" style="font-size: 40px; color:green"></div>
+        <div class = "notification" style="font-size: 40px; color:green; text-align:center"></div>
         <h2>Apply for new membership</h2>
         <form name="add_book" method="post" action="controller/submit_new_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="name_id_label">

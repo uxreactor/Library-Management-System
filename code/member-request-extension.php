@@ -25,7 +25,7 @@
                 <span></span>
             </div>
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
-            <a href="" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+            <a href="member.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
         <!--/#issue book form -->
     </div>
@@ -47,6 +47,7 @@
                     data: login,
                     success: function(response){
                         console.log(response);
+                        window.location = 'member.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

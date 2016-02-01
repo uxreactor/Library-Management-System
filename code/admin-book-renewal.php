@@ -6,7 +6,7 @@
     <!--/#header-->
     <div class="container"> 
         <div id="load-renew-book">
-            <h2>Request for due date extension()</h2>
+            <h2>Request for due date extension</h2>
         </div> 
 
     </div>

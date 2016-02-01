@@ -28,7 +28,7 @@
                 <span></span>
             </div>
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
-            <a href="our-library.html" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+            <a href="our-library.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
     </div>
     <?php include ("footer.php");?> 
@@ -54,6 +54,7 @@
                     data: issue_book,
                     success: function(response){
                         console.log(response);
+                        window.location = 'admin-manage-book.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

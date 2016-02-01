@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" id="author_name"/>
                 <span></span>
             </div>
-            <button type="submit" class="btn btn-info btn-lg">Submit</button>
+            <button type="submit" class="btn btn-info btn-lg" >Submit</button>
             <a href="member.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
         <!--/#issue book form -->
@@ -50,6 +50,7 @@
                     data: new_book_details,
                     success: function(response){
                         console.log(response);
+                        window.location = 'member.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

@@ -85,6 +85,11 @@ function pagination(array,page_size,page_no){
                  button.setAttribute("type","button");
                  button.setAttribute("class","btn btn-info");
                  button.setAttribute("value",s[j]);
+                 if(j==0){
+                    button.setAttribute("onClick","edit();");
+                 }else{
+                    button.setAttribute("onclick","delete()");
+                 }
                  tab_data.appendChild(button);
                  tab_row.appendChild(tab_data);
              }

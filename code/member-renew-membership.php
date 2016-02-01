@@ -26,7 +26,7 @@
                 </select>
             </div>
             <input type="submit" value="Submit" class="btn btn-default btn-lg btn-info"/>
-            <a href="member.html" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+            <a href="member.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
   </div>
     <?php include ("footer.php");?> 
@@ -48,6 +48,7 @@
                     data: renew_details,
                     success: function(response){
                         console.log(response);
+                        window.location = 'member.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
