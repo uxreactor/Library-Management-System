@@ -653,7 +653,7 @@
 		    	$object['book_name'] = $row["book_name"];
 		    	$object['author_name'] = $row["author_name"];
 		    	//$object['edition'] = $row["edition"];
-		    	$object['requests'] = $row["requests"];
+		    	//$object['requests'] = $row["requests"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
