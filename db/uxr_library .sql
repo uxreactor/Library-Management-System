@@ -172,8 +172,6 @@ CREATE TABLE `tbl_login` (
 --
 
 INSERT INTO `tbl_login` (`username`, `password`) VALUES
-('pradeepnarvaneni@gmail.com', 'pradeep'),
-('aduddu@uxreactor.com', 'anurag');
 ('bala@uxreactor.org', 'bala'),
 ('jchallagonda@uxreactor.org', 'jyothi'),
 ('jimmy@uxreactor.org', 'jimmy'),
