@@ -192,14 +192,15 @@
 		    	$result_isbn = $conn->query($sql);
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
-		    	$object['isbn'] = $row["isbn"];
-		    	$object['price'] = $row["price"];
-		    	$object['edition'] = $row["edition"];
-		    	$object['publisher'] = $row["publisher"];
-		    	$object['category'] = $row["category"];
-		    	$object['book_name'] = $row["book_name"];
-		    	$object['author_name'] = $row["author_name"];
-		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['ISBN'] = $row["isbn"];
+		    	$object['Price'] = $row["price"];
+		    	$object['Edition'] = $row["edition"];
+		    	$object['Publisher'] = $row["publisher"];
+		    	$object['Category'] = $row["category"];
+		    	$object['Book name'] = $row["book_name"];
+		    	$object['Author name'] = $row["author_name"];
+		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -216,7 +217,7 @@
 	 *
 	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
 	 */
-	function loadAllBooksInLibrary(){
+	function loadAllBooksInIndex(){
 		$arrayObject = array();
 		$conn = connection();
 		$sql = " SELECT * FROM tbl_book_varities " ;
@@ -236,8 +237,6 @@
 		    	$object['Category'] = $row["category"];
 		    	$object['Book Name'] = $row["book_name"];
 		    	$object['Author Name'] = $row["author_name"];
-		    	$object['Book Quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['action'] = "edit,delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -269,7 +268,7 @@
 		    	$object['Validity'] = $row["expiry_on"];
 		    	$object['Phone No.'] = $row["mem_moblieno"];
 		    	$object['Mail ID'] = $row["mem_email"];
-				$object['action'] = "Edit,Delete";
+				$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
@@ -302,15 +301,15 @@
 		    	$result_isbn = $conn->query($sql);
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
-		    	$object['isbn'] = $row["isbn"];
-		    	$object['price'] = $row["price"];
-		    	$object['edition'] = $row["edition"];
-		    	$object['publisher'] = $row["publisher"];
-		    	$object['category'] = $row["category"];
-		    	$object['book_name'] = $row["book_name"];
-		    	$object['author_name'] = $row["author_name"];
-		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['action'] = "edit,delete";
+		    	$object['ISBN'] = $row["isbn"];
+		    	$object['Price'] = $row["price"];
+		    	$object['Edition'] = $row["edition"];
+		    	$object['Publisher'] = $row["publisher"];
+		    	$object['Category'] = $row["category"];
+		    	$object['Book name'] = $row["book_name"];
+		    	$object['Author name'] = $row["author_name"];
+		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -343,14 +342,14 @@
 		    	$result_isbn = $conn->query($sql);
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
-		    	$object['isbn'] = $row["isbn"];
-		    	$object['price'] = $row["price"];
-		    	$object['edition'] = $row["edition"];
-		    	$object['publisher'] = $row["publisher"];
-		    	$object['category'] = $row["category"];
-		    	$object['book_name'] = $row["book_name"];
-		    	$object['author_name'] = $row["author_name"];
-		    	$object['book_quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['Isbn'] = $row["isbn"];
+		    	$object['Price'] = $row["price"];
+		    	$object['Edition'] = $row["edition"];
+		    	$object['Publisher'] = $row["publisher"];
+		    	$object['Category'] = $row["category"];
+		    	$object['Book name'] = $row["book_name"];
+		    	$object['Author name'] = $row["author_name"];
+		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -380,13 +379,13 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$object['mem_id'] = $row["mem_id"];
-		    	$object['mem_name'] = $row["mem_name"];
-		    	$object['mem_moblieno'] = $row["mem_moblieno"];
-		    	$object['mem_email'] = $row["mem_email"];
-		    	$object['mem_dob'] = $row["mem_dob"];
-		    	$object['mem_gender'] = $row["mem_gender"];
-		    	$object['action'] = "edit,delete";
+		    	$object['Mem ID'] = $row["mem_id"];
+		    	$object['Name'] = $row["mem_name"];
+		    	$object['Moblie'] = $row["mem_moblieno"];
+		    	$object['Email'] = $row["mem_email"];
+		    	$object['DOB'] = $row["mem_dob"];
+		    	$object['Gender'] = $row["mem_gender"];
+		    	$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -650,10 +649,10 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$object['book_name'] = $row["book_name"];
-		    	$object['author_name'] = $row["author_name"];
-		    	//$object['edition'] = $row["edition"];
-		    	//$object['requests'] = $row["requests"];
+
+		    	$object['Book name'] = $row["book_name"];
+		    	$object['Author name'] = $row["author_name"];
+		    	$object['Requests'] = $row["requests"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -866,7 +865,7 @@
 		    	}else{
 		    		$object['Membership type'] = "Silver";
 		    	}
-		    	$object['Actions'] ="approve,reject";
+		    	$object['Action'] ="Approve,Reject";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -901,11 +900,11 @@
 		    	$result = $conn->query($sql);
 		    	$row_mem_id = $result->fetch_assoc();
 				$object = array();
-		    	$object['mem_id'] = $row_mem_id["mem_id"];
-		    	$object['mem_name'] = $row_mem_id["mem_name"];
-		    	$object['expiry_on'] = $row_mem_id["expiry_on"];
-		    	$object['ms_id'] = $row_mem_id["ms_id"];
-		    	$object['action'] = "approve,reject";
+		    	$object['Mem ID'] = $row_mem_id["mem_id"];
+		    	$object['Name'] = $row_mem_id["mem_name"];
+		    	$object['Expiry on'] = $row_mem_id["expiry_on"];
+		    	$object['MS ID'] = $row_mem_id["ms_id"];
+		    	$object['Action'] = "Approve,Reject";
 
 		    	array_push($arrayObject, $object);
 		    }
@@ -935,13 +934,13 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$object['book_id'] = $row["book_id"];
-		    	$object['mem_id'] = $row["mem_id"];
-		    	$object['issue_date'] = $row["issue_date"];
-		    	$object['return_expected'] = $row["return_expected"];
-		    	$object['return_actual'] = $row["return_actual"];
-		    	$object['penality'] = $row["penality"];
-		    	$object['action'] ="Return";
+		    	$object['Book ID'] = $row["book_id"];
+		    	$object['Mem ID'] = $row["mem_id"];
+		    	$object['Issue date'] = $row["issue_date"];
+		    	$object['Return expected'] = $row["return_expected"];
+		    	$object['Return actual'] = $row["return_actual"];
+		    	$object['Penality'] = $row["penality"];
+		    	$object['Action'] ="Return";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -971,10 +970,10 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$object['book_id'] = $row["book_id"];
-		    	$object['mem_id'] = $row["mem_id"];
-		    	$object['extension_days'] = $row["extension_days"];
-		    	$object['action'] ="approve,reject";
+		    	$object['Book ID'] = $row["book_id"];
+		    	$object['Mem ID'] = $row["mem_id"];
+		    	$object['Extension days'] = $row["extension_days"];
+		    	$object['Action'] ="Approve,Reject";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {

@@ -111,7 +111,7 @@
             
              if(submitToServer(validation_message)){
 
-                add_book_details = {book_name: $('#book_name').val(), author_name: $('#author_name').val(),isbn : $('#isbn').val(),category: $('#category').val(),edition: $('#edition').val(),price: $('#price').val(),publisher: $('#publisher').val(),quantity: $('#quantity').val()};
+               
                 if(submitToServer(validation_message)){
                     $.ajax({
                         url: $('form').attr('action'),

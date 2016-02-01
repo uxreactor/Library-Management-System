@@ -179,7 +179,7 @@ var viewData = function(records,parent,page_size) {
      for (var key in object) {
          tab_head = document.createElement('th');
          tab_head.textContent = key; 
-         if(key == 'action'){
+         if(key == 'Action'){
              s = object[key].split(",") ;
              tab_head.setAttribute("colspan",s.length);
          }
