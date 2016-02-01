@@ -1118,5 +1118,28 @@
 		return(json_encode($arrayObject)); //return value
 	}
 
+	/**
+	 * @emailCheck : This function is used to fetch the member name with the help of the memberid.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : int - memberid
+	 *
+	 * @return/outcome : It will read the member name and return.
+	 */
+	function getMemberName($memberId){
+		$conn = connection();
+		$sql = " SELECT mem_name FROM tbl_members WHERE mem_id=$memberId;";
+		$arrayObject;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	$row = $result->fetch_assoc(); 
+	    	$arrayObject = $row["mem_name"];	
+	    	return $arrayObject;
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+	}
+
 
 ?>
