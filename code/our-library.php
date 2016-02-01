@@ -66,6 +66,7 @@
         $(function() {
             postForm();
         });
+        
 
 
         function loadDetails(){
