@@ -114,6 +114,27 @@
 		$conn->close();
 	}
 
+
+	/**
+	 * @login : This function will checks whether the emeil is exists or not
+	 * @author : Prabhakar
+	 *
+	 * @param : string - username
+	 *
+	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
+	 */
+	function adminForgotPassword($email){
+		$conn = connection();
+		$sql = " SELECT username FROM tbl_admin_login WHERE username = '$email'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	return $email; // return value
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+	}
+
 	/**
 	 * @checkCategoryExists : This function will check the category in the database and if it exists displays an error else allows user to continue.
 	 * @author : Mohan, Bala

@@ -18,31 +18,23 @@
     <script>
         var submitForm = function() {
             var validation_message;
-            var type = $('.nav-tabs li.active a').text().toLowerCase().trim();
-            if(type == 'admin'){
-                login_details = {
-                email:$('#email').val(),
-                type: type          
-                };
+            //var type = $('.nav-tabs li.active a').text().toLowerCase().trim();
+                login_details = { email:$('#email').val()};
                 login = [{ type : 'email' , value: $('#email').val() , errorMessage:'Email is required' }];
-            }else {
-                login_details = {
-                email:$('#email2').val(),
-                type: type          
-                }; 
-                login = [{ type : 'email' , value: $('#email2').val() , errorMessage:'Email is required' }];
-            }
 
             validation_message = validateForm(login);          
-             console.log(login_details);
+            //console.log(login_details);
             if(submitToServer(validation_message)){
                 //alert(login_details);
                 $.ajax({             
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
-                    data: login_details,
+                    data: { email:$('#email').val()},
                     success: function(response){
                         console.log(response);
+                        if(response){
+                            window.location.href = 'change-password.php';
+                        }
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
@@ -50,16 +42,8 @@
                 });
             } 
             else{
-                if (login_details.type == 'admin') {
-
                     body = document.getElementById('admin_email');
                     writeError(validation_message[0],body);
-
-                }else{
-
-                    body = document.getElementById('user_email');
-                    writeError(validation_message[0],body);
-                }
             }
             return false;
         }
