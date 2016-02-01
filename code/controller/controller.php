@@ -217,7 +217,7 @@
 	 *
 	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
 	 */
-	function loadAllBooksInLibrary(){
+	function loadAllBooksInIndex(){
 		$arrayObject = array();
 		$conn = connection();
 		$sql = " SELECT * FROM tbl_book_varities " ;
@@ -237,8 +237,6 @@
 		    	$object['Category'] = $row["category"];
 		    	$object['Book Name'] = $row["book_name"];
 		    	$object['Author Name'] = $row["author_name"];
-		    	$object['Book Quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
