@@ -168,52 +168,6 @@ function paginationView(array,page_size){
   pagination(array,page_size,1);
 }
 
-<<<<<<< HEAD
-var viewData = function(records,parent) {
-   table = document.createElement('table');
-   table.setAttribute("class","table table-bordered table-striped");
-   thead = document.createElement('thead');
-   tab_row = document.createElement('tr');
-   var object = "";
-   for (var key in records) {
-       object = records[key];
-       console.log(object);
-       for (var key in object) {
-           tab_head = document.createElement('th');
-           tab_head.textContent = key; 
-           if(key == 'action'){
-               s = object[key].split(",") ;
-               tab_head.setAttribute("colspan",s.length);
-           }
-           tab_row.appendChild(tab_head);      
-       }
-       break;
-   }
-   thead.appendChild(tab_row);
-   tbody = document.createElement('tbody');  
-   for (var key in records) {
-       tab_row = document.createElement('tr');
-       object = records[key];
-       for (var key in object) {
-           if(key == 'Action'){
-               s = object[key].split(",") ;
-               for(var i=0; i< s.length;i++){
-                   tab_data = document.createElement('th');
-                   button = document.createElement('input');
-                   button.setAttribute("type","button");
-                   button.setAttribute("class","btn btn-info");
-                   button.setAttribute("value",s[i]);
-                   tab_data.appendChild(button);
-                   tab_row.appendChild(tab_data);
-               }
-           }else{
-               tab_data = document.createElement('th');
-               tab_data.textContent = object[key]; 
-               tab_row.appendChild(tab_data);  
-            }   
-       }   
-       tbody.appendChild(tab_row);
-=======
 var viewData = function(records,parent,page_size) {
   table = document.createElement('table');
   table.setAttribute("class","table table-bordered table-striped");
@@ -232,7 +186,6 @@ var viewData = function(records,parent,page_size) {
          tab_row.appendChild(tab_head);      
      }
      break;
->>>>>>> origin/master
    }
   thead.appendChild(tab_row);   
   table.appendChild(thead);

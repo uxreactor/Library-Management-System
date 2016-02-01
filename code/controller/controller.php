@@ -204,7 +204,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results"; 
+		    return false; 
 		}
 
 		$conn->close();
@@ -246,7 +246,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results"; 
+		    return false; 
 		}
 
 		$conn->close();
@@ -278,7 +278,7 @@
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -667,12 +667,12 @@
 		    	$object = array();
 		    	$object['book_name'] = $row["book_name"];
 		    	$object['author_name'] = $row["author_name"];
-		    	$object['edition'] = $row["edition"];
+		    	//$object['edition'] = $row["edition"];
 		    	$object['requests'] = $row["requests"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -924,12 +924,12 @@
 
 		    	array_push($arrayObject, $object);
 		    }
-		    return json_encode($arrayObject);
 		} else {
-		    return "0 results"; 
+		    return false; 
 		}
  //return value
 		$conn->close();
+		return json_encode($arrayObject);
 		
 	}
 
@@ -956,11 +956,11 @@
 		    	$object['return_expected'] = $row["return_expected"];
 		    	$object['return_actual'] = $row["return_actual"];
 		    	$object['penality'] = $row["penality"];
-		    	$object['action'] ="return";
+		    	$object['action'] ="Return";
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();
@@ -993,7 +993,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return false;
 		}
 
 		$conn->close();

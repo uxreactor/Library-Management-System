@@ -106,8 +106,9 @@
                         parent.removeChild(parent.childNodes[3]);
                         
                         if (response){
-                            obj = jQuery.parseJSON(response);
-                            viewData(obj,parent);  
+                            books = jQuery.parseJSON(response);
+                            viewData(books,parent); 
+                            paginationView(books,2);    
                         }else{
                             results = document.createElement('h2');
                             results.innerText = "No results found";

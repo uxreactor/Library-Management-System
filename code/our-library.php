@@ -32,6 +32,10 @@
 
     </div>
     <!--/#table-->
+    <center>
+        <ul class="pagination" id="pagination1">
+        </ul>
+    </center>
 
     <?php include ("footer.php");?>
     <!--/#footer-->
@@ -40,18 +44,29 @@
     
     <script type="text/javascript">
 
-        var parent = document.getElementById('load-all-members');
+        var parent = document.getElementById('load-books');
+        var books;
         var error = document.getElementById('book_name_label');
         function postForm() {
             $.ajax({             
-                url: 'controller/load_all_members.php',
-
-        var parent = document.getElementById('load-books');
-        var url;
-
+                url: 'controller/load_all_books_in_library.php',
+                type: 'post',
+                 success: function(response){                        
+                    console.log(response);
+                    books = jQuery.parseJSON(response);
+                    viewData(books,parent);
+                    paginationView(books,2);  
+                },
+                error: function(xhr, desc, err){
+                    writeError('No results found',error);
+                }
+            });
+     
+        }
         $(function() {
-            loadDetails()
+            postForm();
         });
+
 
         function loadDetails(){
             $('.no_result').remove();
@@ -68,15 +83,21 @@
             postForm(url);  
         }
 
-        function postForm(url) {
+        $(function() {
+            loadDetails()
+        });
+
+       function postForm(url) {
             $('.table').remove();
+            $('#pagination1').empty();
             $.ajax({
                 url: url,
                 type: 'post',
                 success: function(response){                        
                     console.log(response);
-                    obj = jQuery.parseJSON(response);
-                    viewData(obj,parent);
+                    books = jQuery.parseJSON(response);                     
+                    viewData(books,parent);
+                    paginationView(books,2);   
                 },
                 error: function(xhr, desc, err){
                     writeError('No results found',error);
@@ -84,11 +105,6 @@
             });
         }
 
-
-        $("form#books").submit(function() {
-            postForm();
-            return false;
-        });
 
         var submitForm = function() {
             var validation_message;
@@ -114,6 +130,7 @@
             
             if(submitToServer(validation_message)){
                 $('.table,.no_result').remove();
+                $('#pagination1').empty();
                 $.ajax({
                     url: url,
                     type: "POST",
@@ -121,8 +138,9 @@
                     success: function(response){
                         console.log(response);
                         if (response){
-                            obj = jQuery.parseJSON(response);
-                            viewData(obj,parent);  
+                            books = jQuery.parseJSON(response);
+                            viewData(books,parent);  
+                            paginationView(books,2);  
                         }else{
                             results = document.createElement('h2');
                             results.className = "no_result";
