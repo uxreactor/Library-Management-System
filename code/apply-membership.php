@@ -184,11 +184,9 @@
                     data: member_details,
                     success: function(response){
                         if(response == 1){
-                            $('.notification').text('Successfully Applied');
-                            $('.form-group span').text('');
-                        }else{
                             $('#input_email_label span').text('Email is already exists');
-                            
+                        }else{
+                            $('.notification').text(response);
                         }
                     },
                     error: function(xhr, desc, err){
