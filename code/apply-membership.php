@@ -183,8 +183,11 @@
                     type: $('form').attr('method'),
                     data: member_details,
                     success: function(response){
-                        $('.notification').text(response);
-                        $('.form-group span').text('');
+                        if(response==1){
+                            $('#input_email_label span').text('Email is already exist');                            
+                        }else{
+                            $('.notification').text(response);                            
+                        }
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
