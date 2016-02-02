@@ -2,7 +2,7 @@
     <!--/#header-->
  <div class="container">
     <div id = "myTabContent" class = "tab-content">
-        <form name="login" method="post" action="controller/validateForgotPassword.php" onsubmit="return submitForm();">
+        <form name="login" method="post" action="" onsubmit="return submitForm();" id="emailform">
             <div class="form-group" id="admin_email" >
                 <label for="exampleInputEmail1">Enter registered Email ID</label>
                 <input type="text" class="form-control" id="email" placeholder="Email" >
@@ -41,14 +41,21 @@
             if(submitToServer(validation_message)){
                 //alert(login_details);
                 $.ajax({             
-                    url: $('form').attr('action'),
+                    url: 'controller/validateForgotPassword.php',
                     type: $('form').attr('method'),
                     data: { email:$('#email').val()},
                     success: function(response){
                         console.log(response);
-                        if(response){
+                        if(response == 1){
+                            error = document.getElementById('admin_email');
+                            console.log(error);
+                            error.removeChild(error.childNodes[5]);
+                            error.childNodes[3].disabled = true;
                             $( "#resetpassword" ).hide();
                             $( "#changepassword" ).show();
+                        }else {
+                            body = document.getElementById('admin_email');
+                            writeError('Email not registered',body);
                         }
                     },
                     error: function(xhr, desc, err){

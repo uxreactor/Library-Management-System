@@ -94,7 +94,7 @@
 
 
 	/**
-	 * @login : This function will check the details of the admin in the database and if the details are matched then it allows to login else it just displays an error message.
+	 * @adminLogin : This function will check the details of the admin in the database and if the details are matched then it allows to login else it just displays an error message.
 	 * @author : Prabhakar
 	 *
 	 * @param : string - username
@@ -116,10 +116,10 @@
 
 
 	/**
-	 * @login : This function will checks whether the emeil is exists or not
+	 * @adminForgotPassword : This function will checks whether the emeil is exists or not
 	 * @author : Prabhakar
 	 *
-	 * @param : string - username
+	 * @param : string - email id.
 	 *
 	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
 	 */
@@ -130,7 +130,7 @@
         if ($result->num_rows > 0) {
         	return $email; // return value
 		}else{
-			return 0; // return value
+			return false; // return value
 		}
 		$conn->close();
 	}
@@ -145,6 +145,7 @@
 	 *
 	 * @return/outcome : It will update the password record in the table tbl_admmin_login.
 	 */
+
 	function updatePassword($email,$password){
 		$conn = connection();
 		$sql = "UPDATE tbl_admin_login SET password='$password' WHERE username = '$email'";

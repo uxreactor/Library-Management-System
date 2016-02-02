@@ -8,15 +8,16 @@
             <!--/#tabs-->
             <div id = "myTabContent" class = "tab-content">
                 <div class = "tab-pane fade in active" id = "Admin">
-                    <form name="login" method="post" action="controller/validateLogin.php" onsubmit="return submitForm();">
+                    <form name="login" method="post" action="controller/validateLogin.php" onsubmit="return submitForm();" id="adminLogin">
+                        <span></span>
                         <div class="form-group" id="admin_email" >
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="text" class="form-control" id="email" placeholder="Email" >
+                            <input type="text" class="form-control" id="email" placeholder="Email" />
                             <span></span>
                         </div>
                         <div class="form-group" id ="admin_password">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <input type="password" class="form-control" id="password" placeholder="Password" />
                             <span></span>
                         </div>
                         <a href="forgot-password.php"> Forgot Password ? </a> <br/><br/>
@@ -25,15 +26,16 @@
                     <!--/#loginform-->
                 </div>
                 <div class = "tab-pane fade" id = "User">
-                  <form name="login" method="post" action="controller/validateLogin.php" onsubmit="return submitForm();">
+                    <form name="login" method="post" action="controller/validateLogin.php" onsubmit="return submitForm();" id="userLogin">
+                        <span></span>
                         <div class="form-group" id = "user_email">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="email2" placeholder="Email">
+                            <input type="email" class="form-control" id="email2" placeholder="Email" />
                             <span></span>
                         </div>
                         <div class="form-group" id ="user_password">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="password2" placeholder="Password">
+                            <input type="password" class="form-control" id="password2" placeholder="Password" />
                             <span></span>
                         </div>
                         <a href="forgot-password.php"> Forgot Password ? </a> <br/><br/>
@@ -83,7 +85,21 @@
                         }else if(response){
                             window.location.href = "member.php";
                         }else{
-                            //Show login failure
+                            if(type == 'admin'){
+                                error = document.getElementById('adminLogin');
+                                error.removeChild(error.childNodes[0]);
+                                errorElement = document.createElement('span');
+                                errorElement.className = 'error';
+                                errorElement.textContent = 'Invalid admin login details';
+                                error.insertBefore(errorElement, error.childNodes[0]);
+                            }else{
+                                error = document.getElementById('userLogin');
+                                error.removeChild(error.childNodes[0]);
+                                errorElement = document.createElement('span');
+                                errorElement.className = 'error';
+                                errorElement.textContent = 'Invalid member login details';
+                                error.insertBefore(errorElement, error.childNodes[0]);
+                            }
                         }
                     },
                     error: function(xhr, desc, err){
