@@ -156,7 +156,7 @@
         } 
         $("input").click(function() {
             //alert("bala");
-        });
+        });        
     </script>
 
 </body>

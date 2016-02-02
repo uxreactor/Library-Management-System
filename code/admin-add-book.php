@@ -59,6 +59,7 @@
     <!--/#footer-->
     <?php include ("javascript-links.php");?>  
     <script type="text/javascript">
+
         var category = document.getElementById('category');  
         var new_option;
         $.ajax({
@@ -85,7 +86,7 @@
 
 
         var submitForm = function() {
-            var validation_message,add_book_details;
+            var validation_message,add_book_details;    
             if(!new_option){
                add_book = [{ type : 'text' , value: $('#book_name').val() , errorMessage:'Book name is required' }, 
                 { type:'text' , value: $('#author_name').val() , errorMessage:'Author name is required' },
@@ -107,54 +108,48 @@
                 add_book_details = {type: "new", book_name: $('#book_name').val(), author_name: $('#author_name').val(),isbn : $('#isbn').val(),category: $('#newcategory').val(),edition: $('#edition').val(),price: $('#price').val(),publisher: $('#publisher').val(),quantity: $('#quantity').val()};
             }
             
-            validation_message = validateForm (add_book);  
-            
-             if(submitToServer(validation_message)){
-
-               
-                if(submitToServer(validation_message)){
-                    $.ajax({
-                        url: $('form').attr('action'),
-                        type: $('form').attr('method'),
-                        data: add_book_details,
-                        success: function(response){
-                            //console.log(response);
-                            if(response == "Category is already exists"){
-                                body = document.getElementById('div1');
-                                writeError(response,body);
-                            }
-                            $('.notification').text(response);
-                        },
-                        error: function(xhr, desc, err){
-                            console.log(desc);
+            validation_message = validateForm (add_book);       
+            if(submitToServer(validation_message)){
+                $.ajax({
+                    url: $('form').attr('action'),
+                    type: $('form').attr('method'),
+                    data: add_book_details,
+                    success: function(response){
+                        //console.log(response);
+                        if(response == "Category is already exists"){
+                            body = document.getElementById('div1');
+                            writeError(response,body);
                         }
-                    });
-                    window.location = 'our-library.php';
-                    
-                }else{
-                    body = document.getElementById('book_name_label');
-                    writeError(validation_message[0],body);
-                    body = document.getElementById('author_name_label');
-                    writeError(validation_message[1],body);
-                    body = document.getElementById('isbn_label');
-                    writeError(validation_message[2],body);
-                    body = document.getElementById('edition_label');
-                    writeError(validation_message[3],body);
-                    body = document.getElementById('price_label');
-                    writeError(validation_message[4],body);
-                    body = document.getElementById('publisher_label');
-                    writeError(validation_message[5],body);
-                    body = document.getElementById('quantity_label');
-                    writeError(validation_message[6],body);
-                    if(new_option){
-                        body = document.getElementById('div1');
-                        writeError(validation_message[7],body);
+                        $('.notification').text(response);
+                    },
+                    error: function(xhr, desc, err){
+                        console.log(desc);
                     }
-                    return false;
+                });
+                window.location = 'our-library.php';
+                
+            }else{
+                body = document.getElementById('book_name_label');
+                writeError(validation_message[0],body);
+                body = document.getElementById('author_name_label');
+                writeError(validation_message[1],body);
+                body = document.getElementById('isbn_label');
+                writeError(validation_message[2],body);
+                body = document.getElementById('edition_label');
+                writeError(validation_message[3],body);
+                body = document.getElementById('price_label');
+                writeError(validation_message[4],body);
+                body = document.getElementById('publisher_label');
+                writeError(validation_message[5],body);
+                body = document.getElementById('quantity_label');
+                writeError(validation_message[6],body);
+                if(new_option){
+                    body = document.getElementById('div1');
+                    writeError(validation_message[7],body);
                 }
                 return false;
-
-             }
+            }
+            return false;          
         }
     </script> 
     <script type="text/javascript">
