@@ -184,6 +184,7 @@
                     data: member_details,
                     success: function(response){
                         $('.notification').text(response);
+                        $('.form-group span').text('');
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

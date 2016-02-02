@@ -48,8 +48,7 @@
                         console.log(response);
                         if(response == 1){
                             error = document.getElementById('admin_email');
-                            console.log(error);
-                            error.removeChild(error.childNodes[5]);
+                            $('.form-group span').text('');
                             error.childNodes[3].disabled = true;
                             $( "#resetpassword" ).hide();
                             $( "#changepassword" ).show();

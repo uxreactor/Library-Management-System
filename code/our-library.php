@@ -155,7 +155,7 @@
             return false;
         } 
         $("input").click(function() {
-            alert("bala");
+            //alert("bala");
         });
     </script>
 
