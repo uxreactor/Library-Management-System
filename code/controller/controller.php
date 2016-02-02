@@ -716,7 +716,6 @@
 
 		    	$object['Book name'] = $row["book_name"];
 		    	$object['Author name'] = $row["author_name"];
-		    	$object['Requests'] = $row["requests"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
