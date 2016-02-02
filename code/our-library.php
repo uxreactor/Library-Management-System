@@ -65,6 +65,13 @@
         $(function() {
             postForm();
         });
+        $(document).on("click",".btn",function(){
+           var $tr = $(this).closest('tr');
+           var isbn = $tr.find('td:first-child').text();
+           console.log(isbn);
+           window.location.href="admin-editbook-details.php?isbn="+isbn;
+               
+       });
 
         function loadDetails(){
             $('.no_result').remove();

@@ -203,7 +203,8 @@
 	 *
 	 * @return/outcome : It will replace the data into the database.
 	 */
-	function editBookDetails($old_isbn,$isbn,$price,$edition,$publisher,$category,$bookname,$authorname){
+
+	function editBookDetails($old_isbn,$isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){
 		$conn = connection();
 
 		$sql = " UPDATE tbl_all_books SET isbn='$isbn'  WHERE isbn='$old_isbn' ";
@@ -1167,6 +1168,43 @@
 			return 0; // return value
 		}
 		$conn->close();
+	}
+
+
+	/**
+	 * @emailCheck : This function is used to fetch the member name with the help of the memberid.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : int - memberid
+	 *
+	 * @return/outcome : It will read the member name and return.
+	 */
+	function getBookDetails($isbn){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_book_varities WHERE isbn ='$isbn'" ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+	    	$row = $result->fetch_assoc();
+			$object = array();
+			$object['ISBN'] = $row["isbn"];
+	    	$object['Price'] = $row["price"];
+	    	$object['Edition'] = $row["edition"];
+	    	$object['Publisher'] = $row["publisher"];
+	    	$object['Category'] = $row["category"];
+	    	$object['Book name'] = $row["book_name"];
+	    	$object['Author name'] = $row["author_name"];
+			$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
+		    $result_isbn = $conn->query($sql);
+		    $row_isbn = $result_isbn->fetch_assoc();
+	    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
+	    	array_push($arrayObject, $object);
+		} else {
+		    return false; 
+		}
+
+		$conn->close();
+		return $arrayObject; //return value
 	}
 
 

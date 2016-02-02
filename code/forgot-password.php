@@ -25,7 +25,8 @@
             <br/><br/>
             <div id="acknowledge" style="font-size: 25px; color:green"></div>
             <br/>
-            <a href="login.php" id="goto" style="font-size: 20px; color:red"></a>
+            <a href="login.php" id="goto" style="font-size: 20
+            px; color:red"></a>
         </form>
         <!--/#forgot password form -->
     </div>
