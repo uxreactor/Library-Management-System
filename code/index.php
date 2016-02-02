@@ -10,7 +10,6 @@
                         <i class="glyphicon glyphicon-search"></i>
                     </button>
                 </span>
-                <span></span>
             </div>
         </form>
         <br/>
@@ -18,42 +17,6 @@
         <div id="load-books">
             <h2>All books</h2>      
         </div>      
-        <!--/#search bar-->   
-       <!-- <table  class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Book ID</th>
-                <th>Book name</th>
-                <th>Category</th>
-                <th>Author name</th>
-                <th>Availability</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>01</th>
-                <td>UX Design</td>
-                <td>Study</td>
-                <td>Donald Norman</td>
-                <td>05</td>
-              </tr>
-              <tr>
-                <th>02</th>
-                <td>UX Design</td>
-                <td>Study</td>
-                <td>Donald Norman</td>
-                <td>05</td>
-              </tr>
-              <tr>
-                <th>03</th>
-                <td>UX Design</td>
-                <td>Study</td>
-                <td>Donald Norman</td>
-                <td>05</td>
-              </tr>
-           </tbody>
-        </table>
-        <!--/#table-->
         <center>
             <ul class="pagination" id="pagination1">
             </ul>
@@ -85,46 +48,33 @@
             postForm();
         });
         var submitForm = function() {
-            var validation_message;
-            search_book = [{ 
-                type: 'text',
-                value: $('#search').val(),
-                errorMessage:'Book or author name is required' 
-            }];
-            validation_message = validateForm(search_book);  
+            var validation_message; 
             search_book_details = {
                 search: $('#search').val().toLowerCase()
             };
-            
-            if(submitToServer(validation_message)){
-                $('#pagination1').empty();
-                $.ajax({
-                    url: $('form').attr('action'),
-                    type: $('form').attr('method'),
-                    data: search_book_details,
-                    success: function(response){
-                        console.log(response);
-                        parent.removeChild(parent.childNodes[3]);
-                        
-                        if (response){
-                            books = jQuery.parseJSON(response);
-                            viewData(books,parent); 
-                            paginationView(books,5);    
-                        }else{
-                            results = document.createElement('h2');
-                            results.innerText = "No results found";
-                            parent.appendChild(results);
-                        }
-                    },
-                    error: function(xhr, desc, err){
-                        console.log(desc);
+            $('#pagination1').empty();
+            $.ajax({
+                url: $('form').attr('action'),
+                type: $('form').attr('method'),
+                data: search_book_details,
+                success: function(response){
+                    //console.log(response);
+                    parent.removeChild(parent.childNodes[3]);
+                    
+                    if (response){
+                        books = jQuery.parseJSON(response);
+                        viewData(books,parent); 
+                        paginationView(books,5);    
+                    }else{
+                        results = document.createElement('h2');
+                        results.innerText = "No results found";
+                        parent.appendChild(results);
                     }
-                });
-                
-            }else{
-                body = document.getElementById('book_name_label');
-                writeError(validation_message[0],body);
-            }
+                },
+                error: function(xhr, desc, err){
+                    console.log(desc);
+                }
+            });         
             return false;
         }
     </script>
