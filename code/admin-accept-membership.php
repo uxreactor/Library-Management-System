@@ -41,6 +41,13 @@
         $(function() {
             postForm();
         });
+        $(document).on("click",".btn",function(){
+            var $row = $(this).closest("tr"),       
+            $tds = $row.find("td");       
+            $.each($tds, function() {              
+                console.log($(this).text());      
+            });
+        });
     </script>
 </body>
 </html>

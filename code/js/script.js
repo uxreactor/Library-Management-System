@@ -79,21 +79,16 @@ function pagination(array,page_size,page_no){
          if(key == 'Action'){
              s = object[key].split(",") ;
              for(var j=0; j< s.length;j++){
-                 tab_data = document.createElement('th');
+                 tab_data = document.createElement('td');
                  button = document.createElement('input');
                  button.setAttribute("type","button");
-                 button.setAttribute("class","btn btn-info");
+                 button.setAttribute("class","btn btn-info "+s[j]);
                  button.setAttribute("value",s[j]);
-                 if(j==0){
-                    button.setAttribute("onClick","edit();");
-                 }else{
-                    button.setAttribute("onclick","delete()");
-                 }
                  tab_data.appendChild(button);
                  tab_row.appendChild(tab_data);
              }
          }else{
-             tab_data = document.createElement('th');
+             tab_data = document.createElement('td');
              tab_data.textContent = object[key]; 
              tab_row.appendChild(tab_data);  
           }   
