@@ -40,24 +40,33 @@
 	function addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){			
 
 		$conn = connection();
+		$sql  = " SELECT book_name FROM tbl_book_varities WHERE isbn = $isbn";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+			if($row['book_name'] !== $bookname){
+				//$sql = "INSERT INTO sampleTable (id, name, date) VALUES ($id, '$name', CURDATE())";
+				for($i=1;$i<=$quantity;$i++){
+					$sql = " INSERT INTO  tbl_all_books (isbn) VALUES ('$isbn') ";
+					if ($conn->query($sql) == TRUE) {
+					} else {
+					    return "Error: " . $sql . "<br>" . $conn->error;
+					}
+					$sql = " SELECT isbn FROM tbl_book_varities WHERE isbn ='$isbn' ";
+					$result = $conn->query($sql);
+					if ($result->num_rows > 0) {
 
-		//$sql = "INSERT INTO sampleTable (id, name, date) VALUES ($id, '$name', CURDATE())";
-		for($i=1;$i<=$quantity;$i++){
-			$sql = " INSERT INTO  tbl_all_books (isbn) VALUES ('$isbn') ";
-			if ($conn->query($sql) == TRUE) {
-			} else {
-			    return "Error: " . $sql . "<br>" . $conn->error;
-			}
-			$sql = " SELECT isbn FROM tbl_book_varities WHERE isbn ='$isbn' ";
-			$result = $conn->query($sql);
-			if ($result->num_rows > 0) {
-			}else{
-				$sql = "INSERT INTO  tbl_book_varities (isbn,price,edition,publisher,category,book_name,author_name) VALUES ('$isbn','$price','$edition','$publisher','$category','$bookname','$authorname')";	
-				if ($conn->query($sql) == TRUE) {
-				} else {
-				    return "Error: " . $sql . "<br>" . $conn->error;
+					}else{
+						$sql = "INSERT INTO  tbl_book_varities (isbn,price,edition,publisher,category,book_name,author_name) VALUES ('$isbn','$price','$edition','$publisher','$category','$bookname','$authorname')";	
+						if ($conn->query($sql) == TRUE) {
+						} else {
+						    return "Error: " . $sql . "<br>" . $conn->error;
+						}
+						return "New book added successfully";
+					}
 				}
-				return "New book added successfully";
+			} else {
+				return "isbn already exists";
 			}
 		}
 		$conn->close();
