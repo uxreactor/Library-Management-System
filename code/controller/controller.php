@@ -623,16 +623,12 @@
 	 * @approveMembership : This function is used to approve the membership requests and append the new entry in the database.
 	 * @author : Mohan, Bala
 	 *
-	 * @param : string - name
-	 * @param : string - phoneNumber
 	 * @param : email - emailId
-	 * @param : string - MembershipType 
-	 * @param : address - address
-	 * @param : string - photos
-	 * @param : string - addressProof
 	 *
 	 * @return/outcome : It will save the new membership details in the database.
 	 */
+
+
 	function approveMembership($emailId){
 		$conn = connection();
 		$object = array();
@@ -647,8 +643,6 @@
 		    $object[2] = $row["mem_email"];
 		    $object[3] = $row["mem_dob"];
 		    $object[4] = $row["mem_gender"];
-		    $object[5] = $row["mem_photo"];
-		    $object[6] = $row["mem_add_proof"];
 		    $object[7] = $row["addr_hno"];
 		    $object[8] = $row["addr_street"];
 		    $object[9] = $row["addr_city"];
@@ -665,13 +659,32 @@
 			}else{
 				$object[14] = date('Y-m-d', strtotime("+3 months", strtotime($object[13])));
 			}
-		    $sql = "INSERT INTO tbl_members (mem_name, mem_moblieno, mem_email, mem_dob, mem_gender, mem_photo, mem_add_proof, ms_id, membership_on, expiry_on, addr_hno, addr_street, addr_city, addr_state, addr_pincode) VALUES ('$object[0]', '$object[1]', '$object[2]', '$object[3]', '$object[4]', '$object[5]', '$object[6]', '$object[12]', '$object[13]', '$object[14]', '$object[7]', '$object[8]', '$object[9]', '$object[10]', '$object[11]' )";
+		    $sql = "INSERT INTO tbl_members (mem_name, mem_moblieno, mem_email, mem_dob, mem_gender, ms_id, membership_on, expiry_on, addr_hno, addr_street, addr_city, addr_state, addr_pincode) VALUES ('$object[0]', '$object[1]', '$object[2]', '$object[3]', '$object[4]', '$object[12]', '$object[13]', '$object[14]', '$object[7]', '$object[8]', '$object[9]', '$object[10]', '$object[11]' )";
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		} else {
-		    return "0 results";
+		    return false;
 		}
+		$sql = "DELETE FROM tbl_mem_request WHERE mem_email='$emailId'";
+		if ($conn->query($sql) === FALSE) {
+		    return "Error: " . $sql . "<br>" . $conn->error;
+		}
+		$conn->close();
+	}
+
+	/**
+	 * @rejectMembership : This function is used to approve the membership requests and append the new entry in the database.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : email - emailId
+	 *
+	 * @return/outcome : It will save the new membership details in the database.
+	 */
+
+	
+	function rejectMembership($emailId){
+		$conn = connection();
 		$sql = "DELETE FROM tbl_mem_request WHERE mem_email='$emailId'";
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;

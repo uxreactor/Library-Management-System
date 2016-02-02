@@ -27,7 +27,7 @@
                 url: 'controller/load_allmembers.php',
                 type: 'post',
                 success: function(response){                        
-                    console.log(response);
+                    //console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
                     paginationView(books,5);   
@@ -41,11 +41,40 @@
         $(function() {
             postForm();
         });
-        $(document).on("click",".btn",function(){
-            var $row = $(this).closest("tr"),       
-            $tds = $row.find("td");       
-            $.each($tds, function() {              
-                console.log($(this).text());      
+        $(document).on("click",".Approve",function(){
+            var $row = $(this).closest("tr");
+            $tds = $row.find("td"); 
+            var email = {email:$tds[2].textContent}
+            console.log(email);
+            $.ajax({             
+                url: 'controller/admin_approve_accept_membership.php',
+                type: 'post',
+                data: email,
+                success: function(response){   
+                    //console.log(response);
+                    window.location.href = 'admin-accept-membership.php';                     
+                },
+                error: function(xhr, desc, err){
+                    //console.log(desc);
+                }
+            });
+        });
+        $(document).on("click",".Reject",function(){
+            var $row = $(this).closest("tr");
+            $tds = $row.find("td"); 
+            var email = {email:$tds[2].textContent}
+            console.log(email);
+            $.ajax({             
+                url: 'controller/admin_reject_membership.php',
+                type: 'post',
+                data: email,
+                success: function(response){   
+                    //console.log(response);
+                    window.location.href = 'admin-accept-membership.php';                     
+                },
+                error: function(xhr, desc, err){
+                    //console.log(desc);
+                }
             });
         });
     </script>
