@@ -8,7 +8,7 @@
                 <input type="text" class="form-control" id="email" placeholder="Email" >
                 <span></span>
             </div>
-            <input type="submit" id = "resetpassword" value="reset password" class="btn btn-info" />
+            <input type="submit" id = "resetpassword" value="Reset password" class="btn btn-info" />
         </form>
         <form name="changepassword" method="post" action="" onsubmit="return submitForm1()" id="changepassword">
             <div class="form-group" id="admin_password1" >
@@ -22,6 +22,10 @@
                 <span></span>
             </div>
             <input type="submit" value="Change password" class="btn btn-info" />
+            <br/><br/>
+            <div id="acknowledge" style="font-size: 25px; color:green"></div>
+            <br/>
+            <a href="login.php" id="goto" style="font-size: 20px; color:red"></a>
         </form>
         <!--/#forgot password form -->
     </div>
@@ -72,7 +76,7 @@
             var validation_message,success=0;
             //var type = $('.nav-tabs li.active a').text().toLowerCase().trim();
                 login_details = { email:$('#email').val()};
-                login = [{ type : 'password' , value: $('#password').val() , errorMessage:'password is required' },
+                login = [{ type : 'password' , value: $('#password').val() , errorMessage:'Password is required' },
                         { type : 'password' , value: $('#repassword').val() , errorMessage:'Re-enter password' }];
 
             validation_message = validateForm(login);
@@ -92,6 +96,9 @@
                     data: {email: $('#email').val(), password: $('#password').val()},
                     success: function(response){
                         console.log(response);
+                        $('#acknowledge').text("Your password has been changed sucessfully");
+                        $('#goto').text("Login")
+                        //window.location.href = 'login.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
