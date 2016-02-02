@@ -14,11 +14,11 @@
 	$zip = $_POST['pin'];
 
 	if(emailCheck($emailId)){
-		$validate = "Duplicate email, please enter different";
+		$validate = 0;
 
 	} else {
 		$validate = requestingMembership($name, $phoneNumber, $emailId, $dob, $gender, $membershipType, $hNo, $street, $place, $city, $zip);
-		$validate = "Successfully applied your form";
+		$validate = 1;
 	}
 	echo $validate;
 	
