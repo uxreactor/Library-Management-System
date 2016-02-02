@@ -843,7 +843,7 @@
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
-		$sql = "SELECT * FROM tbl_issued_books where book_id = '$bookId'";
+		$sql = "SELECT * FROM tbl_issued_books WHERE book_id = '$bookId'";
 		$result = $conn->query($sql);
 		//print_r($result);
 		if ($result->num_rows > 0) {
@@ -852,7 +852,7 @@
 		    $return_expected = $row["return_expected"];
 
 		}else {
-			return "0 Results";
+			return false;
 		}
 		$diff = 0;
 		$return_actual_new = new DateTime($return_actual);
@@ -862,11 +862,31 @@
 		  	$penality = $diff*10;
 		  	$sql = "UPDATE tbl_issued_books SET penality = '$penality'  WHERE book_id = '$bookId' ";
 		  	$result = $conn->query($sql);
-			return 0;
+			return 'failed';
 		}else {
 			$sql = "DELETE FROM tbl_issued_books WHERE book_id = '$bookId'";
 		}
 		
+		if ($conn->query($sql) === FALSE) {
+		    return "Error: " . $sql . "<br>" . $conn->error;
+		}
+		$conn->close();
+
+	}
+
+
+	/**
+	 * @returningBook : This function is used to update the status of issued books after penalty paid.
+	 * @author : Mohan, Bala
+	 *
+	 * @param : string - bookId
+	 *
+	 * @return/outcome : The data is removed in the issued books.
+	 */
+
+	function returningBookAfterPenalityPaid($bookId){
+		$conn = connection();
+			$sql = "DELETE FROM tbl_issued_books WHERE book_id = '$bookId'";		
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
@@ -980,7 +1000,6 @@
 		    	$object['Mem ID'] = $row["mem_id"];
 		    	$object['Issue date'] = $row["issue_date"];
 		    	$object['Return expected'] = $row["return_expected"];
-		    	$object['Return actual'] = $row["return_actual"];
 		    	$object['Penality'] = $row["penality"];
 		    	$object['Action'] ="Return";
 		    	array_push($arrayObject, $object);

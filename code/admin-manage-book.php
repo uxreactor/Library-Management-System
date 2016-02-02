@@ -46,6 +46,45 @@
         $(function() {
             postForm();
         });
+        $(document).on("click",".btn",function(){
+            var $row = $(this).closest("tr"),       
+            $tds = $row.find("td"); 
+            var book_id = ($tds[0].textContent); 
+            console.log(book_id);
+            $.ajax({             
+                url: 'controller/return_books.php',
+                type: 'post',
+                data: { book_id: book_id },
+                success: function(response){
+                    if(response == 'failed'){
+                        var confirm_response = confirm("You have penality to be paid. Do you want to pay now?");
+                        if(confirm_response){
+                            $.ajax({             
+                                url: 'controller/return_money_paid.php',
+                                type: 'post',
+                                data:{ book_id: book_id },
+                                success: function(response){ 
+                                    window.location.href='admin-manage-book.php';  
+                                },
+                                error: function(xhr, desc, err){
+                                    console.log(desc);
+                                }
+                            });  
+                        }else{
+
+                        }
+                        //console.log(response);
+                        //window.location.href = "admin-manage-book.php";
+                    }else{
+                        window.location.href='admin-manage-book.php';
+                    }
+                    
+                },
+                error: function(xhr, desc, err){
+                    console.log(desc);
+                }
+            });  
+        });
     </script>     
 </body>
 </html>

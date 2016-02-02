@@ -43,7 +43,8 @@
         });
         $(document).on("click",".btn",function(){
             var $row = $(this).closest("tr"),       
-            $tds = $row.find("td");       
+            $tds = $row.find("td"); 
+            console.log($tds[0].textContent)  ;    
             $.each($tds, function() {              
                 console.log($(this).text());      
             });
