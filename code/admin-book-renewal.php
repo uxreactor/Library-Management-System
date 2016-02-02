@@ -7,6 +7,7 @@
     <div class="container"> 
         <div id="load-renew-book">
             <h2>Request for due date extension</h2>
+            <center><span id="message"></span></center>
         </div> 
 
     </div>
@@ -50,6 +51,44 @@
         $(function() {
             postForm();
         });
+        $(document).on("click",".Approve",function(){
+            var $row = $(this).closest("tr"),       
+            $tds = $row.find("td");       
+            $bookId = $tds[0].textContent;
+            $memId = $tds[1].textContent;
+            $.ajax({             
+                url: 'controller/submit_approve_extension.php',
+                type: 'post',
+                data:{ bookId: $bookId, memId: $memId },
+                success: function(response){                        
+                    console.log(response);
+                    message.textContent = "MemberID: "+ $memId+ "request is Approved";
+                },
+                error: function(xhr, desc, err){
+                    console.log(desc);
+                }
+            }); 
+        });
+        $(document).on("click",".Reject",function(){
+            var parent = document.getElementById('message')
+            var $row = $(this).closest("tr"),       
+            $tds = $row.find("td");       
+            $bookId = $tds[0].textContent;
+            $memId = $tds[1].textContent;
+            $.ajax({             
+                url: 'controller/submit_reject_extension.php',
+                type: 'post',
+                data:{ bookId: $bookId, memId: $memId },
+                success: function(response){                        
+                    console.log(response);
+                    message.textContent = "MemberID :"+ $memId+ " request is rejected";
+                },
+                error: function(xhr, desc, err){
+                    console.log(desc);
+                }
+            }); 
+        });
+
         </script>    
-</body>
+</body> 
 </html>

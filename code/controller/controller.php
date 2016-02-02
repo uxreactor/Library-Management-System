@@ -767,13 +767,33 @@
 		$date = date('Y-m-d', strtotime("+$extension days", strtotime($returndate)));
 		$sql = "UPDATE tbl_issued_books SET return_expected = '$date'  WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
 		if ($conn->query($sql) === TRUE) {
-		    return "New record created successfully";
+			rejectExtension($memberid,$bookid);
+			return true;
 		} else {
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		$conn->close();
 	}
 
+
+	/**
+	 * @approveDueDateExtension : This function is used delete the data from the datbase.
+	 * @author : Yaswanth
+	 *
+	 * @param : string - memberId
+	 * @param : string - bookId
+	 * 
+	 *
+	 * @return/outcome : If the extension is rejected it will delete the dataa from the database.
+	 */
+
+	function rejectExtension($memberid , $bookid) {
+		$conn = connection();
+			$sql = "DELETE FROM due_date_extension WHERE mem_id = '$memberid' AND book_id = '$bookid'";
+			$conn->query($sql);		   
+    	$conn->close();
+	     return true ;
+	}
 
 	/**
 	 * @approveMembershipRenewal : This function is used approve the membership validity extension.
