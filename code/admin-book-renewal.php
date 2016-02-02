@@ -56,13 +56,18 @@
             $tds = $row.find("td");       
             $bookId = $tds[0].textContent;
             $memId = $tds[1].textContent;
-            $.ajax({             
+            $(this).val('Approved');
+            $(this).css({
+              background: '#449D44'
+            });
+                $.ajax({             
                 url: 'controller/submit_approve_extension.php',
                 type: 'post',
                 data:{ bookId: $bookId, memId: $memId },
                 success: function(response){                        
                     console.log(response);
-                    message.textContent = "MemberID: "+ $memId+ "request is Approved";
+                    message.textContent = "MemberID: "+ $memId+ " request is Approved";
+                    $(this).css('background-color','red');
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
@@ -75,6 +80,10 @@
             $tds = $row.find("td");       
             $bookId = $tds[0].textContent;
             $memId = $tds[1].textContent;
+            $(this).val('Rejected');
+             $(this).css({
+              background: '#D9534F'
+            });
             $.ajax({             
                 url: 'controller/submit_reject_extension.php',
                 type: 'post',
@@ -82,6 +91,7 @@
                 success: function(response){                        
                     console.log(response);
                     message.textContent = "MemberID :"+ $memId+ " request is rejected";
+
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
