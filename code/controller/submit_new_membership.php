@@ -12,7 +12,6 @@
 	$city = $_POST['city'];
 	$place = $_POST['state'];
 	$zip = $_POST['pin'];
-
 	if(emailCheck($emailId)){
 				$validate = 1;
 

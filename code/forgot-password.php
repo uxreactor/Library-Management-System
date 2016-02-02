@@ -92,6 +92,8 @@
                     data: {email: $('#email').val(), password: $('#password').val()},
                     success: function(response){
                         console.log(response);
+
+                        //window.location.href = 'login.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

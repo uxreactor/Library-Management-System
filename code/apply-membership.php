@@ -186,7 +186,7 @@
                         if(response==1){
                             $('#input_email_label span').text('Email is already exist');                            
                         }else{
-                            $('.notification').text(response);                            
+                            $('.notification').text(response);                           
                         }
                     },
                     error: function(xhr, desc, err){
