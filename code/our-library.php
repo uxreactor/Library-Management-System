@@ -65,7 +65,7 @@
         $(function() {
             postForm();
         });
-        $(document).on("click",".btn",function(){
+        $(document).on("click",".Edit",function(){
            var $tr = $(this).closest('tr');
            var isbn = $tr.find('td:first-child').text();
            console.log(isbn);
