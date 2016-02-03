@@ -193,7 +193,8 @@
                     type: $('form').attr('method'),
                     data: member_details,
                     success: function(response){
-                        $('.notification').text("Details are updated sucessfully");                           
+                        $('.notification').text("Details are updated sucessfully");
+                    	window.location = 'our-library.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

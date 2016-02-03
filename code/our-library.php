@@ -27,8 +27,25 @@
         <div id = "load-books">
             <h2>All books</h2>      
         </div> 
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Membership type details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text" >Are you sure to delete the details</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
+                      <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
+                    </div>
+                </div>  
+            </div>
 
-    </div>
+        </div>
     <!--/#table-->
     <center>
         <ul class="pagination" id="pagination1">
@@ -164,23 +181,40 @@
             return false;
         } 
         $(document).on("click",".Delete",function(){
+            var a=0;
             var $row = $(this).closest("tr"),       
             $tds = $row.find("td");       
             var isbn = $tds[0].textContent;
-            key_isbn = {isbn : isbn};
-            $.ajax({             
-                url: 'controller/delete_book.php',
-                type: 'post',
-                data: key_isbn,
-                success: function(response){   
-                    console.log(response);
-                    window.location.href = 'our-library.php';                         
-                },
-                error: function(xhr, desc, err){
-                    //console.log(desc);
-                }
+            var bookname = $tds[5].textContent; 
+            var member = $tds[1].textContent;
+            var select = document.getElementById('option').value;
+            if(select == "Books"){ 
+                $('#confirm-text').text("Are you sure to delete the "+ bookname+" book from library" );
+                $(document).on("click",".YES",function(){                
+                 delete_details(isbn);
+                });
+            } else if(select == "Members") {
+                $('#confirm-text').text("Are you sure to delete the "+ member+" from library" ); 
+                $(document).on("click",".NO",function(){                
+                    delete_details(isbn);
+                });     
+            } 
+           function delete_details(isbn) {                       
+                key_isbn = {isbn : isbn};
+                $.ajax({             
+                    url: 'controller/delete_book.php',
+                    type: 'post',
+                    data: key_isbn,
+                    success: function(response){   
+                        console.log(response);
+                        window.location.href = 'our-library.php';                         
+                    },
+                    error: function(xhr, desc, err){
+                        //console.log(desc);
+                    }
 
-            });
+                });
+            }  
         }); 
               
     </script>

@@ -75,28 +75,32 @@
             }); 
         });
         $(document).on("click",".Reject",function(){
-            var parent = document.getElementById('message')
-            var $row = $(this).closest("tr"),       
-            $tds = $row.find("td");       
-            $bookId = $tds[0].textContent;
-            $memId = $tds[1].textContent;
-            $(this).val('Rejected');
-             $(this).css({
-              background: '#D9534F'
-            });
-            $.ajax({             
-                url: 'controller/submit_reject_extension.php',
-                type: 'post',
-                data:{ bookId: $bookId, memId: $memId },
-                success: function(response){                        
-                    console.log(response);
-                    message.textContent = "MemberID :"+ $memId+ " request is rejected";
-                    window.location.href = 'admin-book-renewal.php';                                       
-                },
-                error: function(xhr, desc, err){
-                    console.log(desc);
-                }
-            }); 
+            var a = confirm("Are you sure to delete");
+            alert(a);
+            if(a){
+                var parent = document.getElementById('message')
+                var $row = $(this).closest("tr"),       
+                $tds = $row.find("td");       
+                $bookId = $tds[0].textContent;
+                $memId = $tds[1].textContent;
+                $(this).val('Rejected');
+                 $(this).css({
+                  background: '#D9534F'
+                });
+                $.ajax({             
+                    url: 'controller/submit_reject_extension.php',
+                    type: 'post',
+                    data:{ bookId: $bookId, memId: $memId },
+                    success: function(response){                        
+                        console.log(response);
+                        message.textContent = "MemberID :"+ $memId+ " request is rejected";
+                        window.location.href = 'admin-book-renewal.php';                                       
+                    },
+                    error: function(xhr, desc, err){
+                        console.log(desc);
+                    }
+                }); 
+            }
         });
 
         </script>    
