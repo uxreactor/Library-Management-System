@@ -169,7 +169,7 @@ function paginationView(array,page_size){
 
 var viewData = function(records,parent,page_size) {
   table = document.createElement('table');
-  table.setAttribute("class","table table-bordered table-striped");
+  table.setAttribute("class","table table-bordered table-striped table-condensed");
   thead = document.createElement('thead');
   tab_row = document.createElement('tr');
   var object = "";

@@ -24,8 +24,6 @@
                 </div>
             </form>  
         </div>
-        <br/>
-        <br/>
         <div id = "load-books">
             <h2>All books</h2>      
         </div> 
@@ -99,7 +97,7 @@
                 url: url,
                 type: 'post',
                 success: function(response){                        
-                    console.log(response);
+                    //console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
                     paginationView(books,5);   
@@ -139,7 +137,7 @@
                     type: "POST",
                     data: search_book_details,
                     success: function(response){
-                        console.log(response);
+                        //console.log(response);
                         if (response){
                             books = jQuery.parseJSON(response);
                             viewData(books,parent);  
@@ -152,7 +150,7 @@
                         }
                     },
                     error: function(xhr, desc, err){
-                        console.log(desc);
+                        //console.log(desc);
                     }
                 });
             }else{
@@ -161,9 +159,26 @@
             }
             return false;
         } 
-        $("input").click(function() {
-            //alert("bala");
-        });        
+        $(document).on("click",".Delete",function(){
+            var $row = $(this).closest("tr"),       
+            $tds = $row.find("td");       
+            var isbn = $tds[0].textContent;
+            key_isbn = {isbn : isbn};
+            $.ajax({             
+                url: 'controller/delete_book.php',
+                type: 'post',
+                data: key_isbn,
+                success: function(response){   
+                    console.log(response);
+                    //window.location.href = 'our-library.php';                         
+                },
+                error: function(xhr, desc, err){
+                    //console.log(desc);
+                }
+
+            });
+        }); 
+              
     </script>
 
 </body>

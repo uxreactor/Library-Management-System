@@ -1227,4 +1227,23 @@
 	}
 
 
+
+	/**
+	 * @approveDueDateExtension : This function is used delete the data from the datbase.
+	 * @author : Yaswanth
+	 *
+	 * @param : string - memberId
+	 * @param : string - bookId
+	 * 
+	 *
+	 * @return/outcome : If the extension is rejected it will delete the dataa from the database.
+	 */
+
+	function deleteBook($isbn) {
+		$conn = connection();
+			$sql = "DELETE FROM tbl_book_varities WHERE isbn = '$isbn'";
+			$conn->query($sql);		   
+    	$conn->close();
+	     return true ;
+	}
 ?>

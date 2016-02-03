@@ -67,7 +67,7 @@
                 success: function(response){                        
                     console.log(response);
                     message.textContent = "MemberID: "+ $memId+ " request is Approved";
-                    $(this).css('background-color','red');
+                    window.location.href = 'admin-book-renewal.php';                                       
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
@@ -91,7 +91,7 @@
                 success: function(response){                        
                     console.log(response);
                     message.textContent = "MemberID :"+ $memId+ " request is rejected";
-
+                    window.location.href = 'admin-book-renewal.php';                                       
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);

@@ -1,8 +1,6 @@
 <?php
-	//require('controller.php');
-	//$memberId = $_POST['member_id'];
-	//$members_data = loadMemberBooks($memberId);
-	//echo $members_data;
-	echo "Bala";
-	
+	require('controller.php');
+	$isbn = $_POST['isbn'];
+	$members_data = deleteBook($isbn);
+	echo $members_data;
 ?>
