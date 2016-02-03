@@ -1,6 +1,7 @@
 <?php
 
 	require 'controller.php';
+	$memId = $_POST['memberId'];
 	$name = $_POST['name'];
 	$phoneNumber = $_POST['phoneno'];
 	$emailId = $_POST['email'];
@@ -12,13 +13,8 @@
 	$city = $_POST['city'];
 	$place = $_POST['state'];
 	$zip = $_POST['pin'];
-	if(emailCheck($emailId)){
-				$validate = 1;
-
-	} else {
-		$validate = editMembershipDetails($name, $phoneNumber, $emailId, $dob, $gender, $membershipType, $hNo, $street, $place, $city, $zip);
-		$validate = "Successfully applied your form";
-	}
-	echo $validate;
+	$exist = emailChecking($emailId);
+	$validate = editMembershipDetails($memId, $name, $phoneNumber, $emailId, $dob, $gender, $membershipType, $hNo, $street, $place, $city, $zip);
+	return 1;
 
 ?>

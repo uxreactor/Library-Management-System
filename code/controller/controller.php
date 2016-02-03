@@ -472,14 +472,12 @@
 	 *
 	 * @return/outcome : It will saves the data in the database.
 	 */
-	function editMembershipDetails($mem_id , $mem_name , $mem_moblieno , $mem_email , $mem_dob , $mem_gender , $mem_photo , $mem_add_proof , $ms_id , $membership_on , $expiry_on , $addr_hno , $addr_street , $addr_city , $addr_state , $addr_pincode){
+	function editMembershipDetails( $memId, $mem_name , $mem_moblieno , $mem_email , $mem_dob , $mem_gender , $addr_hno , $addr_street , $addr_city , $addr_state , $addr_pincode){
 		$conn = connection();
-
 		//$sql = "INSERT INTO sampleTable (id, name, date) VALUES ($id, '$name', CURDATE())";
 		$sql = "UPDATE tbl_members SET mem_name = '$mem_name' , mem_moblieno = '$mem_moblieno' , mem_email = '$mem_email' , mem_dob = '$mem_dob' ,
-		mem_gender = '$mem_gender' , mem_photo = '$mem_photo' ,mem_add_proof = '$mem_add_proof', ms_id = '$ms_id' ,
-		membership_on = '$membership_on' , expiry_on = '$expiry_on' , addr_hno = '$addr_hno' , addr_street = '$addr_street' ,
-		addr_city = '$addr_city' , addr_state = '$addr_state' , addr_pincode = '$addr_pincode' WHERE mem_id='$mem_id' ";
+		mem_gender = '$mem_gender'  , addr_hno = '$addr_hno' , addr_street = '$addr_street' ,
+		addr_city = '$addr_city' , addr_state = '$addr_state' , addr_pincode = '$addr_pincode' WHERE mem_id='$memId' ";
 
 		if ($conn->query($sql) === TRUE) {
 		    return "Member details updated successfully";
@@ -1246,4 +1244,70 @@
     	$conn->close();
 	     return true ;
 	}
+
+
+
+	/**
+	 * @getMemberDetails : This function will display all the records of members from the database to the respective page.
+	 * @author : Yaswanth
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists all the records of memberes.
+	 */
+	function getMemberDetails($memberid){
+		$arrayObject = array();
+		$conn = connection();
+		$sql = " SELECT * FROM tbl_members WHERE mem_id = '$memberid' " ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row  
+		    	$row = $result->fetch_assoc() ;
+		    	$object = array();
+		    	$object['Member ID'] = $row["mem_id"];
+		    	$object['Member Name'] = $row["mem_name"];
+		    	$object['Phone No.'] = $row["mem_moblieno"];
+		    	$object['Mail ID'] = $row["mem_email"];
+		    	$object['Dob'] = $row["mem_dob"];
+		    	$object['Gender'] = $row["mem_gender"];
+		    	$object['H NO'] = $row["addr_hno"];
+		    	$object['Street'] = $row["addr_street"];
+		    	$object['City'] = $row["addr_city"];
+		    	$object['State'] = $row["addr_state"];
+		    	$object['Pincode'] = $row["addr_pincode"];
+		    	array_push($arrayObject, $object);
+
+		} else {
+		    return false;
+		}
+
+		$conn->close();
+		return ($arrayObject); //return value
+	}
+
+
+	/**
+	 * @emailCheck : This function is used to check the duplicate email Id for appling a membership.
+	 * @author : Yaswanth
+	 *
+	 * @param : string - email
+	 *
+	 * @return/outcome : It will returns 1 if the email is exist else returns 0.
+	 */
+	function emailChecking($email){
+		$conn = connection();
+		$count=0;
+		$sql = " SELECT mem_email FROM tbl_mem_request WHERE mem_email = '$email' ";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				echo count($row);
+				echo $row['yaswanth'] = $row['mem_email'];
+				$count++;
+			}
+			return $count; 
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+	}
+
 ?>

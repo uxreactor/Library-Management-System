@@ -63,12 +63,16 @@
         $(function() {
             postForm();
         });
-        $(document).on("click",".Edit",function(){
-           var $tr = $(this).closest('tr');
-           var isbn = $tr.find('td:first-child').text();
-           console.log(isbn);
-           window.location.href="admin-editbook-details.php?isbn="+isbn;
-               
+        $(document).on("click",".Edit",function(){ 
+            var select = document.getElementById('option').value;
+            var $tr = $(this).closest('tr');
+            var isbn = $tr.find('td:first-child').text();
+            console.log(isbn);
+            if(select == "Books"){
+                window.location.href="admin-editbook-details.php?isbn="+isbn;
+            } else if(select == "Members") {
+                window.location.href="admin_editmember_details.php?isbn="+isbn;               
+            }               
        });
 
         function loadDetails(){
@@ -170,7 +174,7 @@
                 data: key_isbn,
                 success: function(response){   
                     console.log(response);
-                    //window.location.href = 'our-library.php';                         
+                    window.location.href = 'our-library.php';                         
                 },
                 error: function(xhr, desc, err){
                     //console.log(desc);
