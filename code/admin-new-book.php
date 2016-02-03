@@ -6,7 +6,7 @@
     <!--/#header-->
     <div class="container" id= "book_name_label"> 
         <div id= "load_books">
-            <h2>Requests for new books()</h2>
+            <h2>Requests for new books</h2>
         </div>
     </div>
     <center>
