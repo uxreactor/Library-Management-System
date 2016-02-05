@@ -16,7 +16,7 @@
                         </div>      
                         <input type="text" id="search" class="textbox_size form-control input-lg" placeholder="Search book by authorname/bookname">
                         <span class="input-group-btn">
-                            <button class="btn btn-default btn-lg" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            <button class="btn btn-default btn-lg" type="submit"><span class="glyphicon glyphicon-search text-info"></span></button>
                         </span>
                     </div>
                     <br/>
@@ -25,7 +25,7 @@
             </form>  
         </div>
         <div id = "load-books">
-            <h2>All books</h2>      
+            <h2>All books </h2>      
         </div> 
         <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">

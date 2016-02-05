@@ -7,7 +7,7 @@
                 <input type="text" class="textbox_size form-control input-lg" id="search" placeholder="Search book by authorname/bookname" />
                 <span class="input-group-btn">
                     <button class="btn btn-default btn-lg" type="submit" >
-                        <i class="glyphicon glyphicon-search"></i>
+                        <i class="glyphicon glyphicon-search text-info"></i>
                     </button>
                 </span>
             </div>
@@ -67,6 +67,7 @@
                         paginationView(books,5);    
                     }else{
                         results = document.createElement('h2');
+                        results.className = "no_result";
                         results.innerText = "No results found";
                         parent.appendChild(results);
                     }
