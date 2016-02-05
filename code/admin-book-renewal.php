@@ -15,7 +15,25 @@
     <center>
         <ul class="pagination" id="pagination1">
         </ul>
-    </center>
+    </center><div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Reject membership renewal request</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text" >Are you sure to reject the membership renewal</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
+                      <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
+                    </div>
+                </div>  
+            </div>
+
+        </div>
 
 
 
@@ -87,19 +105,22 @@
                  $(this).css({
                   background: '#D9534F'
                 });
-                $.ajax({             
-                    url: 'controller/submit_reject_extension.php',
-                    type: 'post',
-                    data:{ bookId: $bookId, memId: $memId },
-                    success: function(response){                        
-                        console.log(response);
-                        message.textContent = "MemberID :"+ $memId+ " request is rejected";
-                        window.location.href = 'admin-book-renewal.php';                                       
-                    },
-                    error: function(xhr, desc, err){
-                        console.log(desc);
-                    }
-                }); 
+                $('#confirm-text').text("Are you sure to delete the book from library" );
+                $(document).on("click",".YES",function(){
+                    $.ajax({             
+                        url: 'controller/submit_reject_extension.php',
+                        type: 'post',
+                        data:{ bookId: $bookId, memId: $memId },
+                        success: function(response){                        
+                            console.log(response);
+                            message.textContent = "MemberID :"+ $memId+ " request is rejected";
+                            window.location.href = 'admin-book-renewal.php';                                       
+                        },
+                        error: function(xhr, desc, err){
+                            console.log(desc);
+                        }
+                    }); 
+                });
             }
         });
 
