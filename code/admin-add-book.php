@@ -110,7 +110,6 @@
             
             validation_message = validateForm (add_book);  
             
-             if(submitToServer(validation_message)){
 
                
                 if(submitToServer(validation_message)){
@@ -154,9 +153,8 @@
                     return false;
                 }
                 return false;
+            }
 
-             }
-        }
     </script> 
     <script type="text/javascript">
     function showfield(name){
