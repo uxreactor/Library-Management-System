@@ -1310,4 +1310,69 @@
 		$conn->close();
 	}
 
+
+	
+	/**
+	 * This function will return the book details based on the bookid in JSON format.
+	 * @author : Rupam Datta
+	 *
+	 * @param : number - bookid
+	 *
+	 * @return/outcome : json object.
+	 */
+	function getBookDetailsById($bookid){
+		$conn = connection();
+		$count=0;
+
+		$sql = 'SELECT a.`isbn`, `price`, `edition`, `publisher`, `category`, `book_name`, `author_name`, b.`book_id` FROM `tbl_book_varities` a JOIN `tbl_all_books` b WHERE a.`isbn` = b.`isbn` and b.`book_id` = '.$bookid;
+		$result = $conn->query($sql);
+		$object = array();
+		
+		if ($result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+    		$object['bookid'] = $row["book_id"];
+	    	$object['isbn'] = $row["isbn"];
+	    	$object['bookname'] = $row["book_name"];
+	    	$object['author'] = $row["author_name"];
+	    	$object['publisher'] = $row["publisher"];
+		} else {
+			return false;
+		}
+
+		$conn->close();
+		return(json_encode($object)); //return value
+	}
+
+	/**
+	 * This function will return the member details based on the memberid in JSON format.
+	 * @author : Rupam Datta
+	 *
+	 * @param : number - memberid
+	 *
+	 * @return/outcome : json object.
+	 */
+	function getMemberDetailsById($memberid){
+		$conn = connection();
+		$count=0;
+
+		$sql = 'SELECT a.`mem_id`, a.`mem_name`, b.`ms_type`, b.`ms_validity_period`, b.`ms_book_limit`, b.`ms_days_limit` , b.`penalty` FROM `tbl_members` a JOIN `tbl_membership` b WHERE a.`ms_id` = b.`ms_id` and a.`mem_id` = '.$memberid;
+		$result = $conn->query($sql);
+		$object = array();
+		
+		if ($result->num_rows > 0) {
+			$row = $result->fetch_assoc();
+    		$object['id'] = $row["mem_id"];
+	    	$object['name'] = $row["mem_name"];
+	    	$object['type'] = $row["ms_type"];
+	    	$object['validity'] = $row["ms_validity_period"];
+	    	$object['book_limit'] = $row["ms_book_limit"];
+	    	$object['days_limit'] = $row["ms_days_limit"];
+	    	$object['penalty'] = $row["penalty"];
+		} else {
+			return false;
+		}
+
+		$conn->close();
+		return(json_encode($object)); //return value
+	}
 ?>
