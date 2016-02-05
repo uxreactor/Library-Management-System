@@ -13,6 +13,25 @@
         <ul class="pagination" id="pagination1">
         </ul>
     </center>
+    <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Reject membership renewal request</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text" >Are you sure to reject the membership renewal</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
+                      <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
+                    </div>
+                </div>  
+            </div>
+
+        </div>
     <!--/#table-->
     <?php include ("footer.php");?> 
     <!--/#footer-->
@@ -26,7 +45,7 @@
                 url: 'controller/load_mem_request.php',
                 type: 'post',
                 success: function(response){                        
-                    console.log(response);
+                    //console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
                     paginationView(books,5);   
@@ -43,19 +62,16 @@
         $(document).on("click",".Approve",function(){
             var $row = $(this).closest("tr"),       
             $tds = $row.find("td");       
-            $bookId = $tds[0].textContent;
-            $memId = $tds[1].textContent;
+            $memId = $tds[0].textContent;
+            $msId = $tds[3].textContent;
             $(this).val('Approved');
-            $(this).css({
-              background: '#449D44'
-            });
                 $.ajax({             
                 url: 'controller/admin_approve_membership_renewal.php',
                 type: 'post',
-                data:{ bookId: $bookId, memId: $memId },
+                data:{ msId: $msId, memId: $memId },
                 success: function(response){                        
                     console.log(response);
-                    message.textContent = "MemberID: "+ $memId+ " request is Approved";
+                    //message.textContent = "MemberID: "+ $memId+ " request is Approved";
                     window.location.href = 'admin-membership-renewal.php';                                       
                 },
                 error: function(xhr, desc, err){
@@ -63,33 +79,33 @@
                 }
             }); 
         });
-        /*$(document).on("click",".Reject",function(){
-            var a = confirm("Are you sure to delete");
-            alert(a);
-            if(a){
+        $(document).on("click",".Reject",function(){
+            //var a = confirm("Are you sure to reject");
                 var parent = document.getElementById('message')
                 var $row = $(this).closest("tr"),       
                 $tds = $row.find("td");       
-                $bookId = $tds[0].textContent;
-                $memId = $tds[1].textContent;
+                $memId = $tds[0].textContent;
                 $(this).val('Rejected');
                  $(this).css({
                   background: '#D9534F'
                 });
-                $.ajax({             
-                    url: 'controller/submit_reject_extension.php',
-                    type: 'post',
-                    data:{ bookId: $bookId, memId: $memId },
-                    success: function(response){                        
-                        console.log(response);
-                        message.textContent = "MemberID :"+ $memId+ " request is rejected";
-                        window.location.href = 'admin-book-renewal.php';                                       
-                    },
-                    error: function(xhr, desc, err){
-                        console.log(desc);
-                    }
-                }); */
-            }
+                $('#confirm-text').text("Are you sure to delete the book from library" );
+                $(document).on("click",".YES",function(){ 
+                    $.ajax({             
+                        url: 'controller/admin_reject_membership_renewal.php',
+                        type: 'post',
+                        data:{ memId: $memId },
+                        success: function(response){                        
+                            console.log(response);
+                            //message.textContent = "MemberID :"+ $memId+ " request is rejected";
+                            window.location.href = 'admin-membership-renewal.php';                                       
+                        },
+                        error: function(xhr, desc, err){
+                            console.log(desc);
+                        }
+                    });                
+                });
+                
         });
     </script>       
 </body>

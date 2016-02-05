@@ -798,7 +798,6 @@
 	 * @author : Mohan, Bala
 	 *
 	 * @param : string - memberId
-	 * @param : string - memberName
 	 * @param : string - extensionType
 	 *
 	 * @return/outcome : If the extension is approved it will save the updated extion date else it will remain same.
@@ -816,25 +815,49 @@
 		}else {
 			return "0 Results";
 		}
-		if($extensionType == "Platinum"){
-			$membershipId = 1;
+		if($extensionType == 1){
+			//$membershipId = 1;
 			$expiry = date('Y-m-d', strtotime("+12 months", strtotime($expiry)));
-		}elseif ($extensionType == "Gold") {
-			$membershipId = 2;
+		}elseif ($extensionType == 2) {
+			//$membershipId = 2;
 			$expiry = date('Y-m-d', strtotime("+6 months", strtotime($expiry)));
 		}else{
-			$membershipId = 3;
+			//$membershipId = 3;
 			$expiry = date('Y-m-d', strtotime("+3 months", strtotime($expiry)));
 		}
 
 		$sql = "UPDATE tbl_members SET expiry_on = '$expiry' WHERE mem_id='$memId'";
-		$sql = "DELETE FROM tbl_membership_renewal_request WHERE mem_id='$memId'";
-		return "Approved membership renewal request";
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
+		$sql = "DELETE FROM tbl_membership_renewal_request WHERE mem_id='$memId'";
+		if ($conn->query($sql) === FALSE) {
+		    return "Error: " . $sql . "<br>" . $conn->error;
+		}
+		return "Approved membership renewal request";
+		
 		$conn->close();
 	}
+
+
+	/**
+	 * @rejetcMembershipRenewal : This function is used reject the membership validity extension.
+	 * @author : Prabhakar
+	 *
+	 * @param : string - memberId
+	 *
+	 * @return/outcome : It will removes the membership renewal request.
+	 */
+		function rejetcMembershipRenewal($memId){
+			$conn = connection();
+			$sql = "DELETE FROM tbl_membership_renewal_request WHERE mem_id='$memId'";
+			if ($conn->query($sql) === FALSE) {
+			    return "Error: " . $sql . "<br>" . $conn->error;
+			}
+			return "rejected membership renewal request";
+			
+			$conn->close();
+		}
 
 
 	/**
@@ -990,7 +1013,7 @@
 	function viewMembershipRenewalRequests(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_membership_renewal_request " ;
+		$sql = " SELECT * FROM tbl_membership_renewal_request" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
@@ -999,13 +1022,13 @@
 		    	$mem_id = $row["mem_id"];
 		    	
 		    	$sql = " SELECT * FROM tbl_members WHERE mem_id = $mem_id ";
-		    	$result = $conn->query($sql);
-		    	$row_mem_id = $result->fetch_assoc();
+		    	$result_id = $conn->query($sql);
+		    	$row_mem_id = $result_id->fetch_assoc();
 				$object = array();
-		    	$object['Mem ID'] = $row_mem_id["mem_id"];
+		    	$object['MemID'] = $row_mem_id["mem_id"];
 		    	$object['Name'] = $row_mem_id["mem_name"];
-		    	$object['Expiry on'] = $row_mem_id["expiry_on"];
-		    	$object['MS ID'] = $row_mem_id["ms_id"];
+		    	$object['Expiryon'] = $row_mem_id["expiry_on"];
+		    	$object['MSID'] = $row_mem_id["ms_id"];
 		    	$object['Action'] = "Approve,Reject";
 
 		    	array_push($arrayObject, $object);
