@@ -1375,19 +1375,18 @@
 		$conn = connection();
 		$count=0;
 
-		$sql = 'SELECT a.`mem_id`, a.`mem_name`, b.`ms_type`, b.`ms_validity_period`, b.`ms_book_limit`, b.`ms_days_limit` , b.`penalty` FROM `tbl_members` a JOIN `tbl_membership` b WHERE a.`ms_id` = b.`ms_id` and a.`mem_id` = '.$memberid;
+		$sql = 'SELECT a.`mem_id`, a.`mem_name`, b.`ms_type`, b.`ms_validity`, b.`ms_due_duration`, c.`return_expected` FROM `tbl_members` a JOIN `tbl_membership` b JOIN `tbl_issued_books` c WHERE a.`ms_id` = b.`ms_id` and a.`mem_id` = ' .$memberid;
 		$result = $conn->query($sql);
 		$object = array();
-		
 		if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
     		$object['id'] = $row["mem_id"];
 	    	$object['name'] = $row["mem_name"];
 	    	$object['type'] = $row["ms_type"];
-	    	$object['validity'] = $row["ms_validity_period"];
-	    	$object['book_limit'] = $row["ms_book_limit"];
-	    	$object['days_limit'] = $row["ms_days_limit"];
-	    	$object['penalty'] = $row["penalty"];
+	    	$object['validity'] = $row["ms_validity"];
+	    	$object['book_limit'] = $row["return_expected"];
+	    	$object['days_limit'] = $row["ms_due_duration"];
+	    	//$object['penalty'] = $row["penalty"];
 		} else {
 			return false;
 		}

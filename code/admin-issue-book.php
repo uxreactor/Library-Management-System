@@ -35,12 +35,12 @@
             </div>
             <div class="form-group" id="issue_date_label">
                 <label >Issue date</label>
-                <input type="date" class="form-control" id="issue_date" readonly="true" />
+                <input class="form-control" id="issue_date" readonly="true" />
                 <span></span>
             </div>
             <div class="form-group" id="return_date_label">
                 <label >Return date</label>
-                <input type="date" class="form-control" id="return_date" readonly="true" />
+                <input  class="form-control" id="return_date" readonly="true" />
                 <span></span>
             </div>
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
