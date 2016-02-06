@@ -12,7 +12,7 @@
 ?>
     <!--/#header-->
     <div class="container">
-        <h2>Membership renewal extension </h2>
+        <h2>Membership Renewal Extension </h2>
         <form name="login" method="post" action="controller/submit_member_renew_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="mem_id_label">
                 <label >Member Id </label>
@@ -71,6 +71,7 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script> 
 </body>
 </html>

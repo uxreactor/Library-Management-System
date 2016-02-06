@@ -43,6 +43,7 @@ validateForm = function(array){
 }
 
 
+ 
 /**
    * @writeError : This function writes error message for corresponding field .
    * @author : Prabhakar
@@ -268,3 +269,17 @@ var viewData = function(records,parent,page_size) {
   parent.appendChild(table);
 }
 
+
+
+/**
+   * @viewData : This function removes on screen errors in form when the form field is focussed.
+   * @author : Nagalakshmi Yarra, Yaswanth Jilakara.
+   *
+   *
+   * @return/outcome : It will remove inline errors.
+   */
+  var RemoveInlineError = function() {
+    $('input').focus(function() {
+      $(this).closest('.form-group').find('span').text('').removeAttr("class");
+    });
+  }

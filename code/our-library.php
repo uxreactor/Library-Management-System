@@ -25,7 +25,7 @@
             </form>  
         </div>
         <div id = "load-books">
-            <h2>All books </h2>      
+            <h2>All Books </h2>      
         </div> 
         <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">
@@ -36,7 +36,7 @@
                       <h4 class="modal-title">Membership type details</h4>
                     </div>
                     <div class="modal-body">
-                        <span id="confirm-text" >Are you sure to delete the details</span>
+                        <span id="confirm-text" ></span>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
@@ -44,7 +44,6 @@
                     </div>
                 </div>  
             </div>
-
         </div>
     <!--/#table-->
     <center>
@@ -195,7 +194,7 @@
                 });
             } else if(select == "Members") {
                 $('#confirm-text').text("Are you sure to delete the "+ member+" from library" ); 
-                $(document).on("click",".NO",function(){                
+                $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });     
             } 

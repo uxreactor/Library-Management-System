@@ -16,7 +16,25 @@
             </div>
         </form>
         <div class="books_table" id="load_manage_books">
-            <h2>Manage issued books</h2>
+            <h2>Manage Issued Books</h2>
+        </div>
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Penalty Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text" >You have penality to be paid. Do you want to pay now?</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default yes" data-dismiss="modal">Yes</button>
+                      <button type="button" class="btn btn-default no" data-dismiss="modal">NO</button>
+                    </div>
+                </div>  
+            </div>
         </div>
     </div>
     <center>
@@ -38,9 +56,11 @@
                 type: 'post',
                 success: function(response){                        
                     console.log(response);
-                    books = jQuery.parseJSON(response);                     
-                    viewData(books,parent);
-                    paginationView(books,5);
+                    if(response) {
+                        books = jQuery.parseJSON(response);                     
+                        viewData(books,parent);
+                        paginationView(books,5);    
+                    }
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
@@ -56,10 +76,11 @@
         $(function() {
             postForm();
         });
-        $(document).on("click",".btn",function(){
+
+        $(document).on("click",".Return",function(){
             var $row = $(this).closest("tr"),       
             $tds = $row.find("td"); 
-            var book_id = ($tds[0].textContent); 
+            var book_id = $tds[0].textContent; 
             console.log(book_id);
             $.ajax({             
                 url: 'controller/return_books.php',
@@ -67,8 +88,7 @@
                 data: { book_id: book_id },
                 success: function(response){
                     if(response == 'failed'){
-                        var confirm_response = confirm("You have penality to be paid. Do you want to pay now?");
-                        if(confirm_response){
+                        $(document).on("click",".yes",function(){
                             $.ajax({             
                                 url: 'controller/return_money_paid.php',
                                 type: 'post',
@@ -80,9 +100,7 @@
                                     console.log(desc);
                                 }
                             });  
-                        }else{
-
-                        }
+                        });
                         //console.log(response);
                         //window.location.href = "admin-manage-book.php";
                     }else{
