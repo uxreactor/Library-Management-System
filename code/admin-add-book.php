@@ -10,7 +10,7 @@
         <form name="add_book" method="post" action="controller/submit_add_book.php" onsubmit="return submitForm();">
             <div class="form-group" id="book_name_label">
                 <label >Book name</label>
-                <input type="text" class="form-control" id ="book_name" />
+                <input type="text" class="form-control" id ="book_name"/>
                 <span></span>
             </div>
             <div class="form-group" id="author_name_label">
@@ -153,8 +153,9 @@
                 }
                 return false;
             }
+            RemoveInlineError();
 
-    </script> 
+        </script> 
     <script type="text/javascript">
     function showfield(name){
         if(name=='Add new category'){

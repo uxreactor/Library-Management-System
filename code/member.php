@@ -1,7 +1,7 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
-    echo $member_id = checkSession();
+    $member_id = checkSession();
     if(checkSession()){
 ?>
 
@@ -20,7 +20,7 @@
     <!--/#searchbar--> 
     </h3>
     <div id="load_books">
-      <h2>My books</h2>
+      <h2>My Books</h2>
     </div>
     
 	<!--/#table-->

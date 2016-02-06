@@ -6,7 +6,7 @@
 
     <!--/#header-->
     <div class="container">
-        <h2>Issue a book</h2>
+        <h2>Issue a Book</h2>
         <form name="login" method="post" action="controller/submit_issue_book.php" onsubmit="return submitForm();">
             <div class="form-group" id="book_id_label">
                 <label >Book Id</label>
@@ -150,6 +150,7 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script> 
 </body>
 </html>

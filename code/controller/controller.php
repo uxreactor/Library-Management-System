@@ -1172,7 +1172,11 @@
 			    	array_push($arrayObject, $object);
 		    }
 		} else {
+<<<<<<< HEAD
+		    return false;
+=======
 		    return 0;
+>>>>>>> origin/master
 		}
 
 		$conn->close();

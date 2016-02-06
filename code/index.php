@@ -15,7 +15,7 @@
         <br/>
         <br/>
         <div id="load-books">
-            <h2>All books</h2>      
+            <h2>All Books</h2>      
         </div>      
         <center>
             <ul class="pagination" id="pagination1">

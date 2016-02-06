@@ -6,7 +6,7 @@
     <!--/#header-->
     <div class="container"> 
         <div id="load-renew-book">
-            <h2>Request for due date extension</h2>
+            <h2>Request for Due Date Extension</h2>
             <center><span id="message"></span></center>
         </div> 
 
@@ -21,10 +21,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Reject membership renewal request</h4>
+                      <h4 class="modal-title">Reject Membership Renewal Request</h4>
                     </div>
                     <div class="modal-body">
-                        <span id="confirm-text" >Are you sure to reject the membership renewal</span>
+                        <span id="confirm-text" >Are you sure to reject the membership renewal?</span>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>

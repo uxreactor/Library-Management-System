@@ -5,7 +5,7 @@
 ?>
     <!--/#header-->
     <div class="container">
-        <h2>Book request extension </h2>
+        <h2>Book Request Extension </h2>
         <form name="login" method="post" action="" onsubmit="return submitForm();">
             <div class="form-group" >
                 <label >Member ID</label>
@@ -60,7 +60,8 @@
                 return false;
             }
             return false;
-        }   
+        }
+        RemoveInlineError();   
 
     </script>   
 </body>

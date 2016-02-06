@@ -6,7 +6,7 @@
     <!--/#header-->
     <div class="container" id="book_name_label"> 
         <div id="load_members" >
-             <h2>New membership requests</h3>
+             <h2>New Membership Requests</h2>
         </div>
     </div>
     <center>
@@ -19,10 +19,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Reject membership request</h4>
+                      <h4 class="modal-title">Reject Membership Request</h4>
                     </div>
                     <div class="modal-body">
-                        <span id="confirm-text" >Are you sure to reject the membership request</span>
+                        <span id="confirm-text" >Are you sure to reject the membership request?</span>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>

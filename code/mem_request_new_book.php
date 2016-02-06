@@ -6,7 +6,7 @@
 
     <!--/#header-->
     <div class="container">
-        <h2>New book request</h2>
+        <h2>New Book Request</h2>
         <form name="add_book" method="post" action="controller/validate_request_new-book.php" onsubmit="return submitForm();">
             <div class="form-group" id="book_name_label">
                 <label >Book name</label>
@@ -65,7 +65,8 @@
                 writeError(validation_message[1],body);
             }
             return false;
-        }   
+        }
+        RemoveInlineError(); 
 
     </script>  
 </body>

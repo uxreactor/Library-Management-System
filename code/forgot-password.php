@@ -1,6 +1,7 @@
 <?php include ("header-guest.php");?> 
     <!--/#header-->
  <div class="container">
+    <h2>Forgot Password</h2>
     <div id = "myTabContent" class = "tab-content">
         <form name="login" method="post" action="" onsubmit="return submitForm();" id="emailform">
             <div class="form-group" id="admin_email" >
@@ -120,4 +121,5 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script>

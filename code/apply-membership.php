@@ -3,7 +3,7 @@
 
     <div class="container">
         <div class = "notification" style="font-size: 40px; color:green; text-align:center"></div>
-        <h2>Apply for new membership</h2>
+        <h2>Apply for New Membership</h2>
         <form name="add_book" method="post" action="controller/submit_new_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="name_id_label">
                 <label >Name</label>
@@ -63,7 +63,7 @@
                 <option>Platinum</option>
                 <option>Gold</option>
                 <option>Silver</option>
-            </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help"s tyle="width:20px;height:20px; margin-left:1%; cursor:pointer;">
+            </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help" style="width:20px;height:20px; margin-left:1%; cursor:pointer;">
             <br/><br />
             <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">
@@ -71,7 +71,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Membership type details</h4>
+                      <h4 class="modal-title">Membership Type Details</h4>
                     </div>
                     <div class="modal-body">
                      <table  class="table table-bordered table-striped" style="width:40%;">
@@ -217,6 +217,7 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script>   
 </body>
 </html>
