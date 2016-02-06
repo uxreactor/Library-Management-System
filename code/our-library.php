@@ -51,7 +51,7 @@
         <ul class="pagination" id="pagination1">
         </ul>
     </center>
-    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>s
+    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
 
     <?php include ("footer.php");?>
     <!--/#footer-->
@@ -192,7 +192,7 @@
             if(select == "Books"){
                 $(".NO").show();
                 $('.YES').text("YES");
-                $('.modal-title').text("Book details" );
+                $('.modal-title').text("Book details");
                 $('#confirm-text').text("Are you sure to delete the "+ bookname+" book from library" );
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);

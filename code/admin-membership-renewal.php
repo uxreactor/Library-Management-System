@@ -14,24 +14,24 @@
         </ul>
     </center>
     <div class="modal fade" id="help" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Reject Membership Renewal Request</h4>
-                    </div>
-                    <div class="modal-body">
-                        <span id="confirm-text" >Are you sure to reject the membership renewal?</span>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
-                      <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
-                    </div>
-                </div>  
-            </div>
-
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Reject Membership Renewal Request</h4>
+                </div>
+                <div class="modal-body">
+                    <span id="confirm-text" >Are you sure to reject the membership renewal?</span>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
+                </div>
+            </div>  
         </div>
+
+    </div>
     <!--/#table-->
     <?php include ("footer.php");?> 
     <!--/#footer-->
@@ -71,8 +71,15 @@
                 data:{ msId: $msId, memId: $memId },
                 success: function(response){                        
                     console.log(response);
+                    $(".NO").hide();
+                    $('.modal-title').text("Approve Membership Renewal" );
+                    $('.YES').text("OK");
+                    $('#confirm-text').text("Membership Renewal is Approved");
+                    $(document).on("click",".YES",function(){                
+                        window.location = 'admin-membership-renewal.php';
+                    });
                     //message.textContent = "MemberID: "+ $memId+ " request is Approved";
-                    window.location.href = 'admin-membership-renewal.php';                                       
+                    //window.location.href = 'admin-membership-renewal.php';                                       
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
@@ -89,6 +96,9 @@
                  $(this).css({
                   background: '#D9534F'
                 });
+                $(".NO").show();
+                $('.YES').text("YES");
+                $('.modal-title').text("Reject Membership Renewal Request");
                 $('#confirm-text').text("Are you sure to delete the book from library" );
                 $(document).on("click",".YES",function(){ 
                     $.ajax({             
