@@ -110,7 +110,26 @@
             
             <button type="submit" class="btn btn-default btn-lg btn-info" >Submit</button>
             <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+
         </form>
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Adding New Book</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text">New book added successfully</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <a href="#" id="button" data-toggle="modal" data-target="#help">dfh</a>
        
 
         <!--/#issue book form -->
@@ -186,7 +205,12 @@
                         if(response==1){
                             $('#input_email_label span').text('Email is already exist');                            
                         }else{
-                            $('.notification').text(response);                           
+                            $("#button").click();
+                            $('#confirm-text').text("New book added successfully" );
+                            $(document).on("click",".OK",function(){                
+                                window.location = 'index.php';
+                            });
+                            //$('.notification').text(response);                           
                         }
                     },
                     error: function(xhr, desc, err){

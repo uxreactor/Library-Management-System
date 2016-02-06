@@ -12,7 +12,7 @@
         <form name="login" method="post" action="controller/submit_member_renew_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="mem_id_label">
                 <label >Member Id </label>
-                <input type="text" class="form-control" id="memId" value=" <?php echo $memberId ?> " />
+                <input type="text" class="form-control" id="memId" value="<?php echo $memberId ?>" />
                 <span></span>
             </div>
             <div class="form-group" id="mem_name_label">
@@ -39,7 +39,7 @@
 
         var submitForm = function() {
             var validation_message;
-            var renew = [{ type : 'text' , value: $('#memid').val() , errorMessage:'Member Id is required' }, 
+            var renew = [{ type : 'text' , value: $('#memId').val() , errorMessage:'Member Id is required' }, 
                     { type:'text' , value: $('#memname').val() , errorMessage:'Member name is required' }];
             validation_message = validateForm (renew); 
 
