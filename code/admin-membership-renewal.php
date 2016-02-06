@@ -48,7 +48,7 @@
                     //console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,5);   
+                    paginationView(books,10);   
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);

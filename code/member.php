@@ -44,7 +44,7 @@
           if(response) {
             obj = jQuery.parseJSON(response);
             viewData(obj,parent);
-            paginationView(obj,5);
+            paginationView(obj,10);
           }
         },
         error: function(xhr, desc, err){
