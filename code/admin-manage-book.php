@@ -1,8 +1,9 @@
 <?php 
     include ("header-admin.php");
     require 'controller/session.php';
-    //echo checkSession();
+    if(checkSession()){
 ?>
+
     <!--/#header-->
     <div class="container" id="book_name_label"> 
         <form name="search_book" method="post" action="controller/search_issued_books.php" onsubmit="return submitForm();">
@@ -98,3 +99,9 @@
     </script>     
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?> 

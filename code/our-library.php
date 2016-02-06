@@ -1,6 +1,7 @@
 <?php 
     include ("header-admin.php");
     require 'controller/session.php';
+    if(checkSession()){
 ?>
     <!--/#header-->
     <div class="container">
@@ -221,3 +222,9 @@
 
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?>

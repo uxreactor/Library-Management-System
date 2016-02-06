@@ -2,9 +2,9 @@
     include ("header-member.php");
     require 'controller/session.php';
     echo $member_id = checkSession();
-
-    //echo "$member_id";
+    if(checkSession()){
 ?>
+
     <!--/#header-->
     <div class="container">
         <div class="input-group col-xs-6 col-xs-offset-3">
@@ -54,3 +54,9 @@
   </script>
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?>
