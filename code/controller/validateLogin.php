@@ -11,7 +11,7 @@
 	}
 	
 	if ($message) {
-		//echo setSession($email,$type,$message);
+		echo setSession($email,$type,$message);
 		echo $message;
 	} else {
 		echo false;

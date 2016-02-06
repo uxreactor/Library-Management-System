@@ -16,7 +16,7 @@
 				$validate = 1;
 
 	} else {
-		$validate = editMembershipDetails($name, $phoneNumber, $emailId, $dob, $gender, $membershipType, $hNo, $street, $place, $city, $zip);
+		$validate = requestingMembership($name, $phoneNumber, $emailId, $dob, $gender, $membershipType, $hNo, $street, $place, $city, $zip);
 		$validate = "Successfully applied your form";
 	}
 	echo $validate;

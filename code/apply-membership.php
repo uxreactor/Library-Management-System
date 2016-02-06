@@ -60,10 +60,10 @@
             </div>
             <span style=" font-size:18px;"> Membership type</span>
             <select class="select_list" id="membership_type" style=" width:23%;">
-                <option>Platinum</option>
-                <option>Gold</option>
-                <option>Silver</option>
-            </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help"s tyle="width:20px;height:20px; margin-left:1%; cursor:pointer;">
+                <option value="1">Platinum</option>
+                <option value="2">Gold</option>
+                <option value="3">Silver</option>
+            </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help" style="width:20px;height:20px; margin-left:1%; cursor:pointer;">
             <br/><br />
             <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">
@@ -177,7 +177,6 @@
                     state: $('#state').val(),
                     pin: $('#pin').val()
                 };
-
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
