@@ -163,6 +163,10 @@ function pagination(array,page_size,page_no){
    */
 
 function paginationView(array,page_size){
+  if(array.length < 10){
+    pagination(array,page_size,1);
+    return false;
+  }
   if(!page_size) {
     page_size = 10;
   }
