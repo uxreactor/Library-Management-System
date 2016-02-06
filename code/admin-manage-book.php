@@ -28,7 +28,7 @@
                       <h4 class="modal-title">Penalty Details</h4>
                     </div>
                     <div class="modal-body">
-                        <span id="confirm-text" >You have penality to be paid. Do you want to pay now?</span>
+                        <span id="confirm-text" ></span>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default yes" data-dismiss="modal">Yes</button>
@@ -83,12 +83,15 @@
             var $row = $(this).closest("tr"),       
             $tds = $row.find("td"); 
             var book_id = $tds[0].textContent; 
+            var penality = $tds[4].textContent; 
             console.log(book_id);
+            
             $.ajax({             
                 url: 'controller/return_books.php',
                 type: 'post',
                 data: { book_id: book_id },
                 success: function(response){
+                    $('#confirm-text').text("You have "+penality+ " Rupees  penality to be paid. Do you want to pay now?");
                     if(response == 'failed'){
                         $(document).on("click",".yes",function(){
                             $.ajax({             
