@@ -100,9 +100,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <span id="confirm-text"></span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                        <button type="button" class="btn btn-default OK" data-dismiss="modal">Ok</button>
                     </div>
                 </div>  
             </div>
@@ -112,24 +113,7 @@
             <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
 
         </form>
-        <div class="modal fade" id="help" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Adding New Book</h4>
-                    </div>
-                    <div class="modal-body">
-                        <span id="confirm-text">New book added successfully</span>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
-                    </div>
-                </div>  
-            </div>
-        </div>
-        <a href="#" id="button" data-toggle="modal" data-target="#help">dfh</a>
+        <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
        
 
         <!--/#issue book form -->
@@ -205,8 +189,13 @@
                             $('#input_email_label span').text('Email is already exist');                            
                         }else{
                             $("#button").click();
-                            $('#confirm-text').text("New book added successfully" );
-                            $(document).on("click",".OK",function(){                
+                            $(".table").hide();
+                            $('#confirm-text').show();
+                            $('#confirm-text').text("New book added successfully");
+                            $(document).on("click",".OK",function(){ 
+                                $('#modal-title').text("Membership Type Details");
+                                $('#confirm-text').hide();
+                                $(".table").show();
                                 window.location = 'index.php';
                             });
                             //$('.notification').text(response);                           

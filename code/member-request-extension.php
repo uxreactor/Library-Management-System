@@ -4,7 +4,7 @@
     $member_id = checkSession();
     $bookId = $_GET['bookId'];
     $returnDate = $_GET['returnDate'];
-    echo $bookId; 
+    //echo $bookId; 
     //echo checkSession();
 ?>
     <!--/#header-->
@@ -32,7 +32,25 @@
             <a href="member.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
         <!--/#issue book form -->
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Requesting New Book</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text">New Book request has sent Successfully</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
     </div>
+    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
     <?php include ("footer.php");?>
     <!--/#footer-->
 
@@ -50,7 +68,12 @@
                     type: $('form').attr('method'),
                     data: login,
                     success: function(response){
-                        window.location = 'member.php';
+                        //window.location = 'member.php';
+                        $("#button").click();
+                        $('#confirm-text').text("Request New book has sent Successfully" );
+                        $(document).on("click",".OK",function(){                
+                            window.location = 'member.php';
+                        });
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

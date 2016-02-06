@@ -126,9 +126,7 @@
             }
             
             validation_message = validateForm (add_book);  
-            
-
-               
+             
                 if(submitToServer(validation_message)){
                     $.ajax({
                         url: $('form').attr('action'),
