@@ -41,13 +41,14 @@
 	function addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){			
 
 		$conn = connection();
-		$sql  =" INSERT INTO `tbl_book_varities`(`isbn`, `price`, `edition`, `publisher`,`category`,`book_name`,`author_name`) SELECT * FROM (SELECT '$isbn','$price','$edition','$publisher','$category','$bookname','$authorname','$quantity') AS tmp WHERE NOT EXISTS (SELECT `book_name`,`isbn` FROM `tbl_book_varities` WHERE `book_name` = '$bookname' AND `isbn` = '$isbn') ";
+		$sql  =" INSERT INTO `tbl_book_varities`(`isbn`, `price`, `edition`, `publisher`,`category`,`book_name`,`author_name`) SELECT * FROM (SELECT '$isbn','$price','$edition','$publisher','$category','$bookname','$authorname') AS tmp WHERE NOT EXISTS (SELECT `book_name`,`isbn` FROM `tbl_book_varities` WHERE `book_name` = '$bookname' AND `isbn` = '$isbn') ";
 		if ($conn->query($sql) === TRUE) {
 			$sql = "INSERT INTO  tbl_all_books (isbn) VALUES ";
 				for($i=1;$i<=$quantity;$i++){
 					$sql .= $i==$quantity ? "('$isbn')" : "('$isbn'), ";
 				}
 				if ($conn->query($sql) == TRUE) {
+					return 1;
 				} else {
 					return "Error: " . $sql . "<br>" . $conn->error;
 				}
@@ -234,24 +235,22 @@
 	function loadAllBooks(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn`" ;
+		$sql = " SELECT a.`book_name` AS 'Book Name', a.`author_name` AS 'Author Name', a.`category` AS 'Category', a.`publisher` AS 'Publisher', a.`edition` AS 'Edition', a.`price` AS 'Book Price', a.`isbn` AS 'ISBN Number', COUNT(b.`isbn`) AS 'Qty' FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn` " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
-		    	$isbn = $row["isbn"];
-		    	//$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
 		    	$result_isbn = $conn->query($sql);
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
-		    	$object['ISBN'] = $row["isbn"];
-		    	$object['Book name'] = $row["book_name"];
-		    	$object['Author name'] = $row["author_name"];
-		    	$object['Edition'] = $row["edition"];
-		    	$object['Publisher'] = $row["publisher"];
-		    	$object['Category'] = $row["category"];
-		        $object['Price'] = $row["price"];
-		    	$object['Quantity'] = $row_isbn["COUNT(b.`isbn`)"];
+		    	$object['ISBN'] = $row["ISBN Number"];
+		    	$object['Book name'] = $row["Book Name"];
+		    	$object['Author name'] = $row["Author Name"];
+		    	$object['Edition'] = $row["Edition"];
+		    	$object['Publisher'] = $row["Publisher"];
+		    	$object['Category'] = $row["Category"];
+		        $object['Price'] = $row["Book Price"];
+		    	$object['Quantity'] = $row["Qty"];
 		    	$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    }
