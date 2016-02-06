@@ -345,7 +345,7 @@
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
-		    return 0;
+		    return false;
 		}
 
 		$conn->close();
@@ -1172,11 +1172,7 @@
 			    	array_push($arrayObject, $object);
 		    }
 		} else {
-<<<<<<< HEAD
 		    return false;
-=======
-		    return 0;
->>>>>>> origin/master
 		}
 
 		$conn->close();
