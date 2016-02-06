@@ -245,12 +245,12 @@
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
 		    	$object['ISBN'] = $row["isbn"];
-		    	$object['Price'] = $row["price"];
+		    	$object['Book name'] = $row["book_name"];
+		    	$object['Author name'] = $row["author_name"];
 		    	$object['Edition'] = $row["edition"];
 		    	$object['Publisher'] = $row["publisher"];
 		    	$object['Category'] = $row["category"];
-		    	$object['Book name'] = $row["book_name"];
-		    	$object['Author name'] = $row["author_name"];
+		        $object['Price'] = $row["price"];
 		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
 		    	$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
@@ -283,12 +283,12 @@
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
 		    	$object['ISBN'] = $row["isbn"];
-		    	$object['Price'] = $row["price"];
+		    	$object['Book Name'] = $row["book_name"];
+		    	$object['Author Name'] = $row["author_name"];
 		    	$object['Edition'] = $row["edition"];
 		    	$object['Publisher'] = $row["publisher"];
 		    	$object['Category'] = $row["category"];
-		    	$object['Book Name'] = $row["book_name"];
-		    	$object['Author Name'] = $row["author_name"];
+		    	$object['Price'] = $row["price"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
