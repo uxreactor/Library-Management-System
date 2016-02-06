@@ -137,7 +137,7 @@
                     data: issue_book,
                     success: function(response){
                         alert(response);
-                        window.location.href = 'http://localhost/uxr_library/code/our-library.php';
+                        window.location.href = 'our-library.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
