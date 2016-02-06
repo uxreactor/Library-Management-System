@@ -1172,9 +1172,7 @@
 			    	array_push($arrayObject, $object);
 		    }
 		} else {
-
 		    return false;
-
 		}
 
 		$conn->close();
