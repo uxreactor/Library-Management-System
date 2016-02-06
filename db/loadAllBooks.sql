@@ -1,7 +1,3 @@
-loadAllBooks.sql
-
-
-
 SELECT 
     a.`book_name` AS "Book Name",
     a.`author_name` AS "Author Name",
