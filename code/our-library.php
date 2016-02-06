@@ -26,7 +26,7 @@
             </form>  
         </div>
         <div id = "load-books">
-            <h2>All books </h2>      
+            <h2>All Books </h2>      
         </div> 
         <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">
@@ -34,10 +34,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Membership type details</h4>
+                      <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
-                        <span id="confirm-text" >Are you sure to delete the details</span>
+                        <span id="confirm-text" ></span>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
@@ -45,13 +45,13 @@
                     </div>
                 </div>  
             </div>
-
         </div>
     <!--/#table-->
     <center>
         <ul class="pagination" id="pagination1">
         </ul>
     </center>
+    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
 
     <?php include ("footer.php");?>
     <!--/#footer-->
@@ -70,7 +70,7 @@
                  success: function(response){                        
                     books = jQuery.parseJSON(response);
                     viewData(books,parent);
-                    paginationView(books,5);  
+                    paginationView(books,10);  
                 },
                 error: function(xhr, desc, err){
                     writeError('No results found',error);
@@ -122,7 +122,7 @@
                     //console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,5);   
+                    paginationView(books,10);   
                 },
                 error: function(xhr, desc, err){
                     writeError('No results found',error);
@@ -163,7 +163,7 @@
                         if (response){
                             books = jQuery.parseJSON(response);
                             viewData(books,parent);  
-                            paginationView(books,5);  
+                            paginationView(books,10);  
                         }else{
                             results = document.createElement('h2');
                             results.className = "no_result";
@@ -189,14 +189,20 @@
             var bookname = $tds[5].textContent; 
             var member = $tds[1].textContent;
             var select = document.getElementById('option').value;
-            if(select == "Books"){ 
+            if(select == "Books"){
+                $(".NO").show();
+                $('.YES').text("YES");
+                $('.modal-title').text("Book details");
                 $('#confirm-text').text("Are you sure to delete the "+ bookname+" book from library" );
                 $(document).on("click",".YES",function(){                
-                 delete_details(isbn);
+                    delete_details(isbn);
                 });
             } else if(select == "Members") {
+                $(".NO").show();
+                $('.YES').text("YES");
+                $('.modal-title').text("Membership type details" );
                 $('#confirm-text').text("Are you sure to delete the "+ member+" from library" ); 
-                $(document).on("click",".NO",function(){                
+                $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });     
             } 
@@ -208,7 +214,14 @@
                     data: key_isbn,
                     success: function(response){   
                         console.log(response);
-                        window.location.href = 'our-library.php';                         
+                        $("#button").click();
+                        $(".NO").hide();
+                        $('.modal-title').text("Delete Record" );
+                        $('.YES').text("OK");
+                        $('#confirm-text').text("Your record deleted successfully" );
+                        $(document).on("click",".YES",function(){                
+                            window.location = 'our-library.php';
+                        });
                     },
                     error: function(xhr, desc, err){
                         //console.log(desc);

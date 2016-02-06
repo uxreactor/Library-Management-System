@@ -65,4 +65,5 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script>

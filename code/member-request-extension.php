@@ -1,23 +1,27 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
+    $member_id = checkSession();
+    $bookId = $_GET['bookId'];
+    $returnDate = $_GET['returnDate'];
+    echo $bookId; 
     //echo checkSession();
 ?>
     <!--/#header-->
     <div class="container">
-        <h2>Book request extension </h2>
+        <h2>Book Request Extension </h2>
         <form name="login" method="post" action="" onsubmit="return submitForm();">
             <div class="form-group" >
                 <label >Member ID</label>
-                <input type="text" class="form-control" readonly />
+                <input type="text" class="form-control" readonly value="<?php echo $member_id ?>" />
             </div>
             <div class="form-group" >
                 <label >Book ID</label>
-                <input type="text" class="form-control" readonly />
+                <input type="text" class="form-control" readonly value="<?php echo $bookId ?>" />
             </div>
             <div class="form-group" >                
                 <label >Return date</label>
-                <input type="date" class="form-control" readonly />
+                <input type="date" class="form-control" readonly value="<?php echo $returnDate ?>" />
             </div>
             <div class="form-group" id="extention_days_label">
                 <label >Extension duration(Days)</label>
@@ -46,7 +50,6 @@
                     type: $('form').attr('method'),
                     data: login,
                     success: function(response){
-                        console.log(response);
                         window.location = 'member.php';
                     },
                     error: function(xhr, desc, err){
@@ -60,7 +63,8 @@
                 return false;
             }
             return false;
-        }   
+        }
+        RemoveInlineError();   
 
     </script>   
 </body>

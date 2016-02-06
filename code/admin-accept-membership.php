@@ -6,7 +6,7 @@
     <!--/#header-->
     <div class="container" id="book_name_label"> 
         <div id="load_members" >
-             <h2>New membership requests</h3>
+             <h2>New Membership Requests</h2>
         </div>
     </div>
     <center>
@@ -14,24 +14,24 @@
         </ul>
     </center>
     <div class="modal fade" id="help" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Reject membership request</h4>
-                    </div>
-                    <div class="modal-body">
-                        <span id="confirm-text" >Are you sure to reject the membership request</span>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
-                      <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
-                    </div>
-                </div>  
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Reject Membership Request</h4>
+                </div>
+                <div class="modal-body">
+                    <span id="confirm-text" >Are you sure to reject the membership request?</span>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
+                  <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
+                </div>
             </div>
-
         </div>
+    </div>
+    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
         
     <!--/#table-->
     <?php include ("footer.php");?> 
@@ -49,7 +49,7 @@
                     //console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,5);   
+                    paginationView(books,10);   
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
@@ -72,7 +72,14 @@
                 data: email,
                 success: function(response){   
                     //console.log(response);
-                    window.location.href = 'admin-accept-membership.php';                     
+                    //$("#button").click();
+                    $(".NO").hide();
+                    $('.modal-title').text("Approve membership" );
+                    $('.YES').text("OK");
+                    $('#confirm-text').text("Membership approved successfully" );
+                    $(document).on("click",".YES",function(){                
+                        window.location = 'admin-accept-membership.php';
+                    });
                 },
                 error: function(xhr, desc, err){
                     //console.log(desc);
@@ -84,6 +91,9 @@
             $tds = $row.find("td"); 
             var email = {email:$tds[2].textContent}
             console.log(email);
+            $(".NO").show();
+            $('.YES').text("YES");
+            $('.modal-title').text("Reject Membership Request");
             $('#confirm-text').text("Are you sure to reject the membership request" );
             $(document).on("click",".YES",function(){
                 $.ajax({             
@@ -92,6 +102,7 @@
                     data: email,
                     success: function(response){   
                         //console.log(response);
+                        
                         window.location.href = 'admin-accept-membership.php';                     
                     },
                     error: function(xhr, desc, err){

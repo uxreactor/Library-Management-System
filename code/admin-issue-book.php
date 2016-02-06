@@ -6,7 +6,7 @@
 
     <!--/#header-->
     <div class="container">
-        <h2>Issue a book</h2>
+        <h2>Issue a Book</h2>
         <form name="login" method="post" action="controller/submit_issue_book.php" onsubmit="return submitForm();">
             <div class="form-group" id="book_id_label">
                 <label >Book Id</label>
@@ -36,12 +36,12 @@
             </div>
             <div class="form-group" id="issue_date_label">
                 <label >Issue date</label>
-                <input type="date" class="form-control" id="issue_date" readonly="true" />
+                <input type="text" class="form-control" id="issue_date" readonly="true" />
                 <span></span>
             </div>
             <div class="form-group" id="return_date_label">
                 <label >Return date</label>
-                <input type="date" class="form-control" id="return_date" readonly="true" />
+                <input type="text" class="form-control" id="return_date" readonly="true" />
                 <span></span>
             </div>
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
@@ -93,8 +93,9 @@
                 data: {member_id: member_id},
                 success: function(response){
                     if(response) {
-                        response = jQuery.parseJSON(response);
                         console.log(response);
+                        response = jQuery.parseJSON(response);
+                        
                         $('#member_name').val(response.name);
                         $('#member_type').val(response.type);
                         //Prefill the issue and return dates
@@ -136,7 +137,7 @@
                     data: issue_book,
                     success: function(response){
                         alert(response);
-                        window.location.href = 'http://localhost/uxr_library/code/our-library.php';
+                        window.location.href = 'our-library.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
@@ -150,6 +151,7 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script> 
 </body>
 </html>

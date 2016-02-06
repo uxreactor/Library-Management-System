@@ -8,11 +8,11 @@
 ?>
     <!--/#header-->
     <div class="container">
-        <h2>Membership renewal extension </h2>
+        <h2>Membership Renewal Extension </h2>
         <form name="login" method="post" action="controller/submit_member_renew_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="mem_id_label">
                 <label >Member Id </label>
-                <input type="text" class="form-control" id="memId" value=" <?php echo $memberId ?> " />
+                <input type="text" class="form-control" id="memId" value="<?php echo $memberId ?>" />
                 <span></span>
             </div>
             <div class="form-group" id="mem_name_label">
@@ -31,7 +31,28 @@
             <input type="submit" value="Submit" class="btn btn-default btn-lg btn-info"/>
             <a href="member.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
+    
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Renewe Membership Extension</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text">Membership renewal request has been sent Successfully</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
     </div>
+    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
+
+
     <?php include ("footer.php");?> 
     <!--/#footer-->
     <?php include ("javascript-links.php");?> 
@@ -39,11 +60,11 @@
 
         var submitForm = function() {
             var validation_message;
-            var renew = [{ type : 'text' , value: $('#memid').val() , errorMessage:'Member Id is required' }, 
+            var renew = [{ type : 'text' , value: $('#memId').val() , errorMessage:'Member Id is required' }, 
                     { type:'text' , value: $('#memname').val() , errorMessage:'Member name is required' }];
             validation_message = validateForm (renew); 
 
-            var renew_details = {memid: $('#memid').val(),memname: $('#memname').val()};
+            var renew_details = {memid: $('#memId').val(),memname: $('#memname').val()};
             if(submitToServer(validation_message)){
                 $.ajax({
                     url: $('form').attr('action'),
@@ -51,7 +72,12 @@
                     data: renew_details,
                     success: function(response){
                         console.log(response);
-                        window.location = 'member.php';
+                        //window.location = 'member.php';
+                        $("#button").click();
+                        $('#confirm-text').text("Membership renewal request is sent Succeesfully" );
+                        $(document).on("click",".OK",function(){                
+                            window.location = 'member.php';
+                        });
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
@@ -67,6 +93,7 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script> 
 </body>
 </html>

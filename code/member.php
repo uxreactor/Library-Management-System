@@ -1,7 +1,7 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
-    echo $member_id = checkSession();
+    $member_id = checkSession();
     if(checkSession()){
 ?>
 
@@ -17,10 +17,26 @@
         </div>
     <br/>
     <br/>
-    <!--/#searchbar--> 
-    </h3>
+    <!--/#searchbar-->
     <div id="load_books">
-      <h2>My books</h2>
+      <h2>My Books</h2>
+    </div>
+    <div class="modal fade" id="help" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Due date Extension</h4>
+                </div>
+                <div class="modal-body">
+                    <span id="confirm-text">Due date extension is sent Successfully</span>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                </div>
+            </div>  
+        </div>
     </div>
     
 	<!--/#table-->
@@ -44,8 +60,13 @@
           if(response) {
             obj = jQuery.parseJSON(response);
             viewData(obj,parent);
-            paginationView(obj,5);
+            paginationView(obj,10);
           }
+          $("#button").click();
+            $('#confirm-text').text("Due date extension request has been sent Successfully" );
+            $(document).on("click",".OK",function(){                
+                window.location = 'member.php';
+          });
         },
         error: function(xhr, desc, err){
           writeError('No results found',parent);
@@ -60,3 +81,14 @@
 }
 
 ?>
+<script type="text/javascript">
+  $(document).on("click",".btn",function(){
+    var $row = $(this).closest("tr"),       
+    $tds = $row.find("td");       
+    var bookId = $tds[1].textContent;
+    var returnDate = $tds[2].textContent; 
+    var url = "member-request-extension.php? bookId=" + bookId + "&returnDate=" + returnDate ;
+    window.location.href = url;
+  });
+
+</script>

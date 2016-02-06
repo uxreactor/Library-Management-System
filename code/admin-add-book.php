@@ -10,7 +10,7 @@
         <form name="add_book" method="post" action="controller/submit_add_book.php" onsubmit="return submitForm();">
             <div class="form-group" id="book_name_label">
                 <label >Book name</label>
-                <input type="text" class="form-control" id ="book_name" />
+                <input type="text" class="form-control" id ="book_name"/>
                 <span></span>
             </div>
             <div class="form-group" id="author_name_label">
@@ -53,6 +53,24 @@
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
             <a href="our-library.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Adding New Book</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text">New book added successfully</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
         <!--/#issue book form -->
     </div>  
     <?php include ("footer.php");?> 
@@ -122,13 +140,18 @@
                                 body = document.getElementById('div1');
                                 writeError(response,body);
                             }
+                            $("#button").click();
+                            $('#confirm-text').text("New book added successfully" );
+                            $(document).on("click",".OK",function(){                
+                                window.location = 'our-library.php';
+                            });
                             $('.notification').text(response);
                         },
                         error: function(xhr, desc, err){
                             console.log(desc);
                         }
                     });
-                    window.location = 'our-library.php';
+                    
                     
                 }else{
                     body = document.getElementById('book_name_label');
@@ -153,8 +176,9 @@
                 }
                 return false;
             }
+            RemoveInlineError();
 
-    </script> 
+        </script> 
     <script type="text/javascript">
     function showfield(name){
         if(name=='Add new category'){

@@ -7,7 +7,7 @@
     <!--/#header-->
     <div class="container" id= "book_name_label"> 
         <div id= "load_books">
-            <h2>Requests for new books</h2>
+            <h2>Requests for New Books</h2>
         </div>
     </div>
     <center>
@@ -30,7 +30,7 @@
                     console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,5);   
+                    paginationView(books,10);   
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);

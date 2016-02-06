@@ -11,8 +11,8 @@
 	}
 	
 	if ($message) {
-		echo setSession($email,$type,$message);
-		echo $message;
+		$response = setSession($email,$type,$message);
+		echo $response;
 	} else {
 		echo false;
 	}

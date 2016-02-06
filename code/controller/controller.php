@@ -288,7 +288,7 @@
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
-		    return 0;
+		    return false;
 		}
 
 		$conn->close();
@@ -1062,7 +1062,7 @@
 			    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return 0;
+		    return false;
 		}
 
 		$conn->close();

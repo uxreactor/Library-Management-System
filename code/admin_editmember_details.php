@@ -16,7 +16,7 @@
 
   <div class="container">
         <div class = "notification" style="font-size: 40px; color:green; text-align:center"></div>
-        <h2>Editing member details</h2>
+        <h2>Editing Member Details</h2>
         <form name="add_book" method="post" action="controller/submit_editmembership_details.php" onsubmit="return submitForm();">
             <div class="form-group" id="name_id_label">
                 <label >Name</label>
@@ -84,7 +84,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Membership type details</h4>
+                      <h4 class="modal-title">Membership Type Details</h4>
                     </div>
                     <div class="modal-body">
                      <table  class="table table-bordered table-striped" style="width:40%; ">
@@ -228,6 +228,7 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script>   
 </body>
 </html>

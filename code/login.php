@@ -1,6 +1,8 @@
 <?php include ("header-guest.php");?> 
     <!--/#header-->
     <div class="container">
+        <h2>Login from Here</h2>
+        <br/>
             <ul id = "myTab" class = "nav nav-tabs">
                <li class = "active"><a href = "#Admin" data-toggle = "tab"> Admin</a></li>
                <li><a href = "#User" data-toggle = "tab">User</a></li>  
@@ -125,6 +127,7 @@
             }
             return false;
         }
+        RemoveInlineError();
     </script>
 </body>
 </html>
