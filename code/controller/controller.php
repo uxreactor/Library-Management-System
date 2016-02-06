@@ -861,16 +861,15 @@
 
 
 	/**
-	 * @requestingForNewBookrequestingForNewBookrequestingForNewBook : This function is used to issue a book to the member and also it consists local variable for current date and returning.
-	 * current date is taken from the system and returning date is taken from the profile.
+	 * @issueBook : This function is used to issue a book and a new record is stored in the database.
 	 * @author : Mohan, Bala
 	 *
 	 * @param : string - memberId
 	 * @param : string - bookId
 	 *
-	 * @return/outcome : The data is saved in the issued books.
+	 * @return/outcome : The data is saved in the issued books table in the database.
 	 */
-	function issueBook($memberId, $bookId, $issuedDate, $returnDate){
+	function issueBook($memberId, $bookId){
 		$conn = connection();
 		//$sql = "INSERT INTO sampleTable (id, name, date) VALUES ($id, '$name', CURDATE())";
 		$sql = "SELECT book_id FROM tbl_issued_books WHERE book_id = $bookId  ";
@@ -939,7 +938,7 @@
 
 
 	/**
-	 * @returningBook : This function is used to update the status of issued books after penalty paid.
+	 * @returningBookAfterPenalityPaid : This function is used to update the status of issued books after penalty paid.
 	 * @author : Mohan, Bala
 	 *
 	 * @param : string - bookId
@@ -959,11 +958,11 @@
 
 
 		/**
-	 * @viewNewBookRequests : This function is used to display the membership requests which are requesterd from the users.
+	 * @viewMembershipRequests : This function is used to display the membership requests which are requesterd from the users.
 	 * @author : Mohan, Bala
 	 *
 	 *
-	 * @return/outcome : It will display all the requests for new book.
+	 * @return/outcome : It will display all the requests for new membership the data is returned in array object.
 	 */
 	function viewMembershipRequests(){
 		$arrayObject = array();
@@ -1005,10 +1004,10 @@
 
 
 /**
-	 * @loadAllBooks : This function is used to display the membership renewal requests which are requesterd from the members.
+	 * @viewMembershipRenewalRequests : This function is used to display the membership renewal requests which are requesterd from the members.
 	 * @author : Mohan, Bala
 	 *
-	 * @return/outcome : Returns a json object where it consists all the records of books.
+	 * @return/outcome : Returns a json object where it consists all the records of membership renewal requests.
 	 */
 	function viewMembershipRenewalRequests(){
 		$arrayObject = array();
@@ -1044,11 +1043,11 @@
 
 
 		/**
-	 * @viewNewBookRequests : This function is used to display the all issued books details .
+	 * @viewIssuedBooks : This function is used to display the all issued books details .
 	 * @author : Mohan, Bala
 	 *
 	 *
-	 * @return/outcome : It will display all the requests for new book.
+	 * @return/outcome : It will display all issued books , where it returns the arrayobject to display.
 	 */
 	function viewIssuedBooks(){
 		$arrayObject = array();
@@ -1079,11 +1078,11 @@
 
 
 	/**
-	 * @viewNewBookRequests : This function is used to display the details of all duedate extensions which are requested by the members.
+	 * @viewDueDateExtensions : This function is used to display the details of all duedate extensions which are requested by the members.
 	 * @author : Mohan, Bala
 	 *
 	 *
-	 * @return/outcome : It will display all the requests for new book by returing the json object.
+	 * @return/outcome : It will display all the requests from users where the data is returned in the form of arayobject.
 	 */
 	function viewDueDateExtensions(){
 		$arrayObject = array();
@@ -1130,11 +1129,12 @@
 	}
 
 	/**
-	 * @viewAllBooks : This function is used to display the details of all books that membertaken.
+	 * @loadMemberBooks : This function is used to display the details of all books that member taken.
 	 * @author : Yaswanth.
 	 *
+	 * @param : integer - membeId
 	 *
-	 * @return/outcome : It will display all the books that are user taken.
+	 * @return/outcome : It will display all the books that are user taken.Where the data is returned in the form of arrayobject.
 	 */
 	function loadMemberBooks($memberId){
 		$arrayObject = array();
@@ -1162,12 +1162,10 @@
 
 	
 	/**
-	 * @emailCheck : This function is used to select all the categories in database.
+	 * @loadDropdownOptions : This function is used to select all the categories in database.
 	 * @author : Mohan, Bala
 	 *
-	 * @param : string - email
-	 *
-	 * @return/outcome : It will display all the categories fo the json object..
+	 * @return/outcome : It will display all the categories, where the data is returned in the form of arrayobject
 	 */
 	function loadDropdownOptions(){
 		$conn = connection();
@@ -1188,12 +1186,12 @@
 	}
 
 	/**
-	 * @emailCheck : This function is used to fetch the member name with the help of the memberid.
+	 * @getMemberName : This function is used to fetch the member name with the help of the memberid.
 	 * @author : Mohan, Bala
 	 *
-	 * @param : int - memberid
+	 * @param : integer - memberid
 	 *
-	 * @return/outcome : It will read the member name and return.
+	 * @return/outcome : It will read the member name and returns.
 	 */
 	function getMemberName($memberId){
 		$conn = connection();
@@ -1212,12 +1210,12 @@
 
 
 	/**
-	 * @emailCheck : This function is used to fetch the member name with the help of the memberid.
+	 * @getBookDetails : This function is used to fetch the book details with the help of the isbn.
 	 * @author : Mohan, Bala
 	 *
-	 * @param : int - memberid
+	 * @param : integer - memberid
 	 *
-	 * @return/outcome : It will read the member name and return.
+	 * @return/outcome : It will read the member name and returns a arraobject.
 	 */
 	function getBookDetails($isbn){
 		$arrayObject = array();
@@ -1250,14 +1248,12 @@
 
 
 	/**
-	 * @approveDueDateExtension : This function is used delete the data from the datbase.
+	 * @deleteBook : This function is used delete a book from the datbase.
 	 * @author : Yaswanth
 	 *
-	 * @param : string - memberId
-	 * @param : string - bookId
-	 * 
+	 * @param : string - isbn
 	 *
-	 * @return/outcome : If the extension is rejected it will delete the dataa from the database.
+	 * @return/outcome : If the extension is rejected it will delete the data from the database.
 	 */
 
 	function deleteBook($isbn) {
@@ -1274,7 +1270,7 @@
 	 * @getMemberDetails : This function will display all the records of members from the database to the respective page.
 	 * @author : Yaswanth
 	 *
-	 * @return/outcome : Returns a json arrayobject where it consists all the records of memberes.
+	 * @return/outcome : Returns a json arrayobject where it consists all the records of members.
 	 */
 	function getMemberDetails($memberid){
 		$arrayObject = array();
@@ -1308,7 +1304,7 @@
 
 
 	/**
-	 * @emailCheck : This function is used to check the duplicate email Id for appling a membership.
+	 * @emailChecking : This function is used to check the duplicate email Id for appling a membership.
 	 * @author : Yaswanth
 	 *
 	 * @param : string - email
