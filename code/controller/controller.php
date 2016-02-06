@@ -66,7 +66,7 @@
 					}
 				}
 			} else {
-				return "isbn already exists";
+				return 0;
 			}
 		}
 		$conn->close();
@@ -84,18 +84,14 @@
 	 */
 	function login($username,$password){
 		$conn = connection();
-		$sql = " SELECT username , password FROM tbl_login WHERE username = '$username' AND password = '$password'";
+		$sql = " SELECT a.username, a.password, b.mem_id FROM tbl_login a JOIN tbl_members b WHERE a.username = '$username' AND a.password ='$password' AND b.mem_email ='$username' ";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
-			 $sql = "SELECT * FROM tbl_members WHERE mem_email = '$username'";
-        	$result = $conn->query($sql);
-        	if ($result->num_rows > 0) {
-        		$row = $result->fetch_assoc();
-        		$returnVal = $row["mem_id"];
-        		return $returnVal; // return value
-        	}
+    		$row = $result->fetch_assoc();
+    		$returnVal = $row["mem_id"];
+    		return $returnVal; // return value
 		}else{
-			return FALSE; // return value
+			return 0; // return value
 		}
 		$conn->close();
 	}
@@ -118,19 +114,19 @@
         if ($result->num_rows > 0) {
 			 return 1; // return value
 		}else{
-			return FALSE; // return value
+			return 0; // return value
 		}
 		$conn->close();
 	}
 
 
 	/**
-	 * @adminForgotPassword : This function will checks whether the emeil is exists or not
+	 * @adminForgotPassword : This function will checks whether the email is exists or not
 	 * @author : Prabhakar
 	 *
 	 * @param : string - email id.
 	 *
-	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
+	 * @return/outcome : It will returns email if the data is valid else returns false.
 	 */
 	function adminForgotPassword($email){
 		$conn = connection();
@@ -139,14 +135,35 @@
         if ($result->num_rows > 0) {
         	return $email; // return value
 		}else{
-			return false; // return value
+			return 0; // return value
 		}
 		$conn->close();
 	}
 
 
 	/**
-	 * @updatePassword : This function will update the password against the matching email id.
+	 * @memberForgotPassword : This function will checks whether the emeil is exists or not
+	 * @author : Prabhakar
+	 *
+	 * @param : string - email id.
+	 *
+	 * @return/outcome : It will returns 1 if the data is valid else returns 0.
+	 */
+	function memberForgotPassword($email){
+		$conn = connection();
+		$sql = " SELECT username FROM tbl_login WHERE username = '$email'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	return $email; // return value
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+	}
+
+
+	/**
+	 * @updatePassword : This function will update the password against the matched email id.
 	 * @author : Prabhakar,Anurag
 	 *
 	 * @param : string - email
@@ -160,6 +177,9 @@
 		$sql = "UPDATE tbl_admin_login SET password='$password' WHERE username = '$email'";
 		if ($conn->query($sql) === TRUE) {
 			echo  $email.$password;
+			return 1;
+		}else{
+			return 0;
 		}
 		
 		$conn->close();
@@ -180,7 +200,7 @@
         if ($result->num_rows > 0) {
 			 return 1; // return value
 		}else{
-			return false; // return value
+			return 0; // return value
 		}
 
 		$conn->close();
@@ -256,7 +276,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false; 
+		    return 0; 
 		}
 
 		$conn->close();
@@ -293,7 +313,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false; 
+		    return 0; 
 		}
 
 		$conn->close();
@@ -325,7 +345,7 @@
 		    	array_push($arrayObject, $object);
 		    } 
 		} else {
-		    return false;
+		    return 0;
 		}
 
 		$conn->close();
@@ -406,7 +426,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false; 
+		    return 0; 
 		}
 
 		$conn->close();
@@ -442,7 +462,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false;
+		    return 0;
 		}
 
 		$conn->close();
@@ -664,7 +684,7 @@
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
 		} else {
-		    return false;
+		    return 0;
 		}
 		$sql = "DELETE FROM tbl_mem_request WHERE mem_email='$emailId'";
 		if ($conn->query($sql) === FALSE) {
@@ -674,7 +694,7 @@
 	}
 
 	/**
-	 * @rejectMembership : This function is used to approve the membership requests and append the new entry in the database.
+	 * @rejectMembership : This function is used to reject the membership requests from database.
 	 * @author : Mohan, Bala
 	 *
 	 * @param : email - emailId
@@ -713,13 +733,12 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-
 		    	$object['Book name'] = $row["book_name"];
 		    	$object['Author name'] = $row["author_name"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false;
+		    return 0;
 		}
 
 		$conn->close();
@@ -750,7 +769,7 @@
 		    $row = $result->fetch_assoc();
 	    	$returndate = $row["return_expected"];
 		} else {
-		    return "0 results";
+		    return 0;
 		}
 		$sql = " SELECT extension_days FROM due_date_extension WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
 		$result = $conn->query($sql);
@@ -767,7 +786,7 @@
 		$sql = "UPDATE tbl_issued_books SET return_expected = '$date'  WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
 		if ($conn->query($sql) === TRUE) {
 			rejectExtension($memberid,$bookid);
-			return true;
+			return 1;
 		} else {
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
@@ -791,7 +810,7 @@
 			$sql = "DELETE FROM due_date_extension WHERE mem_id = '$memberid' AND book_id = '$bookid'";
 			$conn->query($sql);		   
     	$conn->close();
-	     return true ;
+	     return 1 ;
 	}
 
 	/**
@@ -849,16 +868,16 @@
 	 *
 	 * @return/outcome : It will removes the membership renewal request.
 	 */
-		function rejetcMembershipRenewal($memId){
-			$conn = connection();
-			$sql = "DELETE FROM tbl_membership_renewal_request WHERE mem_id='$memId'";
-			if ($conn->query($sql) === FALSE) {
-			    return "Error: " . $sql . "<br>" . $conn->error;
-			}
-			return "rejected membership renewal request";
-			
-			$conn->close();
+	function rejetcMembershipRenewal($memId){
+		$conn = connection();
+		$sql = "DELETE FROM tbl_membership_renewal_request WHERE mem_id='$memId'";
+		if ($conn->query($sql) === FALSE) {
+		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
+		return "rejected membership renewal request";
+		
+		$conn->close();
+	}
 
 
 	/**
@@ -915,7 +934,7 @@
 		    $return_expected = $row["return_expected"];
 
 		}else {
-			return false;
+			return 0;
 		}
 		$diff = 0;
 		$return_actual_new = new DateTime($return_actual);
@@ -994,7 +1013,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return "0 results";
+		    return 0;
 		}
 
 		$conn->close();
@@ -1034,7 +1053,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false; 
+		    return 0; 
 		}
  //return value
 		$conn->close();
@@ -1068,7 +1087,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false;
+		    return 0;
 		}
 
 		$conn->close();
@@ -1081,7 +1100,6 @@
 	/**
 	 * @viewDueDateExtensions : This function is used to display the details of all duedate extensions which are requested by the members.
 	 * @author : Mohan, Bala
-	 *
 	 *
 	 * @return/outcome : It will display all the requests from users where the data is returned in the form of arayobject.
 	 */
@@ -1101,7 +1119,7 @@
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
-		    return false;
+		    return 0;
 		}
 
 		$conn->close();
@@ -1154,7 +1172,11 @@
 			    	array_push($arrayObject, $object);
 		    }
 		} else {
+<<<<<<< HEAD
 		    return false;
+=======
+		    return 0;
+>>>>>>> origin/master
 		}
 
 		$conn->close();
@@ -1239,7 +1261,7 @@
 	    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
 	    	array_push($arrayObject, $object);
 		} else {
-		    return false; 
+		    return 0; 
 		}
 
 		$conn->close();
@@ -1262,7 +1284,7 @@
 			$sql = "DELETE FROM tbl_book_varities WHERE isbn = '$isbn'";
 			$conn->query($sql);		   
     	$conn->close();
-	     return true ;
+	     return 1 ;
 	}
 
 
@@ -1296,7 +1318,7 @@
 		    	array_push($arrayObject, $object);
 
 		} else {
-		    return false;
+		    return 0;
 		}
 
 		$conn->close();
@@ -1314,16 +1336,14 @@
 	 */
 	function emailChecking($email){
 		$conn = connection();
-		$count=0;
 		$sql = " SELECT mem_email FROM tbl_mem_request WHERE mem_email = '$email' ";
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
 				echo count($row);
 				echo $row['yaswanth'] = $row['mem_email'];
-				$count++;
 			}
-			return $count; 
+			return 1; 
 		}else{
 			return 0; // return value
 		}
@@ -1356,7 +1376,7 @@
 	    	$object['author'] = $row["author_name"];
 	    	$object['publisher'] = $row["publisher"];
 		} else {
-			return false;
+			return 0;
 		}
 
 		$conn->close();
@@ -1375,20 +1395,21 @@
 		$conn = connection();
 		$count=0;
 
-		$sql = 'SELECT a.`mem_id`, a.`mem_name`, b.`ms_type`, b.`ms_validity`, b.`ms_due_duration`, c.`return_expected` FROM `tbl_members` a JOIN `tbl_membership` b JOIN `tbl_issued_books` c WHERE a.`ms_id` = b.`ms_id` and a.`mem_id` = ' .$memberid;
+		$sql = 'SELECT a.`mem_id`, a.`mem_name`, b.`ms_type`, b.`ms_validity_period`, b.`ms_book_limit`, b.`ms_days_limit` , b.`penalty` FROM `tbl_members` a JOIN `tbl_membership` b WHERE a.`ms_id` = b.`ms_id` and a.`mem_id` = '.$memberid;
 		$result = $conn->query($sql);
 		$object = array();
+		
 		if ($result->num_rows > 0) {
 			$row = $result->fetch_assoc();
     		$object['id'] = $row["mem_id"];
 	    	$object['name'] = $row["mem_name"];
 	    	$object['type'] = $row["ms_type"];
-	    	$object['validity'] = $row["ms_validity"];
-	    	$object['book_limit'] = $row["return_expected"];
-	    	$object['days_limit'] = $row["ms_due_duration"];
-	    	//$object['penalty'] = $row["penalty"];
+	    	$object['validity'] = $row["ms_validity_period"];
+	    	$object['book_limit'] = $row["ms_book_limit"];
+	    	$object['days_limit'] = $row["ms_days_limit"];
+	    	$object['penalty'] = $row["penalty"];
 		} else {
-			return false;
+			return 0;
 		}
 
 		$conn->close();

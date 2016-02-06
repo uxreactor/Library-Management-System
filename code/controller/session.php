@@ -17,11 +17,11 @@
 	        session_start(); 
 	    } 
 	
-		if (count($_SESSION) > 0 && $_SESSION["user"]) {
+		if (count($_SESSION) > 0 /*&& $_SESSION["user"]*/) {
 			return $_SESSION["type"];	
-		} else if (count($_SESSION) > 0 && $_SESSION["admin"]){
+		}/* else if (count($_SESSION) > 0 && $_SESSION["admin"]){
 			return $_SESSION["type"];
-		} else {
+		}*/ else {
 			return false;
 		}	
 	}

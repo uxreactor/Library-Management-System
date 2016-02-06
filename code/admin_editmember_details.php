@@ -1,6 +1,6 @@
 <?php 
     include ("header-admin.php");
-    require 'controller/session.php';
+
     require('controller/controller.php');
     $isbn = $_GET['isbn'];
     $memberDetails = getMemberDetails($isbn);
@@ -8,6 +8,10 @@
     	$memberDetails[0]['Gender'] = 'checked';
     }
     $memId = $memberDetails[0]['Member ID'];
+    require 'controller/session.php';
+    if(checkSession()){
+    
+    
   ?>
 
   <div class="container">
@@ -228,3 +232,9 @@
     </script>   
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?>

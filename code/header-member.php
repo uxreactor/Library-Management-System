@@ -51,7 +51,7 @@
                         <li class="<?php echo ($page_name=='member.php')?'active':'';?>"><a href="member.php">My books</a></li>
                         <li class="<?php echo ($page_name=='member-renew-membership.php')?'active':'';?>"><a href="member-renew-membership.php">Renew Membership</a></li> 
                         <li class="<?php echo ($page_name=='mem_request_new_book.php')?'active':'';?>"><a href="mem_request_new_book.php">Request New Book</a></li>  
-                        <li class="<?php echo ($page_name=='mem_request_new_book.php')?'active':'';?>"><a href="index.php">LOGOUT</a></li>                                     
+                        <li class="<?php echo ($page_name=='mem_request_new_book.php')?'active':'';?>"><a href="controller/logout.php">LOGOUT</a></li>                                     
 
                     </ul>
                 </div>

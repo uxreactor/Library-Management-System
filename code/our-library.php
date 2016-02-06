@@ -1,6 +1,7 @@
 <?php 
     include ("header-admin.php");
     require 'controller/session.php';
+    if(checkSession()){
 ?>
     <!--/#header-->
     <div class="container">
@@ -68,7 +69,7 @@
                  success: function(response){                        
                     books = jQuery.parseJSON(response);
                     viewData(books,parent);
-                    paginationView(books,5);  
+                    paginationView(books,10);  
                 },
                 error: function(xhr, desc, err){
                     writeError('No results found',error);
@@ -120,7 +121,7 @@
                     //console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
-                    paginationView(books,5);   
+                    paginationView(books,10);   
                 },
                 error: function(xhr, desc, err){
                     writeError('No results found',error);
@@ -161,7 +162,7 @@
                         if (response){
                             books = jQuery.parseJSON(response);
                             viewData(books,parent);  
-                            paginationView(books,5);  
+                            paginationView(books,10);  
                         }else{
                             results = document.createElement('h2');
                             results.className = "no_result";
@@ -220,3 +221,9 @@
 
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?>

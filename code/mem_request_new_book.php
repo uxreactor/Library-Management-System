@@ -1,8 +1,9 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
-    //echo checkSession();
+    if(checkSession()){
 ?>
+
     <!--/#header-->
     <div class="container">
         <h2>New Book Request</h2>
@@ -70,3 +71,9 @@
     </script>  
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?>

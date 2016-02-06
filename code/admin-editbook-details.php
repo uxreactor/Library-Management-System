@@ -4,6 +4,7 @@
     require('controller/controller.php');
     $isbn = $_GET['isbn'];
     $bookDetails = getBookDetails($isbn);
+    if(checkSession()){
 
     //echo "$bookDetails[0].'Category'";
    ?>
@@ -177,3 +178,9 @@
     </script>   
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?>

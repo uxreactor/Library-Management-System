@@ -1,14 +1,10 @@
 <?php 
     include ("header-member.php");
     require 'controller/session.php';
-
-    
-
     $memberId = checkSession();
     require 'controller/controller.php';
     $memberName = getMemberName($memberId);
-
-    //echo checkSession();
+    if(checkSession()){
 ?>
     <!--/#header-->
     <div class="container">
@@ -35,7 +31,7 @@
             <input type="submit" value="Submit" class="btn btn-default btn-lg btn-info"/>
             <a href="member.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
-  </div>
+    </div>
     <?php include ("footer.php");?> 
     <!--/#footer-->
     <?php include ("javascript-links.php");?> 
@@ -75,3 +71,9 @@
     </script> 
 </body>
 </html>
+<?php 
+}else {
+    header("Location: login.php");
+}
+
+?>
