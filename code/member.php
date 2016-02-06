@@ -81,3 +81,14 @@
 }
 
 ?>
+<script type="text/javascript">
+  $(document).on("click",".btn",function(){
+    var $row = $(this).closest("tr"),       
+    $tds = $row.find("td");       
+    var bookId = $tds[1].textContent;
+    var returnDate = $tds[2].textContent; 
+    var url = "member-request-extension.php? bookId=" + bookId + "&returnDate=" + returnDate ;
+    window.location.href = url;
+  });
+
+</script>
