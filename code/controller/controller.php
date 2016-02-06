@@ -289,6 +289,7 @@
 		    	$object['Category'] = $row["category"];
 		    	$object['Book Name'] = $row["book_name"];
 		    	$object['Author Name'] = $row["author_name"];
+		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
