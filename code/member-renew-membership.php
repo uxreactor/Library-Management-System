@@ -12,7 +12,7 @@
         <form name="login" method="post" action="controller/submit_member_renew_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="mem_id_label">
                 <label >Member Id </label>
-                <input type="text" class="form-control" id="memId" value=" <?php echo $memberId ?> " />
+                <input type="text" class="form-control" id="memId" value="<?php echo $memberId ?>" />
                 <span></span>
             </div>
             <div class="form-group" id="mem_name_label">

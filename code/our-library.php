@@ -34,7 +34,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Membership type details</h4>
+                      <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
                         <span id="confirm-text" ></span>
@@ -51,6 +51,7 @@
         <ul class="pagination" id="pagination1">
         </ul>
     </center>
+    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>s
 
     <?php include ("footer.php");?>
     <!--/#footer-->
@@ -188,12 +189,18 @@
             var bookname = $tds[5].textContent; 
             var member = $tds[1].textContent;
             var select = document.getElementById('option').value;
-            if(select == "Books"){ 
+            if(select == "Books"){
+                $(".NO").show();
+                $('.YES').text("YES");
+                $('.modal-title').text("Book details" );
                 $('#confirm-text').text("Are you sure to delete the "+ bookname+" book from library" );
                 $(document).on("click",".YES",function(){                
-                 delete_details(isbn);
+                    delete_details(isbn);
                 });
             } else if(select == "Members") {
+                $(".NO").show();
+                $('.YES').text("YES");
+                $('.modal-title').text("Membership type details" );
                 $('#confirm-text').text("Are you sure to delete the "+ member+" from library" ); 
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
@@ -207,7 +214,14 @@
                     data: key_isbn,
                     success: function(response){   
                         console.log(response);
-                        window.location.href = 'our-library.php';                         
+                        $("#button").click();
+                        $(".NO").hide();
+                        $('.modal-title').text("Delete Record" );
+                        $('.YES').text("OK");
+                        $('#confirm-text').text("Your record deleted successfully" );
+                        $(document).on("click",".YES",function(){                
+                            window.location = 'our-library.php';
+                        });
                     },
                     error: function(xhr, desc, err){
                         //console.log(desc);

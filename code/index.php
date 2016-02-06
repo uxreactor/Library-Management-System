@@ -2,7 +2,7 @@
     </header>
     <!--/#header-->
     <div class="container">
-        <form name="search_book" method="post" action="controller/search_Index_book.php" onsubmit="return submitForm();">
+        <form name="search_book" method="post" action="controller/search_book.php" onsubmit="return submitForm();">
             <div class="input-group col-xs-5 col-xs-offset-3" id="book_name_label">
                 <input type="text" class="textbox_size form-control input-lg" id="search" placeholder="Search book by authorname/bookname" />
                 <span class="input-group-btn">
@@ -31,13 +31,17 @@
         var error = document.getElementById('book_name_label');
         function postForm() {
             $.ajax({             
-                url: 'controller/load_all_books.php',
+                url: 'controller/load_all_books_in_library.php',
                 type: 'post',
-                success: function(response){                        
-                    console.log(response);
-                    books = jQuery.parseJSON(response);                     
-                    viewData(books,parent);
-                    paginationView(books,10);                       
+                success: function(response){          
+                    if(response){
+                        books = jQuery.parseJSON(response);
+                        $.each(books,function(idx,elem){
+                            delete elem.Action;
+                        })    
+                        viewData(books,parent);
+                        paginationView(books,10);
+                    }            
                 },
                 error: function(xhr, desc, err){
                     console.log(desc);
@@ -63,6 +67,9 @@
                     
                     if (response){
                         books = jQuery.parseJSON(response);
+                        $.each(books,function(idx,elem){
+                            delete elem.Action;
+                        })  
                         viewData(books,parent); 
                         paginationView(books,5);    
                     }else{
