@@ -70,29 +70,21 @@
             });
         }
 
-        $("form#books").submit(function() {
-            postForm();
-            return false;
-        });
-
         $(function() {
             postForm();
         });
 
         $(document).on("click",".Return",function(){
             var $row = $(this).closest("tr"),       
-            $tds = $row.find("td"); 
-            var book_id = $tds[0].textContent; 
-            var penality = $tds[4].textContent; 
-            console.log(book_id);
-            
-            $.ajax({             
+            $tds = $row.find("td");
+            var book_id = $row.find('td:first-child').text(); 
+             $.ajax({             
                 url: 'controller/return_books.php',
                 type: 'post',
                 data: { book_id: book_id },
                 success: function(response){
-                    $('#confirm-text').text("You have "+penality+ " Rupees  penality to be paid. Do you want to pay now?");
                     if(response == 'failed'){
+                        $('#confirm-text').text("You have penality to be paid. Do you want to pay now?");
                         $(document).on("click",".yes",function(){
                             $.ajax({             
                                 url: 'controller/return_money_paid.php',
