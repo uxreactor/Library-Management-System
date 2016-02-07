@@ -70,7 +70,7 @@
                     success: function(response){
                         //window.location = 'member.php';
                         $("#button").click();
-                        $('#confirm-text').text("Request New book has sent Successfully" );
+                        $('#confirm-text').text("Due date extension request is sent Successfully" );
                         $(document).on("click",".OK",function(){                
                             window.location = 'member.php';
                         });
