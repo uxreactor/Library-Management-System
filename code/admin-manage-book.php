@@ -25,14 +25,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Penalty Details</h4>
+                      <h4 class="modal-title"></h4>
                     </div>
                     <div class="modal-body">
                         <span id="confirm-text" ></span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default yes" data-dismiss="modal">Yes</button>
-                      <button type="button" class="btn btn-default no" data-dismiss="modal">NO</button>
+                      <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
+                      <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
                     </div>
                 </div>  
             </div>
@@ -91,7 +91,12 @@
                                 type: 'post',
                                 data:{ book_id: book_id },
                                 success: function(response){ 
-                                    window.location.href='admin-manage-book.php';  
+                                    //window.location.href='admin-manage-book.php';
+                                    $("#button").click();
+                                    $('#confirm-text').text("The book is returned Successfully" );
+                                    $(document).on("click",".OK",function(){                
+                                        window.location = 'member.php';
+                                    });  
                                 },
                                 error: function(xhr, desc, err){
                                     console.log(desc);
