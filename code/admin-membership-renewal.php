@@ -99,7 +99,7 @@
                 $(".NO").show();
                 $('.YES').text("YES");
                 $('.modal-title').text("Reject Membership Renewal Request");
-                $('#confirm-text').text("Are you sure to delete the book from library" );
+                $('#confirm-text').text("Are you sure to reject membership renewal request" );
                 $(document).on("click",".YES",function(){ 
                     $.ajax({             
                         url: 'controller/admin_reject_membership_renewal.php',

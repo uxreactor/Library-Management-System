@@ -113,13 +113,15 @@
                             </tr>
                         </tbody>
                     </table>
+                    <span id="confirm-text"></span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                      <button type="button" class="btn btn-default OK" data-dismiss="modal">Ok</button>
                     </div>
                 </div>  
             </div>
         </div>
+        <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
             
             <button type="submit" class="btn btn-default btn-lg btn-info" >Submit</button>
             <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
@@ -198,7 +200,14 @@
                     data: member_details,
                     success: function(response){
                         $('.notification').text("Details are updated sucessfully");
-                    	window.location = 'our-library.php';
+                        $("#button").click();
+                        $(".table").hide();
+                        $('.modal-title').text("Edit Membership Details");
+                        $('#confirm-text').show();
+                        $('#confirm-text').text("Membership details updated successfully");
+                        $(document).on("click",".OK",function(){ 
+                                window.location = 'our-library.php';
+                        });
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

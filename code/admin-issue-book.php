@@ -47,6 +47,25 @@
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>
             <a href="our-library.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Membership Type Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default OK" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
+            
     </div>
     <?php include ("footer.php");?> 
     <!--/#footer-->
@@ -136,8 +155,14 @@
                     type: $('form').attr('method'),
                     data: issue_book,
                     success: function(response){
-                        alert(response);
-                        window.location.href = 'our-library.php';
+                        //alert(response);
+                        $("#button").click();
+                        $('.modal-title').text("Issue Book");
+                        $('#confirm-text').text("Book issued successfully");
+                        $(document).on("click",".OK",function(){ 
+                            window.location = 'our-library.php';
+                        });
+                        //window.location.href = 'our-library.php';
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);

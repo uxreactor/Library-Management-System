@@ -37,6 +37,7 @@
                 </div>  
             </div>
         </div>
+        <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
     </div>
     <center>
         <ul class="pagination" id="pagination1">
@@ -90,23 +91,46 @@
                 data: { book_id: book_id },
                 success: function(response){
                     if(response == 'failed'){
+                        $(".no").show();
+                        $('.yes').text("YES");
+                        $('.modal-title').text("Penalty Details");
+                        $('#confirm-text').text("You have penality to be paid. Do you want to pay now?");
                         $(document).on("click",".yes",function(){
                             $.ajax({             
                                 url: 'controller/return_money_paid.php',
                                 type: 'post',
                                 data:{ book_id: book_id },
-                                success: function(response){ 
-                                    window.location.href='admin-manage-book.php';  
+                                success: function(response){
+                                    $("#button").click();
+                                    $(".no").hide();
+                                    $('.modal-title').text("Book Return Status" );
+                                    $('.yes').text("OK");
+                                    $('#confirm-text').text("Book returned successfully" );
+                                    $(document).on("click",".yes",function(){                
+                                        window.location = 'admin-manage-book.php';
+                                    });
+
+                                    //window.location.href='admin-manage-book.php';  
                                 },
                                 error: function(xhr, desc, err){
                                     console.log(desc);
                                 }
                             });  
                         });
+                        $(document).on("click",".no",function(){                
+                            window.location.href = 'admin-manage-book.php';
+                        });
                         //console.log(response);
                         //window.location.href = "admin-manage-book.php";
                     }else{
-                        window.location.href='admin-manage-book.php';
+                        $(".no").hide();
+                        $('.modal-title').text("Book Return Status" );
+                        $('.yes').text("OK");
+                        $('#confirm-text').text("Book returned successfully" );
+                        $(document).on("click",".yes",function(){                
+                            window.location = 'admin-manage-book.php';
+                        });
+                        //window.location.href='admin-manage-book.php';
                     }
                     
                 },

@@ -112,8 +112,8 @@
                 });
                 $(".NO").show();
                 $('.YES').text("YES");
-                $('.modal-title').text("Reject Membership Request");
-                $('#confirm-text').text("Are you sure to delete the book from library" );
+                $('.modal-title').text("Reject Duedate Extention");
+                $('#confirm-text').text("Are you sure to reject duedate extention" );
                 $(document).on("click",".YES",function(){
                     $.ajax({             
                         url: 'controller/submit_reject_extension.php',
@@ -121,8 +121,16 @@
                         data:{ bookId: $bookId, memId: $memId },
                         success: function(response){                        
                             console.log(response);
-                            message.textContent = "MemberID :"+ $memId+ " request is rejected";
-                            window.location.href = 'admin-book-renewal.php';                                       
+                            $("#button").click();
+                            $(".NO").hide();
+                            $('.modal-title').text("Reject Duedate Extention" );
+                            $('.YES').text("OK");
+                            $('#confirm-text').text("MemberID: "+ $memId+ " request is Rejected");
+                            $(document).on("click",".YES",function(){                
+                                window.location = 'admin-book-renewal.php';
+                            });
+                            //message.textContent = "MemberID :"+ $memId+ " request is rejected";
+                            //window.location.href = 'admin-book-renewal.php';                                       
                         },
                         error: function(xhr, desc, err){
                             console.log(desc);

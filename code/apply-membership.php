@@ -66,48 +66,48 @@
             </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help" style="width:20px;height:20px; margin-left:1%; cursor:pointer;">
             <br/><br />
             <div class="modal fade" id="help" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Membership Type Details</h4>
-                    </div>
-                    <div class="modal-body">
-                     <table  class="table table-bordered table-striped" style="width:40%;">
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>Cost</th>
-                                <th>Validation</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Platinum</td>
-                                <td>300</td>
-                                <td>12 months</td>
-                            </tr>
-                            <tr>
-                                <td>Gold</td>
-                                <td>200</td>
-                                <td>6 months</td>
-                            </tr>
-                            <tr>
-                                <td>Silver</td>
-                                <td>100</td>
-                                <td>3 months</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <span id="confirm-text"></span>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default OK" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>  
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Membership Type Details</h4>
+                        </div>
+                        <div class="modal-body">
+                         <table  class="table table-bordered table-striped" style="width:40%;">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Cost</th>
+                                    <th>Validation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Platinum</td>
+                                    <td>300</td>
+                                    <td>12 months</td>
+                                </tr>
+                                <tr>
+                                    <td>Gold</td>
+                                    <td>200</td>
+                                    <td>6 months</td>
+                                </tr>
+                                <tr>
+                                    <td>Silver</td>
+                                    <td>100</td>
+                                    <td>3 months</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span id="confirm-text"></span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default OK" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>  
+                </div>
             </div>
-        </div>
             
             <button type="submit" class="btn btn-default btn-lg btn-info" >Submit</button>
             <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
@@ -191,12 +191,10 @@
                         }else{
                             $("#button").click();
                             $(".table").hide();
+                            $('.modal-title').text("Apply Membership");
                             $('#confirm-text').show();
-                            $('#confirm-text').text("New book added successfully");
+                            $('#confirm-text').text("Membership request sent successfully");
                             $(document).on("click",".OK",function(){ 
-                                $('#modal-title').text("Membership Type Details");
-                                $('#confirm-text').hide();
-                                $(".table").show();
                                 window.location = 'index.php';
                             });
                             //$('.notification').text(response);                           
