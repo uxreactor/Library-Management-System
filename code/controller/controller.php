@@ -335,6 +335,38 @@
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
 	}
+	/**
+	 * @searchForBook : This function will search for a particular book based on the users criteria.
+	 * @author : NagaLakshmi yarra
+	 *
+	 * @param : string - search_key
+	 *
+	 * @return/outcome : Returns a json arrayobject where it consists the record of particular book.
+	 */
+	function searchForIssuedBook($search_key){
+		$arrayObject = array();
+		$conn = connection();
+		//SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn`
+		$sql = " SELECT *  FROM `tbl_issued_books`  WHERE book_id LIKE '$search_key%' || mem_id LIKE '$search_key%' " ;
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+		    // output data of each row
+		    while($row = $result->fetch_assoc()) {		    	
+				$object = array();
+		    	$object['BookID'] = $row["book_id"];
+		    	$object['MemID'] = $row["mem_id"];
+		    	$object['Issueddate'] = $row["issue_date"];
+		    	$object['Return expected'] = $row["return_expected"];
+		    	$object['Action'] = "Return";
+		    	array_push($arrayObject, $object);
+		    }
+		} else {
+		    return false; 
+		}
+
+		$conn->close();
+		return(json_encode($arrayObject)); //return value
+	}
 	
 	/**
 	 * @searchForMember : This function will search for a particular member based on the users criteria.

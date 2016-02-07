@@ -72,7 +72,7 @@
                             delete elem.Action;
                         })  
                         viewData(books,parent); 
-                        paginationView(books,5);    
+                        paginationView(books,10);    
                     }else{
                         results = document.createElement('h2');
                         results.className = "no_result";
