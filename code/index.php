@@ -35,6 +35,7 @@
                 type: 'post',
                 success: function(response){          
                     if(response){
+                        //console.log(response);
                         books = jQuery.parseJSON(response);
                         $.each(books,function(idx,elem){
                             delete elem.Action;

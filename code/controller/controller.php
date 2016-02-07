@@ -37,38 +37,24 @@
 	 *
 	 * @return/outcome : Adds the newbook into the database and returns a string with successful message.
 	 */
+
 	function addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){			
 
 		$conn = connection();
-		$sql  = " SELECT book_name FROM tbl_book_varities WHERE isbn = $isbn";
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0) {
-			$row = $result->fetch_assoc();
-			if($row['book_name'] !== $bookname){
-				//$sql = "INSERT INTO sampleTable (id, name, date) VALUES ($id, '$name', CURDATE())";
+		$sql  =" INSERT INTO `tbl_book_varities`(`isbn`, `price`, `edition`, `publisher`,`category`,`book_name`,`author_name`) SELECT * FROM (SELECT '$isbn','$price','$edition','$publisher','$category','$bookname','$authorname') AS tmp WHERE NOT EXISTS (SELECT `book_name`,`isbn` FROM `tbl_book_varities` WHERE `book_name` = '$bookname' AND `isbn` = '$isbn') ";
+		if ($conn->query($sql) === TRUE) {
+			$sql = "INSERT INTO  tbl_all_books (isbn) VALUES ";
 				for($i=1;$i<=$quantity;$i++){
-					$sql = " INSERT INTO  tbl_all_books (isbn) VALUES ('$isbn') ";
-					if ($conn->query($sql) == TRUE) {
-					} else {
-					    return "Error: " . $sql . "<br>" . $conn->error;
-					}
-					$sql = " SELECT isbn FROM tbl_book_varities WHERE isbn ='$isbn' ";
-					$result = $conn->query($sql);
-					if ($result->num_rows > 0) {
-
-					}else{
-						$sql = "INSERT INTO  tbl_book_varities (isbn,price,edition,publisher,category,book_name,author_name) VALUES ('$isbn','$price','$edition','$publisher','$category','$bookname','$authorname')";	
-						if ($conn->query($sql) == TRUE) {
-						} else {
-						    return "Error: " . $sql . "<br>" . $conn->error;
-						}
-						return "New book added successfully";
-					}
+					$sql .= $i==$quantity ? "('$isbn')" : "('$isbn'), ";
 				}
-			} else {
-				return 0;
-			}
-		}
+				if ($conn->query($sql) == TRUE) {
+					return 1;
+				} else {
+					return "Error: " . $sql . "<br>" . $conn->error;
+				}
+		}else{
+			return "Error: " . $sql . "<br>" . $conn->error;
+		}				
 		$conn->close();
 	}
 
@@ -227,13 +213,8 @@
 	function editBookDetails($old_isbn,$isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){
 		$conn = connection();
 
-		$sql = " UPDATE tbl_all_books SET isbn='$isbn'  WHERE isbn='$old_isbn' ";
-		if ($conn->query($sql) === TRUE) {
-		} else {
-		    return "Error: " . $sql . "<br>" . $conn->error;
-		}
-		$sql = " UPDATE tbl_book_varities SET isbn = '$isbn' , price = '$price' , edition = '$edition' , publisher = '$publisher', category = '$category',
-				book_name = '$bookname' , author_name = '$authorname' WHERE isbn ='$old_isbn' ";
+		$sql = " UPDATE tbl_all_books a JOIN tbl_book_varities b SET a.isbn='$isbn', b.isbn = '$isbn' , b.price = '$price' , b.edition = '$edition' , b.publisher = '$publisher', b.category = '$category',
+				b.book_name = '$bookname' , b.author_name = '$authorname'  WHERE isbn='$old_isbn' ";
 		if ($conn->query($sql) === TRUE) {
 		    return "Book details updated successfully";
 		} else {
@@ -254,62 +235,23 @@
 	function loadAllBooks(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities " ;
+		$sql = " SELECT a.`book_name` AS 'Book Name', a.`author_name` AS 'Author Name', a.`category` AS 'Category', a.`publisher` AS 'Publisher', a.`edition` AS 'Edition', a.`price` AS 'Book Price', a.`isbn` AS 'ISBN Number', COUNT(b.`isbn`) AS 'Qty' FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn` " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
-		    	$isbn = $row["isbn"];
-		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
 		    	$result_isbn = $conn->query($sql);
 		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
-		    	$object['ISBN'] = $row["isbn"];
-		    	$object['Book name'] = $row["book_name"];
-		    	$object['Author name'] = $row["author_name"];
-		    	$object['Edition'] = $row["edition"];
-		    	$object['Publisher'] = $row["publisher"];
-		    	$object['Category'] = $row["category"];
-		        $object['Price'] = $row["price"];
-		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
+		    	$object['ISBN'] = $row["ISBN Number"];
+		    	$object['Book name'] = $row["Book Name"];
+		    	$object['Author name'] = $row["Author Name"];
+		    	$object['Edition'] = $row["Edition"];
+		    	$object['Publisher'] = $row["Publisher"];
+		    	$object['Category'] = $row["Category"];
+		        $object['Price'] = $row["Book Price"];
+		    	$object['Quantity'] = $row["Qty"];
 		    	$object['Action'] = "Edit,Delete";
-		    	array_push($arrayObject, $object);
-		    }
-		} else {
-		    return 0; 
-		}
-
-		$conn->close();
-		return(json_encode($arrayObject)); //return value
-	}
-
-	/**
-	 * @loadAllBooks : This function will display all the records of books from the database to the respective page it displays all the dettails of book along with count of the book.
-	 * @author : Mohan, Bala
-	 *
-	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
-	 */
-	function loadAllBooksInIndex(){
-		$arrayObject = array();
-		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities " ;
-		$result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-		    // output data of each row
-		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
-		    	$isbn = $row["isbn"];
-		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
-		    	$result_isbn = $conn->query($sql);
-		    	$row_isbn = $result_isbn->fetch_assoc();
-				$object = array();
-		    	$object['ISBN'] = $row["isbn"];
-		    	$object['Book Name'] = $row["book_name"];
-		    	$object['Author Name'] = $row["author_name"];
-		    	$object['Edition'] = $row["edition"];
-		    	$object['Publisher'] = $row["publisher"];
-		    	$object['Category'] = $row["category"];
-		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['Price'] = $row["price"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -364,7 +306,8 @@
 	function searchForBook($search_key){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
+		//SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn`
+		$sql = " SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%' GROUP BY b.`isbn` " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
@@ -392,48 +335,7 @@
 		$conn->close();
 		return(json_encode($arrayObject)); //return value
 	}
-
-
-	/**
-	 * @searchForBook : This function will search for a particular book based on the users criteria. This function will not return any action items.
-	 * @author : Mohan, Bala
-	 *
-	 * @param : string - search_key
-	 *
-	 * @return/outcome : Returns a json arrayobject where it consists the record of particular book.
-	 */
-	function searchForBookInIndex($search_key){
-		$arrayObject = array();
-		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%'" ;
-		$result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-		    // output data of each row
-		    while($row = $result->fetch_assoc()) {		    	
-		    	$isbn = $row["isbn"];
-		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
-		    	$result_isbn = $conn->query($sql);
-		    	$row_isbn = $result_isbn->fetch_assoc();
-				$object = array();
-		    	$object['Isbn'] = $row["isbn"];
-		    	$object['Book name'] = $row["book_name"];
-		    	$object['Author name'] = $row["author_name"];
-		    	$object['Edition'] = $row["edition"];
-		    	$object['Publisher'] = $row["publisher"];
-		    	$object['Category'] = $row["category"];
-		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
-		    	$object['Price'] = $row["price"];
-		    	array_push($arrayObject, $object);
-		    }
-		} else {
-		    return 0; 
-		}
-
-		$conn->close();
-		return(json_encode($arrayObject)); //return value
-	}
-
-
+	
 	/**
 	 * @searchForMember : This function will search for a particular member based on the users criteria.
 	 * @author : Mohan, Bala
@@ -447,7 +349,6 @@
 		$conn = connection();
 		$sql = " SELECT * FROM tbl_members WHERE mem_id LIKE '$search_key%' || LOWER(mem_name) LIKE '$search_key%' " ;
 		$result = $conn->query($sql);
-
 		if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
@@ -527,15 +428,8 @@
 	 */
 	function requestingMembership($name, $phoneNumber, $emailId, $dob, $gender, $membershipType, $hNo, $street, $place, $city, $zip){
 		$conn = connection();
-		if($membershipType == "Platinum"){
-			$membershipId = 1;
-		}elseif ($membershipType == "Gold") {
-			$membershipId = 2;
-		}else{
-			$membershipId = 3;
-		}
 
-		$sql = "INSERT INTO tbl_mem_request (mem_name, mem_mobileno, mem_email, mem_dob, mem_gender,addr_hNo, addr_street, addr_city, addr_state, addr_pincode,  ms_id) VALUES ('$name', '$phoneNumber', '$emailId','$dob', '$gender','$hNo', '$street', '$place', '$city', '$zip', '$membershipId')";
+		$sql = "INSERT INTO tbl_mem_request (mem_name, mem_mobileno, mem_email, mem_dob, mem_gender,addr_hNo, addr_street, addr_city, addr_state, addr_pincode,  ms_id) VALUES ('$name', '$phoneNumber', '$emailId','$dob', '$gender','$hNo', '$street', '$place', '$city', '$zip', '$membershipType')";
 		if ($conn->query($sql) === FALSE) {
 			return "Error: " . $sql . "<br>" . $conn->error;
 		}else{
@@ -779,7 +673,7 @@
 		    $row = $result->fetch_assoc();
 	    	$extension = $row["extension_days"];
 		} else {
-		    return "0 results";
+		    return 0;
 		}
 
 		$date = date('Y-m-d', strtotime("+$extension days", strtotime($returndate)));
@@ -833,7 +727,7 @@
 		    $expiry = $row["expiry_on"];
 
 		}else {
-			return "0 Results";
+			return 0;
 		}
 		if($extensionType == 1){
 			//$membershipId = 1;
@@ -889,23 +783,20 @@
 	 *
 	 * @return/outcome : The data is saved in the issued books table in the database.
 	 */
+
+
+
 	function issueBook($memberId, $bookId){
 		$conn = connection();
-		//$sql = "INSERT INTO sampleTable (id, name, date) VALUES ($id, '$name', CURDATE())";
-		$sql = "SELECT book_id FROM tbl_issued_books WHERE book_id = $bookId  ";
+		$sql = " INSERT INTO `tbl_issued_books`(`mem_id`, `book_id`, `issue_date`, `return_expected`) SELECT * FROM (SELECT '$memberId', '$bookId', '$issuedDate', '$returnDate') AS tmp WHERE NOT EXISTS (SELECT `book_id` FROM `tbl_issued_books` WHERE `book_id` = '$bookId') ";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0){
-			return "You have already issued this book";
+			return "Book is issued successfully
+			";
 		}else{
-			$sql = "INSERT INTO tbl_issued_books ( mem_id, book_id, issue_date,return_expected ) VALUES ( '$memberId', '$bookId', '$issuedDate', '$returnDate')";
-			if ($conn->query($sql) === TRUE) {
-			    return "New issued book record created successfully";
-			} else {
-			    return "Error: " . $sql . "<br>" . $conn->error;
-			}
-			
-			$conn->close();
+			return "You have already issued this book";
 		}
+		$conn->close();
 
 	}
 
@@ -921,7 +812,7 @@
 	function returningBook($bookId){
 		$conn = connection();
 		$return_actual = date('Y-m-d');
-		$sql = "UPDATE tbl_issued_books SET return_actual = '$return_actual'  WHERE book_id = '$bookId' ";
+		$sql = " UPDATE tbl_issued_books SET return_actual = '$return_actual'  WHERE book_id = '$bookId' ";
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;
 		}
@@ -942,11 +833,11 @@
 		$diff = $return_actual_new->diff($return_expected_new)->format("%a");
 		if($return_actual_new > $return_expected_new){
 		  	$penality = $diff*10;
-		  	$sql = "UPDATE tbl_issued_books SET penality = '$penality'  WHERE book_id = '$bookId' ";
+		  	$sql = " UPDATE tbl_issued_books SET penality = '$penality'  WHERE book_id = '$bookId' ";
 		  	$result = $conn->query($sql);
 			return 'failed';
 		}else {
-			$sql = "DELETE FROM tbl_issued_books WHERE book_id = '$bookId'";
+			$sql = " DELETE FROM tbl_issued_books WHERE book_id = '$bookId'";
 		}
 		
 		if ($conn->query($sql) === FALSE) {
@@ -1029,18 +920,16 @@
 	 *
 	 * @return/outcome : Returns a json object where it consists all the records of membership renewal requests.
 	 */
+
+
 	function viewMembershipRenewalRequests(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_membership_renewal_request" ;
+		$sql = " SELECT a.mem_id, a.mem_name, b.expiry_on, b.ms_id  FROM tbl_membership_renewal_request a JOIN tbl_members b WHERE a.mem_id = b.mem_id" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
 		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
-		    	
-		    	$mem_id = $row["mem_id"];
-		    	
-		    	$sql = " SELECT * FROM tbl_members WHERE mem_id = $mem_id ";
 		    	$result_id = $conn->query($sql);
 		    	$row_mem_id = $result_id->fetch_assoc();
 				$object = array();
