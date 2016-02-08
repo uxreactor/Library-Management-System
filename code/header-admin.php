@@ -52,7 +52,7 @@
                                 <li class="<?php echo ($page_name=='admin-manage-book.php')?'active':'';?>"><a href="admin-manage-book.php">Manage Issued Books</a></li>
                             </ul>
                         </li>    
-                        <li class="dropdown <?php echo ($page_name=='admin-new-book.php')?'active':'';?>" > <a>Requests<i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown " > <a>Requests<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
                                 <li class="<?php echo ($page_name=='admin-new-book.php')?'active':'';?>"><a href="admin-new-book.php">New Books</a></li>
                                 <li class="<?php echo ($page_name=='admin-accept-membership.php')?'active':'';?>"><a href="admin-accept-membership.php">New Memberships</a></li>
