@@ -164,7 +164,7 @@ function pagination(array,page_size,page_no){
    */
 
 function paginationView(array,page_size){
-  if(array.length < 10){
+  if(array.length <= 10 || !array.length){
     pagination(array,page_size,1);
     return false;
   }
@@ -188,7 +188,7 @@ function paginationView(array,page_size){
     var page_no = current_selection.text();
     current_selection.addClass('active');
     if(!page_no){
-      // first element of pagination
+      //first element of pagination
     }else{
       pagination(array,page_size,page_no);
     }
