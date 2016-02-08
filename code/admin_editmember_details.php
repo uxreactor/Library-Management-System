@@ -72,11 +72,12 @@
                 <span class="error"></span>               
             </div>
             <span style=" font-size:18px;"> Membership type</span>
-            <select class="select_list" id="membership_type" style=" width:23%;">
-                <option>Platinum</option>
-                <option>Gold</option>
-                <option>Silver</option>
-            </select><img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help"style="width:20px;height:20px; margin-left:1%;">
+            <select class="select_list" id="membership_type" style="width:23%;">
+                <option <?php if($memberDetails[0]["Membership ID"] == 1){ echo "selected";}; ?> value="Platinum">Platinum</option>
+                <option <?php if($memberDetails[0]["Membership ID"] == 2){ echo "selected";}; ?> value="Gold">Gold</option>
+                <option <?php if($memberDetails[0]["Membership ID"] == 3){ echo "selected";}; ?> value="Silver">Silver</option>
+            </select>
+            <img src="images/download.png" alt="Help" data-toggle="modal" data-target="#help"style="width:20px;height:20px; margin-left:1%;">
             <br/><br />
             <div class="modal fade" id="help" role="dialog">
             <div class="modal-dialog">

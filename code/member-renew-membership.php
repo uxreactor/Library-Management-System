@@ -17,15 +17,15 @@
             </div>
             <div class="form-group" id="mem_name_label">
                 <label  >Member name </label>
-                <input type="text" class="form-control" id="memname" value="<?php echo $memberName ?>" readonly/>
+                <input type="text" class="form-control" id="memname" value="<?php echo $memberName[0]["mem_name"] ?>" readonly/>
                 <span></span>
             </div>
             <div class="form-group" >
                 <span style=" font-size:18px;"> Membership type</span>
                 <select class="select_list">
-                    <option>Platinum</option>
-                    <option>Gold</option>
-                    <option>Silver</option>
+                    <option <?php if( $memberName[0]["ms_id"]== 1){ echo "selected";}; ?> value="Platinum">Platinum</option>
+                    <option <?php if( $memberName[0]["ms_id"]== 2){ echo "selected";}; ?> value="Gold">Gold</option>
+                    <option <?php if( $memberName[0]["ms_id"]== 3){ echo "selected";}; ?> value="Silver">Silver</option>
                 </select>
             </div>
             <input type="submit" value="Submit" class="btn btn-default btn-lg btn-info"/>

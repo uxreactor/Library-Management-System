@@ -1144,13 +1144,17 @@
 	 * @return/outcome : It will read the member name and returns.
 	 */
 	function getMemberName($memberId){
+		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT mem_name FROM tbl_members WHERE mem_id=$memberId;";
+		$sql = " SELECT mem_name,ms_id FROM tbl_members WHERE mem_id=$memberId;";
 		$arrayObject;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
-        	$row = $result->fetch_assoc(); 
-	    	$arrayObject = $row["mem_name"];	
+        	$row = $result->fetch_assoc();
+        	$object = array(); 
+	    	$object["mem_name"] = $row["mem_name"];	
+	    	$object["ms_id"] = $row["ms_id"];	
+		    array_push($arrayObject, $object);	
 	    	return $arrayObject;
 		}else{
 			return 0; // return value
@@ -1254,6 +1258,7 @@
 		    	$object['Mail ID'] = $row["mem_email"];
 		    	$object['Dob'] = $row["mem_dob"];
 		    	$object['Gender'] = $row["mem_gender"];
+			   	$object['Membership ID'] = $row["ms_id"];
 		    	$object['H NO'] = $row["addr_hno"];
 		    	$object['Street'] = $row["addr_street"];
 		    	$object['City'] = $row["addr_city"];
