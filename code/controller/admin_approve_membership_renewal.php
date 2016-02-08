@@ -4,4 +4,4 @@ s<?php
 	$memId = $_POST['memId'];
 	$search_member = approveMembershipRenewal($memId,$msId);
 	echo $search_member;
-?>s
+?>

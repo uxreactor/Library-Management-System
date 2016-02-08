@@ -721,15 +721,22 @@
 	 */
 		function approveMembershipRenewal($memId,$extensionType){
 		$conn = connection();
+		$sql = "SELECT expiry_on FROM tbl_members WHERE mem_id='$memId'";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+		    $row = $result->fetch_assoc();
+	    	$expirydate = $row["expiry_on"];
+		}
 		if($extensionType == 1){
 			//$membershipId = 1;
-			$expiry = date('Y-m-d', strtotime("+12 months", strtotime($expiry)));
+			$expiry = date('Y-m-d', strtotime("+12 months", strtotime($expirydate)));
+			echo $expiry;
 		}elseif ($extensionType == 2) {
 			//$membershipId = 2;
-			$expiry = date('Y-m-d', strtotime("+6 months", strtotime($expiry)));
+			$expiry = date('Y-m-d', strtotime("+6 months", strtotime($expirydate)));
 		}else{
 			//$membershipId = 3;
-			$expiry = date('Y-m-d', strtotime("+3 months", strtotime($expiry)));
+			$expiry = date('Y-m-d', strtotime("+3 months", strtotime($expirydate)));
 		}
 		$sql = "UPDATE tbl_members SET expiry_on = '$expiry' WHERE mem_id='$memId'";
 		if ($conn->query($sql) === FALSE) {
