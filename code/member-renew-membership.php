@@ -44,7 +44,7 @@
                         <span id="confirm-text">Membership renewal request has been sent Successfully</span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                      <button type="button" class="btn btn-info OK" data-dismiss="modal">OK</button>
                     </div>
                 </div>  
             </div>
@@ -74,7 +74,8 @@
                         console.log(response);
                         //window.location = 'member.php';
                         $("#button").click();
-                        $('#confirm-text').text("Membership renewal request is sent Succeesfully" );
+                        $('#confirm-text').css('color', 'green');
+                        $('#confirm-text').text("Membership renewal request sent Succeesfully" );
                         $(document).on("click",".OK",function(){                
                             window.location = 'member.php';
                         });

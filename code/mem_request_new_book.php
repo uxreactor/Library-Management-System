@@ -35,7 +35,7 @@
                         <span id="confirm-text">New Book request has sent Successfully</span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                      <button type="button" class="btn btn-info OK" data-dismiss="modal">OK</button>
                     </div>
                 </div>  
             </div>
@@ -73,6 +73,7 @@
                         console.log(response);
                         //window.location = 'member.php';
                         $("#button").click();
+                        $('#confirm-text').css('color', 'green');
                         $('#confirm-text').text("Request New book has sent Successfully" );
                         $(document).on("click",".OK",function(){                
                             window.location = 'member.php';
