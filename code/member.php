@@ -7,14 +7,7 @@
 
     <!--/#header-->
     <div class="container">
-        <div class="input-group col-xs-6 col-xs-offset-3">
-            <input type="text" class="textbox_size form-control" placeholder="Search book by authorname/bookname" />
-            <span class="input-group-btn">
-                <button class="btn btn-default btn-lg" type="button">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span>
-        </div>
+       
     <br/>
     <br/>
     <!--/#searchbar-->

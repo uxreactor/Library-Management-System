@@ -40,7 +40,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="index.php" style="margin-top:10px;">
+                    <a class="navbar-brand" href="member.php" style="margin-top:10px;">
                         <h1>UXR LIBRARY</h1>
                     </a>                  
                 </div>
@@ -51,7 +51,7 @@
                         <li class="<?php echo ($page_name=='member.php')?'active':'';?>"><a href="member.php">My books</a></li>
                         <li class="<?php echo ($page_name=='member-renew-membership.php')?'active':'';?>"><a href="member-renew-membership.php">Renew Membership</a></li> 
                         <li class="<?php echo ($page_name=='mem_request_new_book.php')?'active':'';?>"><a href="mem_request_new_book.php">Request New Book</a></li>  
-                        <li class="<?php echo ($page_name=='mem_request_new_book.php')?'active':'';?>"><a href="controller/logout.php">LOGOUT</a></li>                                     
+                        <li><a href="controller/logout.php">LOGOUT</a></li>                                     
 
                     </ul>
                 </div>

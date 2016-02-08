@@ -37,7 +37,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                   <a class="navbar-brand" href="index.php" style="margin-top:10px;">
+                   <a class="navbar-brand" href="our-library.php" style="margin-top:10px;">
                         <h1>UXR LIBRARY</h1>
                     </a>  
                 </div>
@@ -46,13 +46,13 @@
                         <?php include ("active-menu-item.php");?>
                         <li class="<?php echo ($page_name=='our-library.php')?'active':'';?>"><a href="our-library.php">Our library</a></li>
                         <li class="<?php echo ($page_name=='admin-add-book.php')?'active':'';?>"><a href="admin-add-book.php">Add New Book</a></li>
-                        <li class="dropdown"><a>Issue<i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown "><a>Issue<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
                                 <li class="<?php echo ($page_name=='admin-issue-book.php')?'active':'';?>"><a href="admin-issue-book.php">Issue New Book</a></li>
                                 <li class="<?php echo ($page_name=='admin-manage-book.php')?'active':'';?>"><a href="admin-manage-book.php">Manage Issued Books</a></li>
                             </ul>
                         </li>    
-                        <li class="dropdown "> <a>Requests<i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown <?php echo ($page_name=='admin-new-book.php')?'active':'Requests';?>" > <a>Requests<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
                                 <li class="<?php echo ($page_name=='admin-new-book.php')?'active':'';?>"><a href="admin-new-book.php">New Books</a></li>
                                 <li class="<?php echo ($page_name=='admin-accept-membership.php')?'active':'';?>"><a href="admin-accept-membership.php">New Memberships</a></li>
