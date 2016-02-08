@@ -202,7 +202,8 @@
                     data: member_details,
                     success: function(response){
                         if(response==1){
-                            $('#input_email_label span').text('Email is already exist');                            
+                            $('#input_email_label span').text('Email is already exist'); 
+                            $('#input_email_label span').css("color","#f00");                           
                         }else{
                             $("#button").click();
                             $(".table").hide();
