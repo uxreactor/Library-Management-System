@@ -1325,7 +1325,7 @@
 	    	$object['author'] = $row["author_name"];
 	    	$object['publisher'] = $row["publisher"];
 		} else {
-			return 0;
+			return FALSE;
 		}
 
 		$conn->close();
@@ -1358,7 +1358,7 @@
 	    	$object['days_limit'] = $row["ms_days_limit"];
 	    	$object['penalty'] = $row["penalty"];
 		} else {
-			return 0;
+			return FALSE;
 		}
 
 		$conn->close();
