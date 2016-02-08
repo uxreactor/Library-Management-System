@@ -176,9 +176,9 @@
             if(select == "Books"){
                 $(".NO").show();
                 $('.YES').text("YES");
-                $('.modal-title').text("Book details");
+                $('.modal-title').text("Delete confirmation");
                 $('#confirm-text').css('color', 'red');
-                $('#confirm-text').text("Are you sure to delete the "+ bookname+" book from library" );
+                $('#confirm-text').text("Are you sure to delete the book "+ bookname+" from the library" );
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });
@@ -188,7 +188,7 @@
                 $('.modal-title').text("Membership type details" );
                 $('#confirm-text').css('color', 'red');
                 isbn = $tds[4].textContent;
-                $('#confirm-text').text("Are you sure to delete the "+ member+" from library" ); 
+                $('#confirm-text').text("Are you sure to delete the member "+ member+" from library" ); 
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });     
@@ -206,7 +206,7 @@
                         $('.modal-title').text("Delete Record" );
                         $('.YES').text("OK");
                         $('#confirm-text').css('color', 'red');
-                        $('#confirm-text').text("One record deleted successfully" );
+                        $('#confirm-text').text(member+" Record has been deleted successfully" );
                         $(document).on("click",".YES",function(){                
                             window.location = 'our-library.php';
                         });

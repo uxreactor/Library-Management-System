@@ -38,7 +38,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Renewe Membership Extension</h4>
+                      <h4 class="modal-title">Membership Renewal Request</h4>
                     </div>
                     <div class="modal-body">
                         <span id="confirm-text">Membership renewal request has been sent Successfully</span>
@@ -75,7 +75,7 @@
                         //window.location = 'member.php';
                         $("#button").click();
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text("Membership renewal request sent Succeesfully" );
+                        $('#confirm-text').text("Your membership renewal request has been sent succeesfully" );
                         $(document).on("click",".OK",function(){                
                             window.location = 'member.php';
                         });

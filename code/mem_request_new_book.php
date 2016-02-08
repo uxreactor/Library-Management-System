@@ -70,11 +70,12 @@
                     type: $('form').attr('method'),
                     data: new_book_details,
                     success: function(response){
+                        //var $book_name = document.getElementById('book_name').text(); 
                         console.log(response);
                         //window.location = 'member.php';
                         $("#button").click();
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text("Request New book has sent Successfully" );
+                        $('#confirm-text').text("Your request for new book has been sent successfully" );
                         $(document).on("click",".OK",function(){                
                             window.location = 'member.php';
                         });

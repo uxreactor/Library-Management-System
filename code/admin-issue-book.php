@@ -1,5 +1,5 @@
 <?php 
-    include ("header-admin.php");
+    include ("header-admin.php"); 
     require 'controller/session.php';
     if(checkSession()){
 ?>
@@ -105,6 +105,7 @@
                     if(response){
                         response = jQuery.parseJSON(response);
                         $('#book_name').val(response.bookname);
+                        book_name = val(response.bookname);
                         $('#book_author').val(response.author);
                     } else {
                         body = document.getElementById('book_id_label');
@@ -161,7 +162,7 @@
                 issue_date: dateFormat('yyyy-mm-dd',$('#issue_date').val()),
                 return_date: dateFormat('yyyy-mm-dd',$('#return_date').val())
             };
-
+            var book_name = document.getElementById('book_name');
             if(submitToServer(validation_message)){
                 $.ajax({
                     url: $('form').attr('action'),
@@ -170,7 +171,7 @@
                     success: function(response){
                         //alert(response);
                         $("#button").click();
-                        $('.modal-title').text("Issue Book");
+                        $('.modal-title').text("Issue a Book");
                         $('#confirm-text').css('color', 'green');
                         $('#confirm-text').text("Book issued successfully");
                         $(document).on("click",".OK",function(){ 

@@ -209,7 +209,7 @@
                             $('.modal-title').text("Apply Membership");
                             $('#confirm-text').show();
                             $('#confirm-text').css('color', 'green');
-                            $('#confirm-text').text("New membership request sent successfully");
+                            $('#confirm-text').text("Your membership request has been sent successfully");
                             $(document).on("click",".OK",function(){ 
                                 window.location = 'index.php';
                             });
