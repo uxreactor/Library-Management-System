@@ -134,7 +134,7 @@
             else{
                 if (success == 1) {
                     body = document.getElementById('admin_password2');
-                    writeError('Please check password',body);
+                    writeError("The passwords you entered did not match",body);
                 }else {
                     body = document.getElementById('admin_password1');
                     writeError(validation_message[0],body);

@@ -105,12 +105,13 @@
                     if(response){
                         response = jQuery.parseJSON(response);
                         $('#book_name').val(response.bookname);
-                        book_name = val(response.bookname);
                         $('#book_author').val(response.author);
                     } else {
                         body = document.getElementById('book_id_label');
                         writeError('Invalid Book Id',body);
-                        $('#book_id').focus();
+                        $('#book_name').val("");
+                        $('#book_author').val("");
+                        //$('#book_id').focus();
                     }
                 },
                 error: function(xhr, desc, err){
@@ -138,6 +139,10 @@
                     } else {
                         body = document.getElementById('mem_id_label');
                         writeError('Invalid Member Id',body);
+                        $('#member_name').val("");
+                        $('#member_type').val("");
+                        $('#issue_date').val("");
+                        $('#return_date').val("");
                     }
                 },
                 error: function(xhr, desc, err){
@@ -169,11 +174,13 @@
                     data: issue_book,
                     success: function(response){
                         //alert(response);
+                        var book_name = document.getElementById('book_name').value;
                         $("#button").click();
                         var book_name = document.getElementById('book_name').value;
                         $('.modal-title').text("Issue a Book");
                         $('#confirm-text').css('color', 'green');
                         $('#confirm-text').text(book_name+"Book issued successfully");
+
                         $(document).on("click",".OK",function(){ 
                             window.location = 'our-library.php';
                         });
@@ -183,7 +190,7 @@
                         console.log(desc);
                     }
                 });
-            }else{
+            }else {
                 body = document.getElementById('book_id_label');
                 writeError(validation_message[0],body);
                 body = document.getElementById('mem_id_label');
