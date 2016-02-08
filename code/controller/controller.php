@@ -628,18 +628,21 @@
 	 *
 	 * @return/outcome : It will display all the requests for new book.
 	 */
+
+	
+
 	function viewNewBookRequests(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = "SELECT * FROM tbl_new_book_request";
+		$sql = "SELECT book_name, author_name, COUNT(*) AS count FROM tbl_new_book_request GROUP BY book_name, author_name";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
-		    	$object['Member Id'] = $row["mem_id"];
 		    	$object['Book name'] = $row["book_name"];
 		    	$object['Author name'] = $row["author_name"];
+		    	$object['No of Requests'] = $row["count"];
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -877,7 +880,7 @@
 		    	$object['Mobile No'] = $row["mem_mobileno"];
 		    	$object['Email Id'] = $row["mem_email"];
 		    	$object['Gender'] = $row["mem_gender"];
-		    	$object['#'] = $row["addr_hno"];
+		    	$object['H No'] = $row["addr_hno"];
 		    	$object['Street'] = $row["addr_street"];
 		    	$object['City'] = $row["addr_city"];
 		    	$object['State'] = $row["addr_state"];
@@ -919,15 +922,12 @@
         if ($result->num_rows > 0) {
             // output data of each row
 		    while($row = $result->fetch_assoc()) {		// Used to fetch the data from database.    	
-		    	$result_id = $conn->query($sql);
-		    	$row_mem_id = $result_id->fetch_assoc();
 				$object = array();
-		    	$object['MemID'] = $row_mem_id["mem_id"];
-		    	$object['Name'] = $row_mem_id["mem_name"];
-		    	$object['Expiryon'] = $row_mem_id["expiry_on"];
-		    	$object['MSID'] = $row_mem_id["ms_id"];
+		    	$object['Mem ID'] = $row["mem_id"];
+		    	$object['Name'] = $row["mem_name"];
+		    	$object['Expiry on'] = $row["expiry_on"];
+		    	$object['MS ID'] = $row["ms_id"];
 		    	$object['Action'] = "Approve,Reject";
-
 		    	array_push($arrayObject, $object);
 		    }
 		} else {
@@ -984,7 +984,7 @@
 	function viewDueDateExtensions(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = "SELECT * FROM due_date_extension";
+		$sql = "SELECT a.book_id, a.mem_id, b.mem_name AS name, a.extension_days, b.ms_id FROM due_date_extension a JOIN tbl_members b WHERE a.mem_id = b.mem_id";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 		    // output data of each row
@@ -992,6 +992,7 @@
 		    	$object = array();
 		    	$object['Book ID'] = $row["book_id"];
 		    	$object['Mem ID'] = $row["mem_id"];
+		    	$object['Member Name'] = $row["name"];
 		    	$object['Extension days'] = $row["extension_days"];
 		    	$object['Action'] ="Approve,Reject";
 		    	array_push($arrayObject, $object);
