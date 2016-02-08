@@ -140,7 +140,8 @@
                             }
                             $("#button").click();
                             $('#confirm-text').css('color', 'green');
-                            $('#confirm-text').text("New book added successfully" );
+                            var book_name = document.getElementById('book_name').value;
+                            $('#confirm-text').text(book_name+"New book added successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';
                             });

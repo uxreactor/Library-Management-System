@@ -151,8 +151,9 @@
                             console.log(response);
                             
                             $("#button").click();
+                            var book_name = document.getElementById('book_name').value;
                             $('#confirm-text').css('color', 'green');
-                            $('#confirm-text').text("Book details updated successfully" );
+                            $('#confirm-text').text(book_name+"book details updated successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';
                             });

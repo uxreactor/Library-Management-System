@@ -73,9 +73,10 @@
                         //var $book_name = document.getElementById('book_name').text(); 
                         console.log(response);
                         //window.location = 'member.php';
+                        var book_name = document.getElementById('book_name').value;
                         $("#button").click();
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text("Your request for new book has been sent successfully" );
+                        $('#confirm-text').text("Your request for "+book_name+" book has been sent successfully" );
                         $(document).on("click",".OK",function(){                
                             window.location = 'member.php';
                         });

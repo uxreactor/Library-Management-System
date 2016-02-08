@@ -162,7 +162,6 @@
                 issue_date: dateFormat('yyyy-mm-dd',$('#issue_date').val()),
                 return_date: dateFormat('yyyy-mm-dd',$('#return_date').val())
             };
-            var book_name = document.getElementById('book_name');
             if(submitToServer(validation_message)){
                 $.ajax({
                     url: $('form').attr('action'),
@@ -171,9 +170,10 @@
                     success: function(response){
                         //alert(response);
                         $("#button").click();
+                        var book_name = document.getElementById('book_name').value;
                         $('.modal-title').text("Issue a Book");
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text("Book issued successfully");
+                        $('#confirm-text').text(book_name+"Book issued successfully");
                         $(document).on("click",".OK",function(){ 
                             window.location = 'our-library.php';
                         });
