@@ -193,7 +193,7 @@
                 });     
             } 
            function delete_details(isbn) {                       
-                key_isbn = {isbn : isbn};
+                key_isbn = {isbn : isbn, type : select};
                 $.ajax({             
                     url: 'controller/delete_book.php',
                     type: 'post',
@@ -215,30 +215,7 @@
                     }
 
                 });
-            }
-            function delete_member(memberId) {                       
-                key_isbn = {isbn : isbn};
-                $.ajax({             
-                    url: 'controller/delete_book.php',
-                    type: 'post',
-                    data: key_isbn,
-                    success: function(response){   
-                        console.log(response);
-                        $("#button").click();
-                        $(".NO").hide();
-                        $('.modal-title').text("Delete Record" );
-                        $('.YES').text("OK");
-                        $('#confirm-text').text("Your record deleted successfully" );
-                        $(document).on("click",".YES",function(){                
-                            window.location = 'our-library.php';
-                        });
-                    },
-                    error: function(xhr, desc, err){
-                        //console.log(desc);
-                    }
-
-                });
-            }  
+            } 
         }); 
               
     </script>

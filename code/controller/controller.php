@@ -1222,11 +1222,10 @@
 
 	function deleteMember($memberId) {
 		$conn = connection();
-
-			$sql = "DELETE FROM tbl_members a JOIN tbl_login b WHERE mem_id = '$memberId'";
+			$sql = "DELETE FROM tbl_members a JOIN tbl_login b WHERE a.`mem_id` = '$memberId' AND b.`username` = a.'mem_email'";
 			$conn->query($sql);		   
     	$conn->close();
-	     return 1 ;
+	    return 1 ;
 	}
 
 
