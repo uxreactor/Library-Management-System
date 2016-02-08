@@ -76,11 +76,7 @@
             $tds = $row.find("td");       
             $bookId = $tds[0].textContent;
             $memId = $tds[1].textContent;
-            $(this).val('Approved');
-            $(this).css({
-              background: '#449D44'
-            });
-                $.ajax({             
+            $.ajax({             
                 url: 'controller/submit_approve_extension.php',
                 type: 'post',
                 data:{ bookId: $bookId, memId: $memId },
@@ -108,10 +104,6 @@
                 $tds = $row.find("td");       
                 $bookId = $tds[0].textContent;
                 $memId = $tds[1].textContent;
-                $(this).val('Rejected');
-                 $(this).css({
-                  background: '#D9534F'
-                });
                 $(".NO").show();
                 $('.YES').css("background-color","#fff");
                 $('.YES').text("YES");

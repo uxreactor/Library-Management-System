@@ -64,8 +64,7 @@
             $tds = $row.find("td");       
             $memId = $tds[0].textContent;
             $msId = $tds[3].textContent;
-            $(this).val('Approved');
-                $.ajax({             
+            $.ajax({             
                 url: 'controller/admin_approve_membership_renewal.php',
                 type: 'post',
                 data:{ msId: $msId, memId: $memId },
@@ -94,10 +93,6 @@
                 var $row = $(this).closest("tr"),       
                 $tds = $row.find("td");       
                 $memId = $tds[0].textContent;
-                $(this).val('Rejected');
-                 $(this).css({
-                  background: '#D9534F'
-                });
                 $(".NO").show();
                 $('.YES').css("background-color","#fff");
                 $('.YES').text("YES");
