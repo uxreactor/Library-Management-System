@@ -2,6 +2,7 @@
     include ("header-member.php");
     require 'controller/session.php';
     if(checkSession()){
+        $mem_id=checkSession();
 ?>
 
     <!--/#header-->
@@ -54,9 +55,10 @@
                     { type : 'text' , value: $('#book_name').val() , errorMessage:'Book name is required' },
                     { type:'text' , value: $('#author_name').val() , errorMessage:'Author name is required' }
             ];
+            
+            
             new_book_details = {
-
-                mem_id : 23,
+                mem_id :<?php echo $mem_id ?>,
                 book_name:$('#book_name').val(),
                 author_name:$('#author_name').val()
             };  

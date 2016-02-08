@@ -10,14 +10,14 @@
     <!--/#header-->
     <div class="container">
         <h2>Book Request Extension </h2>
-        <form name="login" method="post" action="" onsubmit="return submitForm();">
+        <form name="login" method="post" action="controller/validate_request_duedate_extension.php" onsubmit="return submitForm();">
             <div class="form-group" >
                 <label >Member ID</label>
-                <input type="text" class="form-control" readonly value="<?php echo $member_id ?>" />
+                <input type="text" id="memId" class="form-control" readonly value="<?php echo $member_id ?>" />
             </div>
             <div class="form-group" >
                 <label >Book ID</label>
-                <input type="text" class="form-control" readonly value="<?php echo $bookId ?>" />
+                <input type="text" id="bookId" class="form-control" readonly value="<?php echo $bookId ?>" />
             </div>
             <div class="form-group" >                
                 <label >Return date</label>
@@ -62,13 +62,13 @@
             var validation_message;
             login = [{ type : 'text' , value: $('#extention_days').val() , errorMessage:'Duration is required'}];
             validation_message = validateForm (login);  
+            var renew_details = {memId: $('#memId').val(),bookId: $('#bookId').val(),extention_days: $('#extention_days').val()};
             if(submitToServer(validation_message)){
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
-                    data: login,
+                    data: renew_details,
                     success: function(response){
-                        //window.location = 'member.php';
                         $("#button").click();
                         $('#confirm-text').text("Due date extension request is sent Successfully" );
                         $(document).on("click",".OK",function(){                

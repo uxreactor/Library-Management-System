@@ -1,9 +1,12 @@
 <?php
 
 	require 'controller.php';
-	$book_name = $_POST['book_name'];
-	$author_name = $_POST['author_name'];
-	$validate=requestingForDueDateExtension($book_name, $author_name);
+	$memberid = $_POST['memId'];
+	$bookid = $_POST['bookId'];
+	$extensiondays = $_POST['extention_days'];
+	$validate=requestingForDueDateExtension($memberid, $bookid, $extensiondays);
 	echo $validate;
+
+
 
 ?>

@@ -307,15 +307,11 @@
 		$arrayObject = array();
 		$conn = connection();
 		//SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn`
-		$sql = " SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%' GROUP BY b.`isbn` " ;
+		$sql = " SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`) AS 'qty' FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` WHERE LOWER(book_name) LIKE '$search_key%' || LOWER(author_name) LIKE '$search_key%' || LOWER(category) LIKE '$search_key%' GROUP BY b.`isbn` " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {		    	
-		    	$isbn = $row["isbn"];
-		    	$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
-		    	$result_isbn = $conn->query($sql);
-		    	$row_isbn = $result_isbn->fetch_assoc();
 				$object = array();
 		    	$object['ISBN'] = $row["isbn"];
 		    	$object['Book name'] = $row["book_name"];
@@ -323,8 +319,8 @@
 		    	$object['Edition'] = $row["edition"];
 		    	$object['Publisher'] = $row["publisher"];
 		    	$object['Category'] = $row["category"];
-		    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
 		    	$object['Price'] = $row["price"];
+		    	$object['Quantity'] = $row["qty"];
 		    	$object['Action'] = "Edit,Delete";
 		    	array_push($arrayObject, $object);
 		    }
@@ -506,24 +502,16 @@
 	 *
 	 * @return/outcome : It will save the data in the databse and returns a string with successful message.
 	 */
-	function requestingForNewBook($memberId,$bookName, $authorName){
+
+
+	function requestingForNewBook($memberId,$bookName,$authorName){
 		$conn = connection();
-			$sql = "SELECT  * FROM tbl_new_book_request where  mem_id = $memberId";
-			$result = $conn->query($sql);
-			if ($result->num_rows > 0 ){
-				return "This book is already requested";
-			}else {
-				$sql = "INSERT INTO tbl_new_book_request (book_name, author_name,mem_id) VALUES ('$bookName', '$authorName',$memberId)";
-				if ($conn->query($sql) === FALSE) {
-			    return "Error: " . $sql . "<br>" . $conn->error;
-				} else{
-					return "New request added sucessfully";
-				}
-			}
-			
-			if ($conn->query($sql_select) === FALSE) {
-			    return "Error: " . $sql_select . "<br>" . $conn->error;
-			}
+		$sql = "INSERT INTO `tbl_new_book_request`(`book_name`, `author_name`, `mem_id`) SELECT * FROM (SELECT '$bookName','$authorName','$memberId') AS tmp WHERE NOT EXISTS (SELECT * FROM `tbl_new_book_request` WHERE `mem_id` = '$memberId')";
+		if ($conn->query($sql) === TRUE) {
+	    	return "New record created successfully";
+		} else {
+	    return "Error: " . $sql . "<br>" . $conn->error;
+		}
 		$conn->close();
 	}
 
@@ -539,29 +527,18 @@
 	 *
 	 * @return/outcome : It will save and update the duedate in the database and returns the successful message.
 		 */
+
+
 	function requestingForDueDateExtension($memberid, $bookid, $extensiondays){
 		$conn = connection();
 		//$sql = " SELECT ms_id FROM tbl_members WHERE mem_id = '$memberid' ";
-		$sql = "SELECT book_id FROM due_date_extension WHERE book_id = $bookid  ";
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0){
-			return "You have already requsted for duedate extension";
-		}else{
-			$sql = "INSERT INTO due_date_extension (mem_id, book_id, extension_days) VALUES ('$memberid',$bookid, $extensiondays)";
-
-			if ($conn->query($sql) === TRUE) {
-			    return "New request for duedate extension created successfully";
-			} else {
-			    return "Error: " . $sql . "<br>" . $conn->error;
-			}
-
-		
-			$conn->close();
+		$sql = "INSERT INTO `due_date_extension`(`mem_id`, `book_id`, `extension_days`) SELECT * FROM (SELECT '$memberid','$bookid',' $extensiondays') AS tmp WHERE NOT EXISTS (SELECT * FROM `due_date_extension` WHERE `book_id` = '$bookid')";
+		if ($conn->query($sql) === TRUE) {
+			return "New Duedate extension is requested";
+		} else {
+			return "Error: " . $sql . "<br>" . $conn->error;
 		}
-		
-
-
-		
+			$conn->close();	
 	}
 
 
@@ -578,6 +555,7 @@
 	function approveMembership($emailId){
 		$conn = connection();
 		$object = array();
+
 		$sql = "SELECT * FROM tbl_mem_request where mem_email='$emailId'";
 		$result = $conn->query($sql);
 		//print_r($result);
@@ -659,6 +637,7 @@
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
+		    	$object['Member Id'] = $row["mem_id"];
 		    	$object['Book name'] = $row["book_name"];
 		    	$object['Author name'] = $row["author_name"];
 		    	array_push($arrayObject, $object);
@@ -687,27 +666,16 @@
 	 */
 	function approveDueDateExtension($memberid, $bookid){
 		$conn = connection();
-		$sql = " SELECT return_expected FROM tbl_issued_books WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
-		$result = $conn->query($sql);
-		
+		$sql = " SELECT a.extension_days, b.return_expected FROM due_date_extension a JOIN tbl_issued_books b WHERE b.mem_id = '$memberid' AND a.book_id = '$bookid' ";
+		$result = $conn->query($sql);	
         if ($result->num_rows > 0) {
 		    // output data of each row
 		    $row = $result->fetch_assoc();
 	    	$returndate = $row["return_expected"];
-		} else {
-		    return 0;
-		}
-		$sql = " SELECT extension_days FROM due_date_extension WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
-		$result = $conn->query($sql);
-		
-        if ($result->num_rows > 0) {
-		    // output data of each row
-		    $row = $result->fetch_assoc();
 	    	$extension = $row["extension_days"];
 		} else {
 		    return 0;
 		}
-
 		$date = date('Y-m-d', strtotime("+$extension days", strtotime($returndate)));
 		$sql = "UPDATE tbl_issued_books SET return_expected = '$date'  WHERE mem_id = '$memberid' AND book_id = '$bookid' ";
 		if ($conn->query($sql) === TRUE) {
@@ -750,17 +718,6 @@
 	 */
 		function approveMembershipRenewal($memId,$extensionType){
 		$conn = connection();
-		$sql = "SELECT * FROM tbl_members where mem_id='$memId'";
-		$result = $conn->query($sql);
-		//print_r($result);
-		if ($result->num_rows > 0) {
-		    // output data of each row
-		    $row = $result->fetch_assoc();
-		    $expiry = $row["expiry_on"];
-
-		}else {
-			return 0;
-		}
 		if($extensionType == 1){
 			//$membershipId = 1;
 			$expiry = date('Y-m-d', strtotime("+12 months", strtotime($expiry)));
@@ -771,7 +728,6 @@
 			//$membershipId = 3;
 			$expiry = date('Y-m-d', strtotime("+3 months", strtotime($expiry)));
 		}
-
 		$sql = "UPDATE tbl_members SET expiry_on = '$expiry' WHERE mem_id='$memId'";
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;
@@ -841,6 +797,7 @@
 	 *
 	 * @return/outcome : The data is removed in the issued books.
 	 */
+
 	function returningBook($bookId){
 		$conn = connection();
 		$return_actual = date('Y-m-d');
@@ -1157,10 +1114,12 @@
 	 *
 	 * @return/outcome : It will read the member name and returns a arraobject.
 	 */
+
+
 	function getBookDetails($isbn){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT * FROM tbl_book_varities WHERE isbn ='$isbn'" ;
+		$sql = " SELECT a.*, COUNT(b.`isbn`) AS 'Qty'  FROM tbl_book_varities a LEFT JOIN tbl_all_books b on a.`isbn` ='$isbn' GROUP BY b.`isbn`" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 	    	$row = $result->fetch_assoc();
@@ -1172,10 +1131,7 @@
 	    	$object['Category'] = $row["category"];
 	    	$object['Book name'] = $row["book_name"];
 	    	$object['Author name'] = $row["author_name"];
-			$sql = " SELECT COUNT(isbn) FROM tbl_all_books WHERE isbn ='$isbn' ";
-		    $result_isbn = $conn->query($sql);
-		    $row_isbn = $result_isbn->fetch_assoc();
-	    	$object['Quantity'] = $row_isbn["COUNT(isbn)"];
+	    	$object['Quantity'] = $row["Qty"];
 	    	array_push($arrayObject, $object);
 		} else {
 		    return 0; 
