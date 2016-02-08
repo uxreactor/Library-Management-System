@@ -163,7 +163,8 @@
                         $('.yes').css("background-color","#5bc0de");
                         $('.yes').text("OK");
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text("Book returned successfully" );
+                        var book_name = $tds[1].textContent;
+                        $('#confirm-text').text(book_name+"Book returned successfully" );
                         $(document).on("click",".yes",function(){                
                             window.location = 'admin-manage-book.php';
                         });
@@ -176,7 +177,7 @@
                 }
             });  
         });
-    </script>     
+    </script>    
 </body>
 </html>
 <?php 
