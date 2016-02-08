@@ -98,10 +98,12 @@
             var select = document.getElementById('option').value;
             
             if(select == "Books"){
+                $("#search").attr("placeholder", "Enter bookname/ authorname/ category");
                 parent.childNodes[1].textContent = "All Books";
                 url = 'controller/load_all_books_in_library.php';
       
             } else if(select == "Members") {
+                $("#search").attr("placeholder", "Enter bookID/ memberID");
                 parent.childNodes[1].textContent = "All Members";
                 url = 'controller/load_all_members.php';
             }
