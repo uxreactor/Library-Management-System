@@ -5,5 +5,3 @@
 	$message=updatePassword($email,$password);
 	echo $message;
 ?>
-
-

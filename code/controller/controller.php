@@ -126,6 +126,26 @@
 		$conn->close();
 	}
 
+	/**
+	 * @userForgotPassword : This function will checks whether the email is exists or not
+	 * @author : Prabhakar
+	 *
+	 * @param : string - email id.
+	 *
+	 * @return/outcome : It will returns email if the data is valid else returns false.
+	 */
+	function userForgotPassword($email){
+		$conn = connection();
+		$sql = " SELECT username FROM tbl_login WHERE username = '$email'";
+		$result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+        	return $email; // return value
+		}else{
+			return 0; // return value
+		}
+		$conn->close();
+	}
+
 
 	/**
 	 * @memberForgotPassword : This function will checks whether the emeil is exists or not
@@ -161,6 +181,29 @@
 	function updatePassword($email,$password){
 		$conn = connection();
 		$sql = "UPDATE tbl_admin_login SET password='$password' WHERE username = '$email'";
+		if ($conn->query($sql) === TRUE) {
+			echo  $email.$password;
+			return 1;
+		}else{
+			return 0;
+		}
+		
+		$conn->close();
+	}
+
+	/**
+	 * @updatePassword : This function will update the password against the matched email id.
+	 * @author : Prabhakar,Anurag
+	 *
+	 * @param : string - email
+	 * @param : string - password
+	 *
+	 * @return/outcome : It will update the password record in the table tbl_login.
+	 */
+
+	function updatePasswordUser($email,$password){
+		$conn = connection();
+		$sql = "UPDATE tbl_login SET password='$password' WHERE username = '$email'";
 		if ($conn->query($sql) === TRUE) {
 			echo  $email.$password;
 			return 1;
