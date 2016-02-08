@@ -1002,13 +1002,14 @@
 	function viewIssuedBooks(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = "SELECT * FROM tbl_issued_books";
+		$sql = "SELECT a.book_id,a.mem_id,a.issue_date,a.return_expected,a.penality,c.book_name FROM tbl_issued_books a JOIN tbl_all_books b JOIN tbl_book_varities c WHERE a.book_id = b.book_id AND b.isbn = c.isbn";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		    	$object = array();
 		    	$object['Book ID'] = $row["book_id"];
+		    	$object['Book Name'] = $row["book_name"];
 		    	$object['Mem ID'] = $row["mem_id"];
 		    	$object['Issue date'] = $row["issue_date"];
 		    	$object['Return expected'] = $row["return_expected"];
