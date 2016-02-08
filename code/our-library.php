@@ -63,25 +63,6 @@
         var parent = document.getElementById('load-books');
         var books;
         var error = document.getElementById('book_name_label');
-        function postForm() {
-            $.ajax({             
-                url: 'controller/load_all_books_in_library.php',
-                type: 'post',
-                 success: function(response){
-                    //console.log(response);                       
-                    books = jQuery.parseJSON(response);
-                    viewData(books,parent);
-                    paginationView(books,10);  
-                },
-                error: function(xhr, desc, err){
-                    writeError('No results found',error);
-                }
-            });
-     
-        }
-        $(function() {
-            postForm();
-        });
         $(document).on("click",".Edit",function(){ 
             var select = document.getElementById('option').value;
             var $tr = $(this).closest('tr');
@@ -206,10 +187,33 @@
                 $('.modal-title').text("Membership type details" );
                 $('#confirm-text').text("Are you sure to delete the "+ member+" from library" ); 
                 $(document).on("click",".YES",function(){                
-                    delete_details(isbn);
+                    delete_member(isbn);
                 });     
             } 
            function delete_details(isbn) {                       
+                key_isbn = {isbn : isbn};
+                $.ajax({             
+                    url: 'controller/delete_book.php',
+                    type: 'post',
+                    data: key_isbn,
+                    success: function(response){   
+                        console.log(response);
+                        $("#button").click();
+                        $(".NO").hide();
+                        $('.modal-title').text("Delete Record" );
+                        $('.YES').text("OK");
+                        $('#confirm-text').text("Your record deleted successfully" );
+                        $(document).on("click",".YES",function(){                
+                            window.location = 'our-library.php';
+                        });
+                    },
+                    error: function(xhr, desc, err){
+                        //console.log(desc);
+                    }
+
+                });
+            }
+            function delete_member(memberId) {                       
                 key_isbn = {isbn : isbn};
                 $.ajax({             
                     url: 'controller/delete_book.php',

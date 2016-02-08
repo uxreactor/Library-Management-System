@@ -40,7 +40,7 @@
                             <input type="password" class="form-control" id="password2" placeholder="Password" />
                             <span></span>
                         </div>
-                        <a href="forgot-password.php"> Forgot Password ? </a> <br/><br/>
+                        <a href="user-forgot-password.php"> Forgot Password ? </a> <br/><br/>
                         <input type="submit" value="Login" class="btn btn-info"/>
                     </form>
                     <!--/#loginform-->

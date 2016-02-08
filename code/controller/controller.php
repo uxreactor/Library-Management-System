@@ -1161,6 +1161,24 @@
 	     return 1 ;
 	}
 
+	/**
+	 * @deleteMember : This function is used delete a member from the datbase.
+	 * @author : Yaswanth
+	 *
+	 * @param : integer - member id
+	 *
+	 * @return/outcome : It will delete the member data from the database.
+	 */
+
+	function deleteMember($memberId) {
+		$conn = connection();
+
+			$sql = "DELETE FROM tbl_members a JOIN tbl_login b WHERE mem_id = '$memberId'";
+			$conn->query($sql);		   
+    	$conn->close();
+	     return 1 ;
+	}
+
 
 
 	/**
