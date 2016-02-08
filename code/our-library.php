@@ -187,9 +187,10 @@
                 $('.YES').text("YES");
                 $('.modal-title').text("Membership type details" );
                 $('#confirm-text').css('color', 'red');
+                isbn = $tds[4].textContent;
                 $('#confirm-text').text("Are you sure to delete the "+ member+" from library" ); 
                 $(document).on("click",".YES",function(){                
-                    delete_member(isbn);
+                    delete_details(isbn);
                 });     
             } 
            function delete_details(isbn) {                       

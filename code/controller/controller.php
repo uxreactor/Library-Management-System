@@ -1219,12 +1219,13 @@
 	 * @return/outcome : It will delete the member data from the database.
 	 */
 
-	function deleteMember($memberId) {
+	function deleteMember($memberEmail) {
 		$conn = connection();
-			$sql = "DELETE FROM tbl_members a JOIN tbl_login b WHERE a.`mem_id` = '$memberId' AND b.`username` = a.'mem_email'";
+			echo $memberEmail;
+			$sql = "DELETE a.*, b.* FROM tbl_members a JOIN tbl_login b WHERE a.`mem_email` = '$memberEmail' AND b.`username` = '$memberEmail'";
 			$conn->query($sql);		   
     	$conn->close();
-	    return 1 ;
+	    return $memberEmail ;
 	}
 
 
