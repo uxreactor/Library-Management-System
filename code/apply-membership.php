@@ -193,7 +193,7 @@
                         }else{
                             $("#button").click();
                             $(".table").hide();
-                            $('.modal-title').text("Forgot Password");
+                            $('.modal-title').text("Apply Membership");
                             $('#confirm-text').show();
                             $('#confirm-text').css('color', 'green');
                             $('#confirm-text').text("New membership request sent successfully");

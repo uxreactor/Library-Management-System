@@ -170,7 +170,7 @@
             var $row = $(this).closest("tr"),       
             $tds = $row.find("td");       
             var isbn = $tds[0].textContent;
-            var bookname = $tds[5].textContent; 
+            var bookname = $tds[1].textContent; 
             var member = $tds[1].textContent;
             var select = document.getElementById('option').value;
             if(select == "Books"){

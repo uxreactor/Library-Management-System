@@ -65,6 +65,7 @@
             var $row = $(this).closest("tr");
             $tds = $row.find("td"); 
             var email = {email:$tds[2].textContent}
+            var mem_name = $tds[0].textContent;
             console.log(email);
             $.ajax({             
                 url: 'controller/admin_approve_accept_membership.php',
@@ -78,7 +79,7 @@
                     $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
                     $('#confirm-text').css('color', 'green');
-                    $('#confirm-text').text("Membership request approved successfully" );
+                    $('#confirm-text').text(mem_name+" request approved successfully" );
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-accept-membership.php';
                     });
@@ -92,12 +93,13 @@
             var $row = $(this).closest("tr");
             $tds = $row.find("td"); 
             var email = {email:$tds[2].textContent}
+            var mem_name = $tds[0].textContent;
             console.log(email);
             $(".NO").show();
             $('.YES').css("background-color","#fff");
             $('.YES').text("YES");
             $('#confirm-text').css('color', 'red');
-            $('#confirm-text').text("Are you sure to reject the membership request" );
+            $('#confirm-text').text("Are you sure to reject "+mem_name+" request" );
             $(document).on("click",".YES",function(){
                 $.ajax({             
                     url: 'controller/admin_reject_membership.php',

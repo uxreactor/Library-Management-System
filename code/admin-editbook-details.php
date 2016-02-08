@@ -65,7 +65,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Editing Book</h4>
+                      <h4 class="modal-title">Update book details</h4>
                     </div>
                     <div class="modal-body">
                         <span id="confirm-text">Book details are updated successfully</span>
@@ -151,7 +151,7 @@
                             
                             $("#button").click();
                             $('#confirm-text').css('color', 'green');
-                            $('#confirm-text').text("Book details are updated successfully" );
+                            $('#confirm-text').text("Book details updated successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';
                             });

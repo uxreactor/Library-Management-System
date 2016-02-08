@@ -124,7 +124,7 @@
         <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
             
             <button type="submit" class="btn btn-default btn-lg btn-info" >Submit</button>
-            <a href="index.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
+            <a href="our-library.php" style="font-size:18px; padding-left:15px"> <u> Cancel </u></a>
         </form>
        
 
