@@ -6,7 +6,7 @@
 
     <!--/#header-->
     <div class="container" id="book_name_label"> 
-        <form name="search_book" method="post" action="controller/search_issued_books.php" onsubmit="return submitForm();">
+        <form name="search_book" method="post" action="controller/search_in_issued_books.php" onsubmit="return submitForm();">
             <div class="input-group col-xs-5 col-xs-offset-3" id="book_name_label">
                 <input type="text" class="textbox_size form-control input-lg" id="search" placeholder="Search book by bookID / memberID" />
                 <span class="input-group-btn">
