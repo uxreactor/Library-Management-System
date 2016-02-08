@@ -866,7 +866,7 @@
 		    $return_expected = $row["return_expected"];
 
 		}else {
-			return 0;
+			return FALSE;
 		}
 		$diff = 0;
 		$return_actual_new = new DateTime($return_actual);
@@ -875,8 +875,11 @@
 		if($return_actual_new > $return_expected_new){
 		  	$penality = $diff*10;
 		  	$sql = " UPDATE tbl_issued_books SET penality = '$penality'  WHERE book_id = '$bookId' ";
+		  	if ($conn->query($sql) === FALSE) {
+			    return "Error: " . $sql . "<br>" . $conn->error;
+			}
 		  	$result = $conn->query($sql);
-			return 'failed';
+			return $penality;
 		}else {
 			$sql = " DELETE FROM tbl_issued_books WHERE book_id = '$bookId'";
 		}

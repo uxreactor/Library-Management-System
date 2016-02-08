@@ -121,13 +121,13 @@
                 type: 'post',
                 data: { book_id: book_id },
                 success: function(response){
-                    if(response == 'failed'){
+                    if($.isNumeric(response) && response != 0){
                         $(".no").show();
                         $('.yes').css("background-color","#fff");
                         $('.yes').text("YES");
                         $('.modal-title').text("Penalty Details");
                         $('#confirm-text').css('color', 'red');
-                        $('#confirm-text').text("You have penality to be paid. Do you want to pay now?");
+                        $('#confirm-text').text("You have penality " + response + " Rs to be paid. Do you want to pay now?");
                         $(document).on("click",".yes",function(){
                             $.ajax({             
                                 url: 'controller/return_money_paid.php',

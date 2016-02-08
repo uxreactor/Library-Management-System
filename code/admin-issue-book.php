@@ -75,16 +75,29 @@
     <script type="text/javascript">
 
         $(document).on('blur','#book_id',function(){
-            if($(this).val()) getBookDetails($(this).val());
-            $('#mem_id').focus();
+            if($(this).val()) {
+                getBookDetails($(this).val());
+                $('#mem_id').focus();
+            } else {
+                $('#book_name').val("");
+                $('#book_author').val("");
+            }
+            
         });
 
         $(document).on('blur','#mem_id',function(){
-            if($(this).val()) getMemberDetails($(this).val());
+            if($(this).val()) {
+               getMemberDetails($(this).val()); 
+           } else {
+                $('#member_name').val("");
+                $('#member_type').val("");
+                $('#issue_date').val("");
+                $('#return_date').val("");
+           }
         });
 
         var getBookDetails = function(book_id){
-            $.ajax({
+                $.ajax({
                 url: 'controller/get_book_details.php',
                 type: 'post',
                 data: {book_id: book_id},
