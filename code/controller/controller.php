@@ -385,7 +385,7 @@
 		$arrayObject = array();
 		$conn = connection();
 		//SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn`
-		$sql = " SELECT *  FROM `tbl_issued_books`  WHERE book_id LIKE '$search_key%' || mem_id LIKE '$search_key%' " ;
+		$sql = " SELECT *  FROM `tbl_issued_books`  WHERE book_id LIKE '$search_key%' || mem_id LIKE '$search_key%'  " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
@@ -826,15 +826,14 @@
 
 
 
-	function issueBook($memberId, $bookId){
+	function issueBook($memberId, $bookId, $issuedDate, $returnDate){
 		$conn = connection();
 		$sql = " INSERT INTO `tbl_issued_books`(`mem_id`, `book_id`, `issue_date`, `return_expected`) SELECT * FROM (SELECT '$memberId', '$bookId', '$issuedDate', '$returnDate') AS tmp WHERE NOT EXISTS (SELECT `book_id` FROM `tbl_issued_books` WHERE `book_id` = '$bookId') ";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0){
-			return "Book is issued successfully
-			";
+			return "issued";
 		}else{
-			return "You have already issued this book";
+			return FALSE;
 		}
 		$conn->close();
 
@@ -1176,7 +1175,7 @@
 
 	function getBookDetails($isbn){
 		$arrayObject = array();
-		$conn = connection();
+		$conn = issueBook();
 		$sql = " SELECT a.*, COUNT(b.`isbn`) AS 'Qty' FROM tbl_book_varities a LEFT JOIN tbl_all_books b on a.`isbn` ='$isbn'" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {

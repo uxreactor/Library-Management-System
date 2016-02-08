@@ -111,7 +111,6 @@
                         writeError('Invalid Book Id',body);
                         $('#book_name').val("");
                         $('#book_author').val("");
-                        //$('#book_id').focus();
                     }
                 },
                 error: function(xhr, desc, err){
@@ -127,7 +126,7 @@
                 data: {member_id: member_id},
                 success: function(response){
                     if(response) {
-                        console.log(response);
+                        //console.log(response);
                         response = jQuery.parseJSON(response);
                         
                         $('#member_name').val(response.name);
@@ -167,23 +166,30 @@
                 issue_date: dateFormat('yyyy-mm-dd',$('#issue_date').val()),
                 return_date: dateFormat('yyyy-mm-dd',$('#return_date').val())
             };
+            console.log(issue_book);
             if(submitToServer(validation_message)){
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
                     data: issue_book,
                     success: function(response){
-                        //alert(response);
-                        var book_name = document.getElementById('book_name').value;
-                        $("#button").click();
-                        var book_name = document.getElementById('book_name').value;
-                        $('.modal-title').text("Issue a Book");
-                        $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text(book_name+"Book issued successfully");
-
-                        $(document).on("click",".OK",function(){ 
-                            window.location = 'our-library.php';
-                        });
+                        console.log(response);
+                        if (response){
+                            var book_name = document.getElementById('book_name').value;
+                            $("#button").click();
+                            var book_name = document.getElementById('book_name').value;
+                            $('.modal-title').text("Issue a Book");
+                            $('#confirm-text').css('color', 'green');
+                            $('#confirm-text').text(book_name+"Book issued successfully");
+                            $(document).on("click",".OK",function(){ 
+                                window.location = 'our-library.php';
+                            });
+                        }else {
+                            body = document.getElementById('book_id_label');
+                            writeError('Book already issued',body);
+                            return false;
+                        }
+                        
                         //window.location.href = 'our-library.php';
                     },
                     error: function(xhr, desc, err){
