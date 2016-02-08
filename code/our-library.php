@@ -67,7 +67,8 @@
             $.ajax({             
                 url: 'controller/load_all_books_in_library.php',
                 type: 'post',
-                 success: function(response){                        
+                 success: function(response){
+                    //console.log(response);                       
                     books = jQuery.parseJSON(response);
                     viewData(books,parent);
                     paginationView(books,10);  
@@ -107,14 +108,14 @@
                 parent.childNodes[1].textContent = "All Members";
                 url = 'controller/load_all_members.php';
             }
-            postForm(url);  
+            postForm1(url);  
         }
 
         $(function() {
             loadDetails()
         });
 
-       function postForm(url) {
+       function postForm1(url) {
             $('.table').remove();
             $('#pagination1').empty();
             $.ajax({
