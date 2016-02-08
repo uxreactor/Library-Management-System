@@ -256,8 +256,7 @@
 	function editBookDetails($old_isbn,$isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){
 		$conn = connection();
 
-		$sql = " UPDATE tbl_all_books a JOIN tbl_book_varities b SET a.isbn='$isbn', b.isbn = '$isbn' , b.price = '$price' , b.edition = '$edition' , b.publisher = '$publisher', b.category = '$category',
-				b.book_name = '$bookname' , b.author_name = '$authorname'  WHERE isbn='$old_isbn' ";
+		$sql = " UPDATE tbl_all_books a JOIN tbl_book_varities b SET a.isbn='$isbn', b.isbn = '$isbn' , b.price = '$price' , b.edition = '$edition' , b.publisher = '$publisher', b.category = '$category', b.book_name = '$bookname' , b.author_name = '$authorname'  WHERE b.isbn='$old_isbn' AND b.isbn=a.isbn ";
 		if ($conn->query($sql) === TRUE) {
 		    return "Book details updated successfully";
 		} else {
@@ -1170,7 +1169,7 @@
 	function getBookDetails($isbn){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT a.*, COUNT(b.`isbn`) AS 'Qty'  FROM tbl_book_varities a LEFT JOIN tbl_all_books b on a.`isbn` ='$isbn' GROUP BY b.`isbn`" ;
+		$sql = " SELECT a.*, COUNT(b.`isbn`) AS 'Qty' FROM tbl_book_varities a LEFT JOIN tbl_all_books b on a.`isbn` ='$isbn'" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 	    	$row = $result->fetch_assoc();
