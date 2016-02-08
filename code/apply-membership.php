@@ -80,6 +80,9 @@
                                     <th>Type</th>
                                     <th>Cost</th>
                                     <th>Validation</th>
+                                    <th>Books limit</th>
+                                    <th>Penality per day</th>
+                                    <th>Duration</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,16 +90,26 @@
                                     <td>Platinum</td>
                                     <td>300</td>
                                     <td>12 months</td>
+                                    <td>10</td>
+                                    <td>10 Rupees</td>
+                                    <td>10 days</td>
                                 </tr>
                                 <tr>
                                     <td>Gold</td>
                                     <td>200</td>
                                     <td>6 months</td>
+                                    <td>5</td>
+                                    <td>10 Rupees</td>
+                                    <td>5 days</td>
+
                                 </tr>
                                 <tr>
                                     <td>Silver</td>
                                     <td>100</td>
                                     <td>3 months</td>
+                                    <td>3</td>
+                                    <td>10 Rupees</td>
+                                    <td>3 days</td>
                                 </tr>
                             </tbody>
                         </table>
