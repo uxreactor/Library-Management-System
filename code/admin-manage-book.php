@@ -123,8 +123,10 @@
                 success: function(response){
                     if(response == 'failed'){
                         $(".no").show();
+                        $('.yes').css("background-color","#fff");
                         $('.yes').text("YES");
                         $('.modal-title').text("Penalty Details");
+                        $('#confirm-text').css('color', 'red');
                         $('#confirm-text').text("You have penality to be paid. Do you want to pay now?");
                         $(document).on("click",".yes",function(){
                             $.ajax({             
@@ -135,7 +137,9 @@
                                     $("#button").click();
                                     $(".no").hide();
                                     $('.modal-title').text("Book Return Status" );
+                                    $('.yes').css("background-color","#5bc0de");
                                     $('.yes').text("OK");
+                                    $('#confirm-text').css('color', 'green');
                                     $('#confirm-text').text("Book returned successfully" );
                                     $(document).on("click",".yes",function(){                
                                         window.location = 'admin-manage-book.php';
@@ -156,7 +160,9 @@
                     }else{
                         $(".no").hide();
                         $('.modal-title').text("Book Return Status" );
+                        $('.yes').css("background-color","#5bc0de");
                         $('.yes').text("OK");
+                        $('#confirm-text').css('color', 'green');
                         $('#confirm-text').text("Book returned successfully" );
                         $(document).on("click",".yes",function(){                
                             window.location = 'admin-manage-book.php';

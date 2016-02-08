@@ -88,8 +88,10 @@
                     console.log(response);
                     $(".NO").hide();
                     $('.modal-title').text("Approve Duedate Extention" );
+                    $('.YES').css("background-color","#5bc0de");
+                    $('#confirm-text').css('color', 'green');
                     $('.YES').text("OK");
-                    $('#confirm-text').text("MemberID: "+ $memId+ " request is Approved");
+                    $('#confirm-text').text("Due date extension is Approved");
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-book-renewal.php';
                     });
@@ -111,8 +113,10 @@
                   background: '#D9534F'
                 });
                 $(".NO").show();
+                $('.YES').css("background-color","#fff");
                 $('.YES').text("YES");
                 $('.modal-title').text("Reject Duedate Extention");
+                $('#confirm-text').css('color', 'red');
                 $('#confirm-text').text("Are you sure to reject duedate extention" );
                 $(document).on("click",".YES",function(){
                     $.ajax({             

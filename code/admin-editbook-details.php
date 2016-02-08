@@ -71,7 +71,7 @@
                         <span id="confirm-text">Book details are updated successfully</span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                      <button type="button" class="btn btn-info OK" data-dismiss="modal">OK</button>
                     </div>
                 </div>  
             </div>
@@ -150,6 +150,7 @@
                             console.log(response);
                             
                             $("#button").click();
+                            $('#confirm-text').css('color', 'green');
                             $('#confirm-text').text("Book details are updated successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';

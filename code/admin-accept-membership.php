@@ -75,8 +75,10 @@
                     //$("#button").click();
                     $(".NO").hide();
                     $('.modal-title').text("Approve membership" );
+                    $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
-                    $('#confirm-text').text("Membership approved successfully" );
+                    $('#confirm-text').css('color', 'green');
+                    $('#confirm-text').text("Membership request approved successfully" );
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-accept-membership.php';
                     });
@@ -92,8 +94,9 @@
             var email = {email:$tds[2].textContent}
             console.log(email);
             $(".NO").show();
+            $('.YES').css("background-color","#fff");
             $('.YES').text("YES");
-            $('.modal-title').text("Reject Membership Request");
+            $('#confirm-text').css('color', 'red');
             $('#confirm-text').text("Are you sure to reject the membership request" );
             $(document).on("click",".YES",function(){
                 $.ajax({             

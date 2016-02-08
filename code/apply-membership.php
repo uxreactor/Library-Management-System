@@ -1,4 +1,4 @@
-<?php include ("header-guest.php");?> 
+<?php include ("header-guest.php");?>
     <!--/#header-->
 
     <div class="container">
@@ -73,7 +73,7 @@
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
                           <h4 class="modal-title">Membership Type Details</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" >
                          <table  class="table table-bordered table-striped" style="width:40%;">
                             <thead>
                                 <tr>
@@ -102,8 +102,11 @@
                         </table>
                         <span id="confirm-text"></span>
                         </div>
+                        <div class="modal-body">
+                            <span id="confirm-text" style=" color:green"></span>
+                        </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default OK" data-dismiss="modal">Ok</button>
+                            <button type="button" class="btn btn-info OK" data-dismiss="modal">Ok</button>
                         </div>
                     </div>  
                 </div>
@@ -190,9 +193,10 @@
                         }else{
                             $("#button").click();
                             $(".table").hide();
-                            $('.modal-title').text("Apply Membership");
+                            $('.modal-title').text("Forgot Password");
                             $('#confirm-text').show();
-                            $('#confirm-text').text("Membership request sent successfully");
+                            $('#confirm-text').css('color', 'green');
+                            $('#confirm-text').text("New membership request sent successfully");
                             $(document).on("click",".OK",function(){ 
                                 window.location = 'index.php';
                             });

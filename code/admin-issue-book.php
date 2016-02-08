@@ -59,7 +59,7 @@
                         <span id="confirm-text"></span>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default OK" data-dismiss="modal">Ok</button>
+                        <button type="button" class="btn btn-info OK" data-dismiss="modal">Ok</button>
                     </div>
                 </div>  
             </div>
@@ -158,6 +158,7 @@
                         //alert(response);
                         $("#button").click();
                         $('.modal-title').text("Issue Book");
+                        $('#confirm-text').css('color', 'green');
                         $('#confirm-text').text("Book issued successfully");
                         $(document).on("click",".OK",function(){ 
                             window.location = 'our-library.php';

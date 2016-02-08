@@ -65,7 +65,7 @@
                         <span id="confirm-text">New book added successfully</span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default OK" data-dismiss="modal">OK</button>
+                      <button type="button" class="btn btn-info OK" data-dismiss="modal">OK</button>
                     </div>
                 </div>  
             </div>
@@ -139,6 +139,7 @@
                                 writeError(response,body);
                             }
                             $("#button").click();
+                            $('#confirm-text').css('color', 'green');
                             $('#confirm-text').text("New book added successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';

@@ -22,7 +22,7 @@
                   <h4 class="modal-title">Reject Membership Renewal Request</h4>
                 </div>
                 <div class="modal-body">
-                    <span id="confirm-text" >Are you sure to reject the membership renewal?</span>
+                    <span id="confirm-text" ></span>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
@@ -73,7 +73,9 @@
                     console.log(response);
                     $(".NO").hide();
                     $('.modal-title').text("Approve Membership Renewal" );
+                    $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
+                    $('#confirm-text').css('color', 'green');
                     $('#confirm-text').text("Membership Renewal is Approved");
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-membership-renewal.php';
@@ -97,8 +99,10 @@
                   background: '#D9534F'
                 });
                 $(".NO").show();
+                $('.YES').css("background-color","#fff");
                 $('.YES').text("YES");
                 $('.modal-title').text("Reject Membership Renewal Request");
+                $('#confirm-text').css('color', 'red');
                 $('#confirm-text').text("Are you sure to reject membership renewal request" );
                 $(document).on("click",".YES",function(){ 
                     $.ajax({             
