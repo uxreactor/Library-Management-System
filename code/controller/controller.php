@@ -1175,7 +1175,7 @@
 
 	function getBookDetails($isbn){
 		$arrayObject = array();
-		$conn = issueBook();
+		$conn = connection();
 		$sql = " SELECT a.*, COUNT(b.`isbn`) AS 'Qty' FROM tbl_book_varities a LEFT JOIN tbl_all_books b on a.`isbn` ='$isbn'" ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
