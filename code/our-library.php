@@ -204,6 +204,7 @@
                         $("#button").click();
                         $(".NO").hide();
                         $('.modal-title').text("Delete Record" );
+                        $('.YES').css("background-color","#5bc0de");
                         $('.YES').text("OK");
                         $('#confirm-text').css('color', 'red');
                         $('#confirm-text').text(member+" Record has been deleted successfully" );

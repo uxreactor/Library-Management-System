@@ -206,7 +206,8 @@
                         $('.modal-title').text("Edit Membership Details");
                         $('#confirm-text').show();
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text("Membership details updated successfully");
+                        var mem_name = document.getElementById('name_id').value;
+                        $('#confirm-text').text(mem_name+" details updated successfully");
                         $(document).on("click",".OK",function(){ 
                                 window.location = 'our-library.php';
                         });
