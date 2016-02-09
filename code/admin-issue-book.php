@@ -161,12 +161,13 @@
             validation_message = validateForm(add_book);
             function GetDate(str){
                 var arr = str.split("-");
-                var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+                var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-                var month = months.indexOf(arr[1].toLowerCase());
+                var month = months.indexOf(arr[1]);
 
                 return new Date(parseInt(arr[2]), month+1, parseInt(arr[0]));
             } 
+            //alert(dateFormat('yyyy-mm-dd',GetDate($('#issue_date').val())));
 
             var issue_book = {
                 book_id: $('#book_id').val(),
@@ -181,7 +182,7 @@
                     type: $('form').attr('method'),
                     data: issue_book,
                     success: function(response){
-                        //console.log(response);
+                        console.log(response);
                         if (response){
                             var book_name = document.getElementById('book_name').value;
                             $("#button").click();
@@ -190,7 +191,7 @@
                             $('#confirm-text').css('color', 'green');
                             $('#confirm-text').text(book_name+" Book issued successfully");
                             $(document).on("click",".OK",function(){ 
-                                window.location = 'our-library.php';
+                                //window.location = 'our-library.php';
                             });
                         }else {
                             body = document.getElementById('book_id_label');
