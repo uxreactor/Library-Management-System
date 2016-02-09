@@ -194,6 +194,7 @@
                 //$('#confirm-text').text("Are you sure you want to delete " + member +" member from library" ); 
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
+                    alert(isbn);
                 });     
             } 
            function delete_details(isbn) {                       

@@ -4,7 +4,7 @@
     require('controller/controller.php');
     $isbn = $_GET['isbn'];
     $bookDetails = getBookDetails($isbn);
-    
+    //echo $bookDetails[0]['Quantity'];
     if(checkSession()){
 
     //echo "$bookDetails[0].'Category'";

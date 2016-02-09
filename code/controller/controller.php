@@ -1186,18 +1186,19 @@
 	function getBookDetails($isbn){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT a.*, COUNT(b.`isbn`) AS 'Qty' FROM tbl_book_varities a LEFT JOIN tbl_all_books b on a.`isbn` ='$isbn'" ;
+		$sql = " SELECT a.`book_name` AS 'Book Name', a.`author_name` AS 'Author Name', a.`category` AS 'Category', a.`publisher` AS 'Publisher', a.`edition` AS 'Edition', a.`price` AS 'Book Price', a.`isbn` AS 'ISBN Number', COUNT(b.`isbn`) AS 'Qty' FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = '$isbn' AND b.`isbn` = '$isbn' AND a.`isbn` = b.`isbn` AND b.`status` = '1'" ;
+		//echo 'Qty';
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 	    	$row = $result->fetch_assoc();
 			$object = array();
-			$object['ISBN'] = $row["isbn"];
-	    	$object['Price'] = $row["price"];
-	    	$object['Edition'] = $row["edition"];
-	    	$object['Publisher'] = $row["publisher"];
-	    	$object['Category'] = $row["category"];
-	    	$object['Book name'] = $row["book_name"];
-	    	$object['Author name'] = $row["author_name"];
+			$object['ISBN'] = $row["ISBN Number"];
+	    	$object['Price'] = $row["Book Price"];
+	    	$object['Edition'] = $row["Edition"];
+	    	$object['Publisher'] = $row["Publisher"];
+	    	$object['Category'] = $row["Category"];
+	    	$object['Book name'] = $row["Book Name"];
+	    	$object['Author name'] = $row["Author Name"];
 	    	$object['Quantity'] = $row["Qty"];
 	    	array_push($arrayObject, $object);
 		} else {
@@ -1238,9 +1239,11 @@
 
 	function deleteMember($memberEmail) {
 		$conn = connection();
-			echo $memberEmail;
-			$sql = "DELETE a.*, b.* FROM tbl_members a JOIN tbl_login b WHERE a.`mem_email` = '$memberEmail' AND b.`username` = '$memberEmail'";
+			$sql = "DELETE FROM tbl_members WHERE mem_email = '$memberEmail'";
+			$sql1 = "DELETE FROM tbl_login WHERE username = '$memberEmail'";
+			//$sql = "DELETE a.*, b.* FROM tbl_members a JOIN tbl_login b WHERE a.`mem_email` = '$memberEmail' AND b.`username` = '$memberEmail'";
 			$conn->query($sql);		   
+			$conn->query($sql1);		   
     	$conn->close();
 	    return $memberEmail ;
 	}
