@@ -127,7 +127,7 @@
                         $('.yes').text("YES");
                         $('.modal-title').text("Penalty Details");
                         $('#confirm-text').css('color', 'red');
-                        $('#confirm-text').text("You have penality " + response + " Rs to be paid. Do you want to pay now?");
+                        $('#confirm-text').html("You have penality<strong> " + response + " </strong>Rs to be paid. Do you want to pay now?");
                         $(document).on("click",".yes",function(){
                             $.ajax({             
                                 url: 'controller/return_money_paid.php',
@@ -140,7 +140,8 @@
                                     $('.yes').css("background-color","#5bc0de");
                                     $('.yes').text("OK");
                                     $('#confirm-text').css('color', 'green');
-                                    $('#confirm-text').text("Book returned successfully" );
+                                    var book_name = $tds[1].textContent;
+                                    $('#confirm-text').html("<strong>"+book_name+" </strong>Book returned successfully" );
                                     $(document).on("click",".yes",function(){                
                                         window.location = 'admin-manage-book.php';
                                     });
@@ -164,7 +165,7 @@
                         $('.yes').text("OK");
                         $('#confirm-text').css('color', 'green');
                         var book_name = $tds[1].textContent;
-                        $('#confirm-text').text(book_name+" Book returned successfully" );
+                        $('#confirm-text').html("<strong>"+book_name+" </strong>Book returned successfully" );
                         $(document).on("click",".yes",function(){                
                             window.location = 'admin-manage-book.php';
                         });

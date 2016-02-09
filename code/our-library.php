@@ -178,7 +178,7 @@
                 $('.YES').text("YES");
                 $('.modal-title').text("Delete confirmation");
                 $('#confirm-text').css('color', 'red');
-                $('#confirm-text').text("Are you sure you want to delete "+ bookname +" book from the library" );
+                $('#confirm-text').html("Are you sure you want to delete <strong> "+ bookname +" </strong> book from the library" );
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });
@@ -210,7 +210,7 @@
                         $('.YES').css("background-color","#5bc0de");
                         $('.YES').text("OK");
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text(member+" member has been deleted successfully" );
+                        $('#confirm-text').html("<strong> "+member+" </strong>member has been deleted successfully" );
                         $(document).on("click",".YES",function(){                
                             window.location = 'our-library.php';
                         });

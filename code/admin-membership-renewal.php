@@ -76,7 +76,7 @@
                     $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
                     $('#confirm-text').css('color', 'green');
-                    $('#confirm-text').text("Membership Renewal of "+mem_name+" is Approved");
+                    $('#confirm-text').html("Membership Renewal of <strong> "+mem_name+"</strong> is Approved");
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-membership-renewal.php';
                     });
@@ -100,7 +100,7 @@
                 $('.YES').text("YES");
                 $('.modal-title').text("Membership Renewal Requests");
                 $('#confirm-text').css('color', 'red');
-                $('#confirm-text').text("Are you sure to reject membership renewal request of "+mem_name );
+                $('#confirm-text').html("Are you sure to reject membership renewal request of <strong> "+mem_name+"</strong>" );
                 $(document).on("click",".YES",function(){ 
                     $.ajax({             
                         url: 'controller/admin_reject_membership_renewal.php',

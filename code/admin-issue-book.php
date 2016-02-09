@@ -189,7 +189,7 @@
                             var book_name = document.getElementById('book_name').value;
                             $('.modal-title').text("Issue a Book");
                             $('#confirm-text').css('color', 'green');
-                            $('#confirm-text').text(book_name+" Book issued successfully");
+                            $('#confirm-text').html("<strong> "+book_name+"</strong> Book issued successfully");
                             $(document).on("click",".OK",function(){ 
                                 window.location = 'admin-manage-book.php';
                             });

@@ -121,7 +121,7 @@
                             $(".NO").hide();
                             $('.modal-title').text("Reject Duedate Extention" );
                             $('.YES').text("OK");
-                            $('#confirm-text').text("MemberID: "+ $memId+ " request is Rejected");
+                            $('#confirm-text').html(" Due date extension request is Rejected");
                             $(document).on("click",".YES",function(){                
                                 window.location = 'admin-book-renewal.php';
                             });

@@ -76,7 +76,7 @@
                         var book_name = document.getElementById('book_name').value;
                         $("#button").click();
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').text("Your request for "+book_name+" book has been sent successfully" );
+                        $('#confirm-text').html("Your request for <strong>"+book_name+"</strong> book has been sent successfully" );
                         $(document).on("click",".OK",function(){                
                             window.location = 'member.php';
                         });

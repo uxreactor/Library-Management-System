@@ -140,7 +140,7 @@
                             $("#button").click();
                             $('#confirm-text').css('color', 'green');
                             var book_name = document.getElementById('book_name').value;
-                            $('#confirm-text').text(book_name+" book added successfully" );
+                            $('#confirm-text').html("<strong> "+book_name+"</strong> book added successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';
                             });

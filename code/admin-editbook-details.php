@@ -152,7 +152,7 @@
                             $("#button").click();
                             var book_name = document.getElementById('book_name').value;
                             $('#confirm-text').css('color', 'green');
-                            $('#confirm-text').text(book_name+" book details updated successfully" );
+                            $('#confirm-text').html("<strong>"+book_name+"</strong> book details updated successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';
                             });
