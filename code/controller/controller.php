@@ -277,7 +277,7 @@
 	function loadAllBooks(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT a.`book_name` AS 'Book Name', a.`author_name` AS 'Author Name', a.`category` AS 'Category', a.`publisher` AS 'Publisher', a.`edition` AS 'Edition', a.`price` AS 'Book Price', a.`isbn` AS 'ISBN Number', COUNT(b.`isbn`) AS 'Qty' FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn` " ;
+		$sql = " SELECT a.`book_name` AS 'Book Name', a.`author_name` AS 'Author Name', a.`category` AS 'Category', a.`publisher` AS 'Publisher', a.`edition` AS 'Edition', a.`price` AS 'Book Price', a.`isbn` AS 'ISBN Number', COUNT(b.`isbn`) AS 'Qty' FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` AND b.`status` = '1' GROUP BY b.`isbn` " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
@@ -828,6 +828,9 @@
 
 	function issueBook($memberId, $bookId, $issuedDate, $returnDate){
 		$conn = connection();
+
+		$sql = " UPDATE `tbl_all_books` SET status = '0' where book_id = '$bookId' ";
+		$result = $conn->query($sql);
 		$sql = " INSERT INTO `tbl_issued_books`(`mem_id`, `book_id`, `issue_date`, `return_expected`) SELECT * FROM (SELECT '$memberId', '$bookId', '$issuedDate', '$returnDate') AS tmp WHERE NOT EXISTS (SELECT `book_id` FROM `tbl_issued_books` WHERE `book_id` = '$bookId') ";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0){
@@ -881,11 +884,16 @@
 			return $penality;
 		}else {
 			$sql = " DELETE FROM tbl_issued_books WHERE book_id = '$bookId'";
+			if ($conn->query($sql) === FALSE) {
+		   		return "Error: " . $sql . "<br>" . $conn->error;
+			}
+			$sql = " UPDATE `tbl_all_books` SET status = '1' where book_id = '$bookId' ";
+			if ($conn->query($sql) === FALSE) {
+		    	return "Error: " . $sql . "<br>" . $conn->error;
+			}
+
 		}
 		
-		if ($conn->query($sql) === FALSE) {
-		    return "Error: " . $sql . "<br>" . $conn->error;
-		}
 		$conn->close();
 
 	}
