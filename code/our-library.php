@@ -190,7 +190,8 @@
                 $('#member').css("font-weight","Bold");
                 isbn = $tds[4].textContent;
                 //$member = $member.html("<b>member</b>");
-                $('#confirm-text').text("Are you sure you want to delete " + member +" member from library" ); 
+                $('#confirm-text').html("Are you sure you want to delete <strong>" + member + "</strong> member from library");
+                //$('#confirm-text').text("Are you sure you want to delete " + member +" member from library" ); 
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });     
