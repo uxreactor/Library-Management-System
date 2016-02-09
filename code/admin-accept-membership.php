@@ -46,7 +46,7 @@
                 url: 'controller/load_allmembers.php',
                 type: 'post',
                 success: function(response){                        
-                    //console.log(response);
+                    console.log(response);
                     books = jQuery.parseJSON(response);                     
                     viewData(books,parent);
                     paginationView(books,10);   

@@ -8,7 +8,7 @@
 ?>
     <!--/#header-->
     <div class="container">
-        <h2>Membership Renewal Extension </h2>
+        <h2>Membership Renewal Extension <h4>(Expired on : <?php echo $memberName[0]["expiry"] ?>)</h4></h2>
         <form name="login" method="post" action="controller/submit_member_renew_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="mem_id_label">
                 <label >Member Id </label>
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group" >
                 <span style=" font-size:18px;"> Membership type</span>
-                <select class="select_list">
+                <select class="select_list" disabled = "true">
                     <option <?php if( $memberName[0]["ms_id"]== 1){ echo "selected";}; ?> value="Platinum">Platinum</option>
                     <option <?php if( $memberName[0]["ms_id"]== 2){ echo "selected";}; ?> value="Gold">Gold</option>
                     <option <?php if( $memberName[0]["ms_id"]== 3){ echo "selected";}; ?> value="Silver">Silver</option>

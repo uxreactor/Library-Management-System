@@ -396,7 +396,6 @@
 		    	$object['Mem ID'] = $row["mem_id"];
 		    	$object['Issue date'] = $row["issue_date"];
 		    	$object['Return expected'] = $row["return_expected"];
-		    	$object['Penality'] = $row["penality"];
 		    	$object['Action'] = "Return";
 		    	array_push($arrayObject, $object);
 		    }
@@ -941,7 +940,7 @@
 		    	$object['Mobile No'] = $row["mem_mobileno"];
 		    	$object['Email Id'] = $row["mem_email"];
 		    	$object['Gender'] = $row["mem_gender"];
-		    	$object['H No'] = $row["addr_hno"];
+		    	$object['HNo'] = $row["addr_hno"];
 		    	$object['Street'] = $row["addr_street"];
 		    	$object['City'] = $row["addr_city"];
 		    	$object['State'] = $row["addr_state"];
@@ -949,7 +948,7 @@
 		    	if($row["ms_id"]==1){
 		    		$object['Membership type'] = "Platinum";
 		    	}else if($row["ms_id"]==2){
-		    		$object['Membership typetype'] = "Gold";
+		    		$object['Membership type'] = "Gold";
 		    	}else{
 		    		$object['Membership type'] = "Silver";
 		    	}
@@ -978,7 +977,7 @@
 	function viewMembershipRenewalRequests(){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT a.mem_id, a.mem_name, b.expiry_on, b.ms_id  FROM tbl_membership_renewal_request a JOIN tbl_members b WHERE a.mem_id = b.mem_id" ;
+		$sql = " SELECT a.mem_id, a.mem_name, b.expiry_on, b.ms_id , c.ms_type  FROM tbl_membership_renewal_request a JOIN tbl_members b JOIN tbl_membership c WHERE a.mem_id = b.mem_id AND b.ms_id = c.ms_id " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
@@ -988,6 +987,7 @@
 		    	$object['Name'] = $row["mem_name"];
 		    	$object['Expiry on'] = $row["expiry_on"];
 		    	$object['MS ID'] = $row["ms_id"];
+		    	$object['MS type'] = $row["ms_type"];
 		    	$object['Action'] = "Approve,Reject";
 		    	array_push($arrayObject, $object);
 		    }
@@ -1022,7 +1022,6 @@
 		    	$object['Mem ID'] = $row["mem_id"];
 		    	$object['Issue date'] = $row["issue_date"];
 		    	$object['Return expected'] = $row["return_expected"];
-		    	$object['Penality'] = $row["penality"];
 		    	$object['Action'] ="Return";
 		    	array_push($arrayObject, $object);
 		    }
@@ -1156,14 +1155,15 @@
 	function getMemberName($memberId){
 		$arrayObject = array();
 		$conn = connection();
-		$sql = " SELECT mem_name,ms_id FROM tbl_members WHERE mem_id=$memberId;";
+		$sql = " SELECT mem_name,ms_id,expiry_on FROM tbl_members WHERE mem_id=$memberId;";
 		$arrayObject;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
         	$row = $result->fetch_assoc();
         	$object = array(); 
 	    	$object["mem_name"] = $row["mem_name"];	
-	    	$object["ms_id"] = $row["ms_id"];	
+	    	$object["ms_id"] = $row["ms_id"];
+	    	$object["expiry"] = $row["expiry_on"];	
 		    array_push($arrayObject, $object);	
 	    	return $arrayObject;
 		}else{
