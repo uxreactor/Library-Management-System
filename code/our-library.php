@@ -189,12 +189,9 @@
                 $('#confirm-text').css('color', 'red');
                 $('#member').css("font-weight","Bold");
                 isbn = $tds[4].textContent;
-                //$member = $member.html("<b>member</b>");
                 $('#confirm-text').html("Are you sure you want to delete <strong>" + member + "</strong> member from library");
-                //$('#confirm-text').text("Are you sure you want to delete " + member +" member from library" ); 
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
-                    alert(isbn);
                 });     
             } 
            function delete_details(isbn) {                       
@@ -211,7 +208,7 @@
                         $('.YES').css("background-color","#5bc0de");
                         $('.YES').text("OK");
                         $('#confirm-text').css('color', 'green');
-                        $('#confirm-text').html("<strong> "+member+" </strong>member has been deleted successfully" );
+                        $('#confirm-text').html("<strong> "+member+"</strong> member has been deleted successfully" );
                         $(document).on("click",".YES",function(){                
                             window.location = 'our-library.php';
                         });

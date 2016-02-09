@@ -205,7 +205,7 @@
                         $('#confirm-text').show();
                         $('#confirm-text').css('color', 'green');
                         var mem_name = document.getElementById('name_id').value;
-                        $('#confirm-text').text(mem_name+" details updated successfully");
+                        $('#confirm-text').html("<strong>"+mem_name+"</strong> details updated successfully");
                         $(document).on("click",".OK",function(){ 
                                 window.location = 'our-library.php';
                         });

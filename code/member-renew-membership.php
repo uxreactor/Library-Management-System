@@ -8,7 +8,7 @@
 ?>
     <!--/#header-->
     <div class="container">
-        <h2>Membership Renewal Extension <h4>(Expired on : <?php echo $memberName[0]["expiry"] ?>)</h4></h2>
+        <h2>Membership Renewal Extension <h4>(Membership expired on : <?php echo $memberName[0]["expiry"] ?>)</h4></h2>
         <form name="login" method="post" action="controller/submit_member_renew_membership.php" onsubmit="return submitForm();">
             <div class="form-group" id="mem_id_label">
                 <label >Member Id </label>
