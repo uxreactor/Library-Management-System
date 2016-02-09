@@ -85,7 +85,7 @@
                 url = 'controller/load_all_books_in_library.php';
       
             } else if(select == "Members") {
-                $("#search").attr("placeholder", "Enter bookID/ memberID");
+                $("#search").attr("placeholder", "Enter memberID/ membername");
                 parent.childNodes[1].textContent = "All Members";
                 url = 'controller/load_all_members.php';
             }
