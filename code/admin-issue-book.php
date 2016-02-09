@@ -158,29 +158,37 @@
                 { type:'text' , value: $('#mem_id').val() , errorMessage:'Member id is required' }
             ];
             
-            validation_message = validateForm(add_book); 
+            validation_message = validateForm(add_book);
+            function GetDate(str){
+                var arr = str.split("-");
+                var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+                var month = months.indexOf(arr[1].toLowerCase());
+
+                return new Date(parseInt(arr[2]), month+1, parseInt(arr[0]));
+            } 
 
             var issue_book = {
                 book_id: $('#book_id').val(),
                 mem_id: $('#mem_id').val(),
-                issue_date: dateFormat('yyyy-mm-dd',$('#issue_date').val()),
-                return_date: dateFormat('yyyy-mm-dd',$('#return_date').val())
+                issue_date: dateFormat('yyyy-mm-dd',GetDate($('#issue_date').val())),//dateFormat('yyyy-mm-dd',$('#issue_date').val()),
+                return_date: dateFormat('yyyy-mm-dd',GetDate($('#return_date').val()))
             };
-            console.log(issue_book);
+            //console.log(issue_book);
             if(submitToServer(validation_message)){
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
                     data: issue_book,
                     success: function(response){
-                        console.log(response);
+                        //console.log(response);
                         if (response){
                             var book_name = document.getElementById('book_name').value;
                             $("#button").click();
                             var book_name = document.getElementById('book_name').value;
                             $('.modal-title').text("Issue a Book");
                             $('#confirm-text').css('color', 'green');
-                            $('#confirm-text').text(book_name+"Book issued successfully");
+                            $('#confirm-text').text(book_name+" Book issued successfully");
                             $(document).on("click",".OK",function(){ 
                                 window.location = 'our-library.php';
                             });
