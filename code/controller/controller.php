@@ -43,9 +43,9 @@
 		$conn = connection();
 		$sql  =" INSERT INTO `tbl_book_varities`(`isbn`, `price`, `edition`, `publisher`,`category`,`book_name`,`author_name`) SELECT * FROM (SELECT '$isbn','$price','$edition','$publisher','$category','$bookname','$authorname') AS tmp WHERE NOT EXISTS (SELECT `book_name`,`isbn` FROM `tbl_book_varities` WHERE `book_name` = '$bookname' AND `isbn` = '$isbn') ";
 		if ($conn->query($sql) === TRUE) {
-			$sql = "INSERT INTO  tbl_all_books (isbn) VALUES ";
+			$sql = "INSERT INTO  tbl_all_books (isbn,status) VALUES ";
 				for($i=1;$i<=$quantity;$i++){
-					$sql .= $i==$quantity ? "('$isbn')" : "('$isbn'), ";
+					$sql .= $i==$quantity ? "('$isbn','1')" : "('$isbn','1'), ";
 				}
 				if ($conn->query($sql) == TRUE) {
 					return 1;
