@@ -191,7 +191,7 @@
                             $('#confirm-text').css('color', 'green');
                             $('#confirm-text').text(book_name+" Book issued successfully");
                             $(document).on("click",".OK",function(){ 
-                                //window.location = 'our-library.php';
+                                window.location = 'admin-manage-book.php';
                             });
                         }else {
                             body = document.getElementById('book_id_label');
