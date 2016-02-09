@@ -170,7 +170,7 @@
             var $row = $(this).closest("tr"),       
             $tds = $row.find("td");       
             var isbn = $tds[0].textContent;
-            var bookname = $tds[1].textContent; 
+            var bookname = $tds[1].textContent;
             var member = $tds[1].textContent;
             var select = document.getElementById('option').value;
             if(select == "Books"){
@@ -178,17 +178,19 @@
                 $('.YES').text("YES");
                 $('.modal-title').text("Delete confirmation");
                 $('#confirm-text').css('color', 'red');
-                $('#confirm-text').text("Are you sure to delete the book "+ bookname+" from the library" );
+                $('#confirm-text').text("Are you sure you want to delete "+ bookname +" book from the library" );
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });
             } else if(select == "Members") {
                 $(".NO").show();
                 $('.YES').text("YES");
-                $('.modal-title').text("Membership type details" );
+                $('.modal-title').text("Delete Confirmation" );
                 $('#confirm-text').css('color', 'red');
+                $('#member').css("font-weight","Bold");
                 isbn = $tds[4].textContent;
-                $('#confirm-text').text("Are you sure to delete the member "+ member+" from library" ); 
+                //$member = $member.html("<b>member</b>");
+                $('#confirm-text').text("Are you sure you want to delete " + member +" member from library" ); 
                 $(document).on("click",".YES",function(){                
                     delete_details(isbn);
                 });     
@@ -203,11 +205,11 @@
                         console.log(response);
                         $("#button").click();
                         $(".NO").hide();
-                        $('.modal-title').text("Delete Record" );
+                        $('.modal-title').text("Delete Confirmation " );
                         $('.YES').css("background-color","#5bc0de");
                         $('.YES').text("OK");
-                        $('#confirm-text').css('color', 'red');
-                        $('#confirm-text').text(member+" Record has been deleted successfully" );
+                        $('#confirm-text').css('color', 'green');
+                        $('#confirm-text').text(member+" member has been deleted successfully" );
                         $(document).on("click",".YES",function(){                
                             window.location = 'our-library.php';
                         });
