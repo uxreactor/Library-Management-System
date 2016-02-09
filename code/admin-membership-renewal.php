@@ -64,6 +64,7 @@
             $tds = $row.find("td");       
             $memId = $tds[0].textContent;
             $msId = $tds[3].textContent;
+            var mem_name = $tds[1].textContent;
             $.ajax({             
                 url: 'controller/admin_approve_membership_renewal.php',
                 type: 'post',
@@ -71,11 +72,11 @@
                 success: function(response){                        
                     console.log(response);
                     $(".NO").hide();
-                    $('.modal-title').text("Approve Membership Renewal" );
+                    $('.modal-title').text("Membership Renewal Requests" );
                     $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
                     $('#confirm-text').css('color', 'green');
-                    $('#confirm-text').text("Membership Renewal is Approved");
+                    $('#confirm-text').text("Membership Renewal of "+mem_name+" is Approved");
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-membership-renewal.php';
                     });
@@ -93,12 +94,13 @@
                 var $row = $(this).closest("tr"),       
                 $tds = $row.find("td");       
                 $memId = $tds[0].textContent;
+                var mem_name = $tds[1].textContent;
                 $(".NO").show();
                 $('.YES').css("background-color","#fff");
                 $('.YES').text("YES");
-                $('.modal-title').text("Reject Membership Renewal Request");
+                $('.modal-title').text("Membership Renewal Requests");
                 $('#confirm-text').css('color', 'red');
-                $('#confirm-text').text("Are you sure to reject membership renewal request" );
+                $('#confirm-text').text("Are you sure to reject membership renewal request of "+mem_name );
                 $(document).on("click",".YES",function(){ 
                     $.ajax({             
                         url: 'controller/admin_reject_membership_renewal.php',

@@ -6,7 +6,7 @@
     <!--/#header-->
     <div class="container"> 
         <div id="load-renew-book">
-            <h2>Request for Due Date Extension</h2>
+            <h2>Request Due Date Extension</h2>
             <center><span id="message"></span></center>
         </div> 
 
@@ -83,7 +83,7 @@
                 success: function(response){                        
                     console.log(response);
                     $(".NO").hide();
-                    $('.modal-title').text("Approve Duedate Extention" );
+                    $('.modal-title').text("Request Duedate Extention" );
                     $('.YES').css("background-color","#5bc0de");
                     $('#confirm-text').css('color', 'green');
                     $('.YES').text("OK");
@@ -107,7 +107,7 @@
                 $(".NO").show();
                 $('.YES').css("background-color","#fff");
                 $('.YES').text("YES");
-                $('.modal-title').text("Reject Duedate Extention");
+                $('.modal-title').text("Request Duedate Extention");
                 $('#confirm-text').css('color', 'red');
                 $('#confirm-text').text("Are you sure to reject duedate extention" );
                 $(document).on("click",".YES",function(){

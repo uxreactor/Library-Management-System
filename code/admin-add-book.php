@@ -5,7 +5,6 @@
 ?>
     <!--/#header-->
     <div class="container">
-        <div class = "notification" style="font-size: 40px; color:green"></div>
         <h2>Adding Book</h2>
         <form name="add_book" method="post" action="controller/submit_add_book.php" onsubmit="return submitForm();">
             <div class="form-group" id="book_name_label">
@@ -141,11 +140,10 @@
                             $("#button").click();
                             $('#confirm-text').css('color', 'green');
                             var book_name = document.getElementById('book_name').value;
-                            $('#confirm-text').text(book_name+"New book added successfully" );
+                            $('#confirm-text').text(book_name+" book added successfully" );
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';
                             });
-                            $('.notification').text(response);
                         },
                         error: function(xhr, desc, err){
                             console.log(desc);

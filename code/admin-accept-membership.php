@@ -75,7 +75,7 @@
                     //console.log(response);
                     //$("#button").click();
                     $(".NO").hide();
-                    $('.modal-title').text("Approve membership" );
+                    $('.modal-title').text("New Membership Request" );
                     $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
                     $('#confirm-text').css('color', 'green');
@@ -96,6 +96,7 @@
             var mem_name = $tds[0].textContent;
             console.log(email);
             $(".NO").show();
+            $('.modal-title').text("New Membership Request" );
             $('.YES').css("background-color","#fff");
             $('.YES').text("YES");
             $('#confirm-text').css('color', 'red');

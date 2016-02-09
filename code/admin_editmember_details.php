@@ -15,7 +15,6 @@
   ?>
 
   <div class="container">
-        <div class = "notification" style="font-size: 40px; color:green; text-align:center"></div>
         <h2>Editing Member Details</h2>
         <form name="add_book" method="post" action="controller/submit_editmembership_details.php" onsubmit="return submitForm();">
             <div class="form-group" id="name_id_label">
@@ -200,7 +199,6 @@
                     type: $('form').attr('method'),
                     data: member_details,
                     success: function(response){
-                        $('.notification').text("Details are updated sucessfully");
                         $("#button").click();
                         $(".table").hide();
                         $('.modal-title').text("Edit Membership Details");

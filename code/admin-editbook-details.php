@@ -11,7 +11,6 @@
 ?>
     <!--/#header-->
     <div class="container">
-        <div class = "notification" style="font-size: 40px; color:green"></div>
         <h2>Update Book Details</h2>
         <form name="add_book" method="post" action="controller/submit_edit_book.php" onsubmit="return submitForm();">
             <div class="form-group" id="book_name_label">
@@ -157,7 +156,6 @@
                             $(document).on("click",".OK",function(){                
                                 window.location = 'our-library.php';
                             });
-                            $('.notification').text(response);
                         },
                         error: function(xhr, desc, err){
                             console.log(desc);
