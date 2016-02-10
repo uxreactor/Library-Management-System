@@ -41,7 +41,7 @@
 	function addNewBook($isbn,$price,$edition,$publisher,$category,$bookname,$authorname,$quantity){			
 
 		$conn = connection();
-		$sql  =" INSERT INTO `tbl_book_varities`(`isbn`, `price`, `edition`, `publisher`,`category`,`book_name`,`author_name`) SELECT * FROM (SELECT '$isbn','$price','$edition','$publisher','$category','$bookname','$authorname') AS tmp WHERE NOT EXISTS (SELECT `book_name`,`isbn` FROM `tbl_book_varities` WHERE `book_name` = '$bookname' AND `isbn` = '$isbn') ";
+		$sql  =" INSERT INTO `tbl_book_varities`(`isbn`, `price`, `edition`, `publisher`,`category`,`book_name`,`author_name`) SELECT * FROM (SELECT '$isbn' AS `isbn`,'$price' AS `price`,'$edition' AS `edition`,'$publisher' AS `publisher`,'$category' AS `category`,'$bookname' AS `book_name`,'$authorname' AS `author_name`) AS tmp WHERE NOT EXISTS (SELECT `book_name`,`isbn` FROM `tbl_book_varities` WHERE `book_name` = '$bookname' AND `isbn` = '$isbn');";
 		if ($conn->query($sql) === TRUE) {
 			$sql = "INSERT INTO  tbl_all_books (isbn,status) VALUES ";
 				for($i=1;$i<=$quantity;$i++){
@@ -258,6 +258,17 @@
 
 		$sql = " UPDATE tbl_all_books a JOIN tbl_book_varities b SET a.isbn='$isbn', b.isbn = '$isbn' , b.price = '$price' , b.edition = '$edition' , b.publisher = '$publisher', b.category = '$category', b.book_name = '$bookname' , b.author_name = '$authorname'  WHERE b.isbn='$old_isbn' AND b.isbn=a.isbn ";
 		if ($conn->query($sql) === TRUE) {
+			$sql1 = "DELETE FROM tbl_all_books where isbn=$isbn";
+			$conn->query($sql1);
+			$sql = "INSERT INTO  tbl_all_books (isbn,status) VALUES ";
+				for($i=1;$i<=$quantity;$i++){
+					$sql .= $i==$quantity ? "('$isbn','1')" : "('$isbn','1'), ";
+				}
+				if ($conn->query($sql) == TRUE) {
+					return 1;
+				} else {
+					return "Error: " . $sql . "<br>" . $conn->error;
+				}
 		    return "Book details updated successfully";
 		} else {
 		    return "Error: " . $sql . "<br>" . $conn->error;
