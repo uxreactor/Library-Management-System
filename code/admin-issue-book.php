@@ -176,7 +176,15 @@
                 return_date: dateFormat('yyyy-mm-dd',GetDate($('#return_date').val()))
             };
             //console.log(issue_book);
-            if(submitToServer(validation_message)){
+            var a = document.getElementById('book_name').value; 
+            var b = document.getElementById('book_author').value;
+            var c = document.getElementById('member_name').value;
+            var d = document.getElementById('member_type').value;
+            var e = document.getElementById('issue_date').value; 
+            var f = document.getElementById('return_date').value;
+            var g = document.getElementById('book_id').value;
+            var h = document.getElementById('mem_id').value;
+            if(submitToServer(validation_message) && a && b && c && d && e && f){
                 $.ajax({
                     url: $('form').attr('action'),
                     type: $('form').attr('method'),
@@ -205,11 +213,14 @@
                         console.log(desc);
                     }
                 });
-            }else {
+            } else if( g && h){
+                getBookDetails(g);        
+                getMemberDetails(h);
+            }else{
                 body = document.getElementById('book_id_label');
                 writeError(validation_message[0],body);
                 body = document.getElementById('mem_id_label');
-                writeError('Invalid Member Id',body);
+                writeError('Member Id is required',body);
             }
             return false;
         }

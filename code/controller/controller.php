@@ -239,7 +239,7 @@
 
 	/**
 	 * @editBookDetails : This function will edit the details of the book and replace the details in the same location in database using with old_isbn number.
-	 * @author : Mohan, Bala
+	 * @author : Mohan, Bala,Yaswanth.
 	 *
 	 * @param : integer - old_isbn
 	 * @param : integer - isbn
@@ -281,7 +281,7 @@
 
 	/**
 	 * @loadAllBooks : This function will display all the records of books from the database to the respective page it displays all the dettails of book along with count of the book.
-	 * @author : Mohan, Bala
+	 * @author : Mohan, Bala,Yaswanth
 	 *
 	 * @return/outcome : Returns a json arrayobject where it consists all the records of books.
 	 */
