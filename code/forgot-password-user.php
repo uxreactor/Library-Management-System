@@ -30,7 +30,25 @@
             px; color:red"></a>
         </form>
         <!--/#forgot password form -->
+        <div class="modal fade" id="help" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Forgot Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="confirm-text"></span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-info OK" data-dismiss="modal">OK</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
     </div>
+    <a href="#" id="button" data-toggle="modal" data-target="#help"></a>
  <?php include ("footer.php");?> 
     <!--/#footer-->
     <?php include ("javascript-links.php");?> 
@@ -98,9 +116,12 @@
                     data: {email: $('#email').val(), password: $('#password').val()},
                     success: function(response){
                         console.log(response);
-                        $('#acknowledge').text("Your password has been changed sucessfully");
-                        $('#goto').text("Login")
-                        //window.location.href = 'login.php';
+                        $("#button").click();
+                        $('#confirm-text').css('color', 'green');
+                        $('#confirm-text').text("Password changed Successfully" );
+                        $(document).on("click",".OK",function(){                
+                            window.location = 'login.php';
+                        });
                     },
                     error: function(xhr, desc, err){
                         console.log(desc);
