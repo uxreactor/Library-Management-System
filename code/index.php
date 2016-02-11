@@ -63,7 +63,7 @@
                 type: $('form').attr('method'),
                 data: search_book_details,
                 success: function(response){
-                    //console.log(response);
+                    console.log(response);
                     parent.removeChild(parent.childNodes[3]);
                     
                     if (response){

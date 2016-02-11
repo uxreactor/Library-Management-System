@@ -396,7 +396,7 @@
 		$arrayObject = array();
 		$conn = connection();
 		//SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn`
-		$sql = " SELECT a.book_id,a.mem_id,a.issue_date,a.return_expected,a.penality,c.book_name FROM tbl_issued_books a JOIN tbl_all_books b JOIN tbl_book_varities c WHERE (a.book_id = b.book_id AND b.isbn = c.isbn) AND (a.book_id LIKE '$search_key' OR a.mem_id LIKE '$search_key')  " ;
+		$sql = " SELECT a.book_id,a.mem_id,a.issue_date,a.return_expected,a.penality,c.book_name FROM tbl_issued_books a JOIN tbl_all_books b JOIN tbl_book_varities c WHERE (a.book_id = b.book_id AND b.isbn = c.isbn) AND (a.book_id LIKE '$search_key%' OR a.mem_id LIKE '$search_key%')  " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
