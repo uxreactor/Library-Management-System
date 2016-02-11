@@ -73,7 +73,6 @@
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
                           <h4 class="modal-title">Membership Type Details</h4>
                         </div>
-                        <div class="modal-body" >
                          <table  class="table table-bordered table-striped" style="width:40%;">
                             <thead>
                                 <tr>
@@ -113,8 +112,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <span id="confirm-text"></span>
-                        </div>
                         <div class="modal-body">
                             <span id="confirm-text" style=" color:green"></span>
                         </div>

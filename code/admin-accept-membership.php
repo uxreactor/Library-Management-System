@@ -26,7 +26,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default YES" data-dismiss="modal">Yes</button>
-                  <button type="button" class="btn btn-default NO" data-dismiss="modal">NO</button>
+                  <button type="button" class="btn btn-default NO" data-dismiss="modal" >NO</button>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                     $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
                     $('#confirm-text').css('color', 'green');
-                    $('#confirm-text').html("<strong>"+mem_name+"</strong> request approved successfully" );
+                    $('#confirm-text').html("<strong>"+mem_name+"</strong> membership request approved successfully" );
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-accept-membership.php';
                     });
@@ -100,7 +100,7 @@
             $('.YES').css("background-color","#fff");
             $('.YES').text("YES");
             $('#confirm-text').css('color', 'red');
-            $('#confirm-text').html("Are you sure you want to reject <strong>"+mem_name+"</strong> request" );
+            $('#confirm-text').html("Are you sure you want to reject <strong>"+mem_name+"</strong> membership request" );
             $(document).on("click",".YES",function(){
                 $.ajax({             
                     url: 'controller/admin_reject_membership.php',

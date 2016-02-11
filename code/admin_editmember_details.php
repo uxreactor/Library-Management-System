@@ -29,7 +29,7 @@
             </div>
             <div class="form-group" id="input_email_label">
                 <label >Email</label>
-                <input type="text" class="form-control" id="input_email" value="<?php echo $memberDetails[0]['Mail ID']; ?>"/>
+                <input type="text" class="form-control" id="input_email" value="<?php echo $memberDetails[0]['Mail ID']; ?>" readonly/>
                 <span class="error"></span>
             </div>
             <div class="form-group" id="issue_date_label">
