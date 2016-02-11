@@ -116,7 +116,7 @@
                     <span id="confirm-text"></span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-info OK" data-dismiss="modal">Ok</button>
+                      <button type="button" class="btn btn-info OK" data-dismiss="modal" autofocus>Ok</button>
                     </div>
                 </div>  
             </div>

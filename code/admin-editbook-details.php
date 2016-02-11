@@ -71,7 +71,7 @@
                         <span id="confirm-text">Book details are updated successfully</span>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-info OK" data-dismiss="modal">OK</button>
+                      <button type="button" class="btn btn-info OK" data-dismiss="modal" autofocus>OK</button>
                     </div>
                 </div>  
             </div>
