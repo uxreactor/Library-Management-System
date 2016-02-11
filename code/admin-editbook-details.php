@@ -53,7 +53,7 @@
             </div>
             <div class="form-group" id="quantity_label">
                 <label >Quantity</label>
-                <input type="number" class="form-control" id ="quantity" value = "<?php echo $bookDetails[0]['Quantity']; ?>"/>
+                <input type="number" class="form-control" id ="quantity" value = "<?php echo $bookDetails[0]['Quantity']; ?>" readonly />
                 <span></span>
             </div>
             <button type="submit" class="btn btn-default btn-lg btn-info">Submit</button>

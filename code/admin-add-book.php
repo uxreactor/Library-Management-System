@@ -24,8 +24,8 @@
             </div>
             <div class="form-group" id="category_label">
                 <label >Category</label><br/>
-                <select class="form-control" name="category" id="category" onchange="showfield(this.options[this.selectedIndex].value)">
-                    <option value="Add new category">Add new category</option>
+                <select class="form-control" name="category" id="category" onchange ="showfield(this.options[this.selectedIndex].value)" onclick ="showfield(this.options[this.selectedIndex].value)">
+                    <option value="Add new category" >Add new category</option>
                 </select>     
             </div>
             <div class="form-group" id="div1"></div> 
