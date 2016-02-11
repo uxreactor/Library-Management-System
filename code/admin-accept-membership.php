@@ -79,7 +79,7 @@
                     $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
                     $('#confirm-text').css('color', 'green');
-                    $('#confirm-text').html("<strong>"+mem_name+"</strong> membership request approved successfully" );
+                    $('#confirm-text').html("<strong>"+mem_name+"</strong> request approved successfully" );
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-accept-membership.php';
                     });

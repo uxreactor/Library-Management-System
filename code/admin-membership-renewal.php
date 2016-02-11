@@ -76,7 +76,7 @@
                     $('.YES').css("background-color","#5bc0de");
                     $('.YES').text("OK");
                     $('#confirm-text').css('color', 'green');
-                    $('#confirm-text').html("Membership Renewal of <strong> "+mem_name+"</strong> is Approved");
+                    $('#confirm-text').html("<strong>"mem_name+"</strong> Membership Renewal of is Approved");
                     $(document).on("click",".YES",function(){                
                         window.location = 'admin-membership-renewal.php';
                     });

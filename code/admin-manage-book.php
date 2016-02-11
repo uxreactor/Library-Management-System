@@ -127,7 +127,7 @@
                         $('.yes').text("YES");
                         $('.modal-title').text("Penalty Details");
                         $('#confirm-text').css('color', 'red');
-                        $('#confirm-text').html("You have penality<strong> " + response + " </strong>Rs to be paid. Do you want to pay now?");
+                        $('#confirm-text').html("You have penality rupees<strong> " + response + " </strong> to be paid. Do you want to pay now?");
                         $(document).on("click",".yes",function(){
                             $.ajax({             
                                 url: 'controller/return_money_paid.php',
