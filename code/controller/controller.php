@@ -396,7 +396,7 @@
 		$arrayObject = array();
 		$conn = connection();
 		//SELECT a.`book_name`, a.`author_name` , a.`category` , a.`publisher`, a.`edition` , a.`price` , a.`isbn` , COUNT(b.`isbn`)  FROM `tbl_book_varities` a LEFT JOIN `tbl_all_books` b on a.`isbn` = b.`isbn` GROUP BY b.`isbn`
-		$sql = " SELECT a.book_id,a.mem_id,a.issue_date,a.return_expected,a.penality,c.book_name FROM tbl_issued_books a JOIN tbl_all_books b JOIN tbl_book_varities c WHERE (a.book_id = b.book_id AND b.isbn = c.isbn) AND (a.book_id LIKE '$search_key%' OR a.mem_id LIKE '$search_key%')  " ;
+		$sql = " SELECT a.book_id,a.mem_id,a.issue_date,a.return_expected,a.penality,c.book_name FROM tbl_issued_books a JOIN tbl_all_books b JOIN tbl_book_varities c WHERE (a.book_id = b.book_id AND b.isbn = c.isbn) AND (a.book_id LIKE '$search_key' OR a.mem_id LIKE '$search_key')  " ;
 		$result = $conn->query($sql);
         if ($result->num_rows > 0) {
 		    // output data of each row
@@ -847,7 +847,7 @@
 
 		$sql = " UPDATE `tbl_all_books` SET status = '0' where book_id = '$bookId' ";
 		$result = $conn->query($sql);
-		$sql = " INSERT INTO `tbl_issued_books`(`mem_id`, `book_id`, `issue_date`, `return_expected`) SELECT * FROM (SELECT '$memberId', '$bookId', '$issuedDate', '$returnDate') AS tmp WHERE NOT EXISTS (SELECT `book_id` FROM `tbl_issued_books` WHERE `book_id` = '$bookId') ";
+		$sql = " INSERT INTO `tbl_issued_books`(`mem_id`, `book_id`, `issue_date`, `return_expected`) SELECT * FROM (SELECT '$memberId' AS `mem_id`, '$bookId' AS `book_id`, '$issuedDate' AS `issue_date`, '$returnDate' AS `return_expected`) AS tmp WHERE NOT EXISTS (SELECT `book_id` FROM `tbl_issued_books` WHERE `book_id` = '$bookId') ";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0){
 			return "issued";
@@ -1372,7 +1372,7 @@
 		$conn = connection();
 		$count=0;
 
-		$sql = 'SELECT a.`mem_id`, a.`mem_name`, b.`ms_type`, b.`ms_validity_period`, b.`ms_book_limit`, b.`ms_days_limit` , b.`penalty` FROM `tbl_members` a JOIN `tbl_membership` b WHERE a.`ms_id` = b.`ms_id` and a.`mem_id` = '.$memberid;
+		$sql = "SELECT a.`mem_id`, a.`mem_name`, b.`ms_type`, b.`ms_validity_period`, b.`ms_book_limit`, b.`ms_days_limit` , b.`penalty` FROM `tbl_members` a JOIN `tbl_membership` b WHERE a.`ms_id` = b.`ms_id` and a.`mem_id` = '$memberid' ";
 		$result = $conn->query($sql);
 		$object = array();
 		

@@ -4,7 +4,7 @@
     $memberId = checkSession();
     require 'controller/controller.php';
     $memberName = getMemberName($memberId);
-    if(checkSession()){
+    if(!(checkSession() == "admin")){
 ?>
     <!--/#header-->
     <div class="container">
