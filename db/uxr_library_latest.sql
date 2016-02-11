@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2016 at 09:53 AM
+-- Generation Time: Feb 11, 2016 at 11:48 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -49,7 +49,13 @@ CREATE TABLE `tbl_admin_login` (
 --
 
 INSERT INTO `tbl_admin_login` (`username`, `password`) VALUES
-('vkonduri@uxreactor.org', 'jimmy');
+('vkonduri@uxreactor.org', 'jimmy'),
+('yjilakara@uxreactor.org', 'yashwanth'),
+('mgoud@uxreactor.org', 'mohan'),
+('btanneeru@uxreactor.org', 'bala'),
+('nyarra@uxreactor.org', 'nagalakshmi'),
+('aduddu@uxreactor.com', 'anurag'),
+('pnarvaneni@uxreactor.com', 'pradeep');
 
 -- --------------------------------------------------------
 
@@ -59,7 +65,7 @@ INSERT INTO `tbl_admin_login` (`username`, `password`) VALUES
 
 CREATE TABLE `tbl_all_books` (
   `book_id` int(5) NOT NULL,
-  `isbn` int(4) NOT NULL,
+  `isbn` bigint(13) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -70,7 +76,7 @@ CREATE TABLE `tbl_all_books` (
 INSERT INTO `tbl_all_books` (`book_id`, `isbn`, `status`) VALUES
 (1, 1001, 0),
 (2, 1001, 1),
-(6, 1004, 0),
+(6, 1004, 1),
 (7, 1004, 1),
 (8, 1004, 0),
 (9, 1004, 1),
@@ -109,7 +115,15 @@ INSERT INTO `tbl_all_books` (`book_id`, `isbn`, `status`) VALUES
 (67, 1003, 1),
 (68, 1003, 1),
 (69, 1003, 1),
-(170, 1002, 1);
+(170, 1002, 1),
+(171, 43, 1),
+(172, 43, 1),
+(173, 43, 1),
+(180, 67898, 1),
+(181, 67898, 1),
+(182, 67898, 1),
+(183, 67898, 1),
+(184, 67898, 1);
 
 -- --------------------------------------------------------
 
@@ -118,7 +132,7 @@ INSERT INTO `tbl_all_books` (`book_id`, `isbn`, `status`) VALUES
 --
 
 CREATE TABLE `tbl_book_varities` (
-  `isbn` int(13) NOT NULL COMMENT 'not null, primary key',
+  `isbn` bigint(13) NOT NULL COMMENT 'not null, primary key',
   `price` float NOT NULL,
   `edition` int(2) NOT NULL,
   `publisher` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -132,7 +146,7 @@ CREATE TABLE `tbl_book_varities` (
 --
 
 INSERT INTO `tbl_book_varities` (`isbn`, `price`, `edition`, `publisher`, `category`, `book_name`, `author_name`) VALUES
-(1001, 500, 2, 'Pradeep ', 'Design', 'UX Design', 'Pradeep'),
+(1001, 500, 2, 'Melissa Marr', 'Design', 'UX Design', 'Akira Toriyama '),
 (1002, 500, 3, 'S.Chand', 'Inspirational', 'Wings of fire', 'A.P.J.Abdul kalam'),
 (1003, 250, 2, 'Sir Charles Baskerville', 'Novel', 'The Hound Of Baskerville', 'Arthur Conan Doyle'),
 (1004, 400, 2, 'Parvateesam', 'Novel', 'Barrister Parvateesam', 'Mokkapati Narasimha Sastry'),
@@ -140,8 +154,8 @@ INSERT INTO `tbl_book_varities` (`isbn`, `price`, `edition`, `publisher`, `categ
 (1006, 400, 3, 'Martha publishers', 'Novel', 'The Jew of Malta ', 'Christopher Marlowe '),
 (1007, 300, 2, 'Thomas Kyd ', 'Comic', 'The Spanish Tragedy ', 'Thomas Kyd '),
 (1008, 400, 3, 'Pliot publisher', 'Mystery', 'Murder in the Cathedral ', 'T.S. Eliot '),
-(1009, 220, 6, 'Symonds', 'Mystery', 'An Enemy of the People ', ' Henrik Ibsen '),
-(1010, 100, 2, 'Steve smith', 'Comic', 'The Duchess of Malfi ', 'John Webster ');
+(1009, 220, 6, 'Mirjam Pressler ', 'Mystery', 'An Enemy of the People ', ' Henrik Ibsen '),
+(1010, 100, 2, 'Nick Bullard', 'Comic', 'The Duchess of Malfi ', 'John Webster ');
 
 -- --------------------------------------------------------
 
@@ -165,7 +179,6 @@ CREATE TABLE `tbl_issued_books` (
 
 INSERT INTO `tbl_issued_books` (`reurn_id`, `return_actual`, `return_expected`, `penality`, `mem_id`, `book_id`, `issue_date`) VALUES
 (10, '0000-00-00', '2016-02-16', 0, 3, 3, '2016-02-11'),
-(11, '0000-00-00', '2016-02-21', 0, 6, 6, '2016-02-11'),
 (12, '0000-00-00', '2016-02-21', 0, 8, 8, '2016-02-11'),
 (13, '0000-00-00', '2016-02-21', 0, 6, 1, '2016-02-11');
 
@@ -185,16 +198,16 @@ CREATE TABLE `tbl_login` (
 --
 
 INSERT INTO `tbl_login` (`username`, `password`) VALUES
-('aduddu@uxreactor.org', 'anurag'),
+('aduddu@uxreactor.com', 'anurag'),
 ('btanneeru@uxreactor.org', 'bala'),
-('jchallagonda@uxreactor.org', ''),
-('mgoud@uxreactor.org', ''),
-('ntalveen@uxreactor.org', ''),
-('nyarra@uxreactor.org', ''),
-('pnarvaneni@uxreactor.org', ''),
-('valle@uxreactor.org', ''),
-('vkonduri@uxreactor.org', ''),
-('yjilakara@uxreactor.org', '');
+('jchallagonda@uxreactor.org', 'jyothi'),
+('mgoud@uxreactor.org', 'mohan'),
+('ntalveen@uxreactor.org', 'nida'),
+('nyarra@uxreactor.org', 'nagalakshmi'),
+('pnarvaneni@uxreactor.com', 'pradeep'),
+('valle@uxreactor.org', 'vamsi'),
+('vkonduri@uxreactor.org', 'jimmy'),
+('yjilakara@uxreactor.org', 'yaswanth');
 
 -- --------------------------------------------------------
 
@@ -403,7 +416,7 @@ ALTER TABLE `due_date_extension`
 -- AUTO_INCREMENT for table `tbl_all_books`
 --
 ALTER TABLE `tbl_all_books`
-  MODIFY `book_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `book_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 --
 -- AUTO_INCREMENT for table `tbl_issued_books`
 --
