@@ -644,6 +644,10 @@
 		} else {
 		    return 0;
 		}
+		$sql = "INSERT INTO tbl_login (username) VALUES ('$emailId')";
+		if ($conn->query($sql) === FALSE) {
+		    return "Error: " . $sql . "<br>" . $conn->error;
+		}
 		$sql = "DELETE FROM tbl_mem_request WHERE mem_email='$emailId'";
 		if ($conn->query($sql) === FALSE) {
 		    return "Error: " . $sql . "<br>" . $conn->error;
