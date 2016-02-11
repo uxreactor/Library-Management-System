@@ -1001,8 +1001,7 @@
 		    	$object['Mem ID'] = $row["mem_id"];
 		    	$object['Name'] = $row["mem_name"];
 		    	$object['Expiry on'] = $row["expiry_on"];
-		    	$object['MS ID'] = $row["ms_id"];
-		    	$object['MS type'] = $row["ms_type"];
+		    	$object['Membership type'] = $row["ms_type"];
 		    	$object['Action'] = "Approve,Reject";
 		    	array_push($arrayObject, $object);
 		    }
